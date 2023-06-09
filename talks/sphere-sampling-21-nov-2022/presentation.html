@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Sampling L<sub>p</sub>-spherical distributions</title>
+<meta name="author" content="Gergely Flamich"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Sampling L<sub>p</sub>-spherical distributions</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>21/11/2022</h4>
+</section>
+
+
+<section>
+<section id="slide-org82021cd">
+<h2 id="org82021cd"><span class="section-number-2">1.</span> Notation</h2>
+<ul>
+<li class="fragment appear">\(\lVert x \rVert_p \stackrel{def}{=} \left( \sum_{k = 1}^n \lvert x_k \rvert^p \right)^{1 / p}\)</li>
+<li class="fragment appear">\(B_p^n \stackrel{def}{=} \left\{x \in \mathbb{R}^n \mid \lVert x \rVert_p \leq 1 \right\}\)</li>
+<li class="fragment appear">\(S_p^n \stackrel{def}{=} \partial B^{n + 1}_p\)</li>
+<li class="fragment appear">\(\mathcal{B}_p^n\) - uniform distribution on \(B_p^n\)</li>
+<li class="fragment appear">\(\mathcal{S}_p^n\) - uniform distribution on \(S_p^n\).</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org6b2f7f7">
+<h2 id="org6b2f7f7"><span class="section-number-2">2.</span> In Pictures</h2>
+
+<div id="org29a5b1d" class="figure">
+<p><img src="./img/lp_spheres.png" alt="lp_spheres.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfd43f88">
+<h2 id="orgfd43f88"><span class="section-number-2">3.</span> First attempt</h2>
+<ul>
+<li class="fragment appear">For \(\mathcal{B}_p^n:\) Rejection sample</li>
+<li class="fragment appear">Uniform proposal on \(C^n = [-1, 1]^n\)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org0ab35cd">
+<h2 id="org0ab35cd"><span class="section-number-2">4.</span> Problem w/ first attempt</h2>
+<p class="fragment (appear)">
+\(\text{Accept prob} = \mathrm{Vol}(B_p^n) \, / \, \mathrm{Vol}(C^n)\)
+</p>
+
+
+<div id="org4321638" class="figure">
+<p><img src="./img/cube_sphere_vol_ratio.png" alt="cube_sphere_vol_ratio.png" class="fragment (appear)" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org78afedd">
+<h2 id="org78afedd"><span class="section-number-2">5.</span> Second attempt</h2>
+<ul>
+<li class="fragment appear">\(n\) -dimensional Gaussian: \(X \sim \mathcal{N}(0, I)\)</li>
+<li class="fragment appear"><b>Observation:</b> for \(O \in \mathrm{SO}(n)\): \[ X \sim OX \quad \Rightarrow \frac{X}{\lVert X \rVert_2} \sim \frac{OX}{\lVert X \rVert_2} = \frac{OX}{\lVert OX \rVert_2} \]</li>
+<li class="fragment appear"><b>Hence:</b> \(X \, / \, \lVert X \rVert_2 \sim \mathcal{S}^{n-1}_2\)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgea85709">
+<h2 id="orgea85709"><span class="section-number-2">6.</span> Why did this trick work?</h2>
+<p class="fragment (appear)">
+Spherical symmetry \(\Leftrightarrow\) " \(L_2\) -symmetry "
+</p>
+
+<p class="fragment (appear)">
+\[\mathcal{N}(x \mid 0, I) \propto e^{-\frac{\lVert x \rVert_2^2}{2}}\]
+</p>
+
+<p class="fragment (appear)">
+\(p\) - generalized Gaussian:
+</p>
+
+<p class="fragment (appear)">
+\[\mathcal{N}_p(x \mid 0, I) \propto e^{-\frac{\lVert x \rVert_p^p}{2}}\]
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgec728c2">
+<h2 id="orgec728c2"><span class="section-number-2">7.</span> Recipe for L<sub>p</sub> spheres</h2>
+<ul>
+<li class="fragment appear">Draw \(X \sim \mathcal{N}_p(x \mid 0, I)\).</li>
+<li class="fragment appear">Then \[ X \, / \, \lVert X \rVert_p \sim \mathcal{S}^{n - 1}_p \]</li>
+<li class="fragment appear">Drawing \(X\) can be done dimensionwise!</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org90dc457">
+<h2 id="org90dc457"><span class="section-number-2">8.</span> L<sub>p</sub> spherical distributions</h2>
+<ul>
+<li class="fragment appear">\(L_p\) spherical RV: \[Z = R \times U, \quad U \sim \mathcal{S}_p^n, R > 0\]</li>
+<li class="fragment appear">\(Z \sim \mathcal{S}_p^n\): \(\quad R = 1\).</li>
+<li class="fragment appear">\(Z \sim \mathcal{N}_p\): \(\quad R^p \sim \chi^2(2n \, /\, p)\).</li>
+<li class="fragment appear">\(Z \sim \mathcal{B}_p^n\): \(\quad \mathbb{P}[R < r] = \min\{r, 1\}^n\).</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org90f2688">
+<h2 id="org90f2688"><span class="section-number-2">9.</span> How special is our trick?</h2>
+
+<div id="org380e9c6" class="figure">
+<p><img src="./img/factorial_lp_spherical_dists.png" alt="factorial_lp_spherical_dists.png" class="fragment (appear)" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org049869a">
+<h2 id="org049869a"><span class="section-number-2">10.</span> A third way for L<sub>p</sub> balls</h2>
+<ul>
+<li class="fragment appear">Let \(U \sim \mathcal{S}^{n - 1}_p\)</li>
+<li class="fragment appear">Then \(U = U_{1:n} = (U_1, \dots, U_{n})\)</li>
+<li class="fragment appear">\(U_{1:k} \sim ?\)</li>
+
+</ul>
+
+<p class="fragment (appear)">
+<b>Theorem:</b> \(U_{1:n - p} \sim \mathcal{B}^{n - p}_p\)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org03069b2">
+<h2 id="org03069b2"><span class="section-number-2">11.</span> References</h2>
+<ul>
+<li>Wang, X. (2005). Volumes of generalized unit balls. Mathematics Magazine, 78(5), 390-395.</li>
+<li>Sinz, F., Gerwinn, S., &amp; Bethge, M. (2009). Characterization of the p-generalized normal distribution. Journal of Multivariate Analysis, 100(5), 817-820.</li>
+<li>Barthe, F., Guédon, O., Mendelson, S., &amp; Naor, A. (2005). A probabilistic approach to the geometry of the ℓpn-ball. The Annals of Probability, 33(2), 480-513.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+slideNumber:'c/t',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

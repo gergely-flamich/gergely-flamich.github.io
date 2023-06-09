@@ -1,0 +1,246 @@
+#+TITLE: Channel Simulation with Poisson Processes
+#+author: Gergely Flamich
+#+date: 05/04/2023
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4>"
+#+OPTIONS: toc:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+# +REVEAL_HLEVEL:0
+
+* Lossy Image Compression
+#+ATTR_REVEAL: :frag (appear)
+[[./img/image_compression.png]]
+
+* Channel Simulation
+#+ATTR_REVEAL: :frag (appear)
+Source $X$, latent $Z$, model $P_{X, Z}$
+
+#+ATTR_REVEAL: :frag (appear)
+*Encoder:*
+
+#+ATTR_REVEAL: :frag (appear)
+1. Receive $X \sim P_X$ from source
+2. Encode $Z \sim P_{Z \mid X}$ using $P_Z$
+
+#+ATTR_REVEAL: :frag (appear)
+*Decoder:*
+
+#+ATTR_REVEAL: :frag (appear)
+1. Recover $Z$ using $P_Z$
+2. Recover $\hat{X} \sim P_{X \mid Z}$
+
+* Channel Simulation
+#+ATTR_REVEAL: :frag (appear)
+*Assumptions*
+#+ATTR_REVEAL: :frag (appear)
+ - $I[X; Z] < \infty$
+ - Can simulate $Z \sim P_Z$
+ - Encoder and decoder share PRNG seed
+
+* Poisson Processes
+#+ATTR_REVEAL: :frag (appear)
+ - Collection of random points in space
+ - Focus on spatio-temporal processes on $\mathbb{R}^D \times \mathbb{R}^+$
+ - Exponential inter-arrival times
+ - Spatial distribution $P_{X \mid T}$
+
+** Poisson Processes
+#+ATTR_REVEAL: :frag (appear)
+[[./img/pp_alg.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/empty_pp.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1_x1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2_x2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_sim.png]]
+
+
+* Rejection Sampling
+#+ATTR_REVEAL: :frag (appear)
+- Sampling algorithm for target distribution $Q$.
+- Using proposal $P$
+- Bound on their density ratio $q/p$: $M$
+
+** Rejection Sampling
+#+ATTR_REVEAL: :frag (appear)
+#+REVEAL_HTML: <img src="./img/rs_alg.png" class="r-stretch">
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_0.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_1.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_2.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_3.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_4.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_5.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_6.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_7.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_8.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_9.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_10.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_accept.png]]
+
+* Channel Simulation with Rejection Sampling
+#+ATTR_REVEAL: :frag (appear)
+*Encoder:*
+#+ATTR_REVEAL: :frag (appear)
+- Receive $X \sim P_X$
+- Rejection sample from $P_{Z \mid X}$ using $P_Z$.
+- Send index $K$ of the accepted sample.
+
+#+ATTR_REVEAL: :frag (appear)
+*Decoder:*
+#+ATTR_REVEAL: :frag (appear)
+- Simulate the same $K$ samples from $P_Z$
+
+* Efficiency of RS
+#+ATTR_REVEAL: :frag (appear)
+Best possible bound is $M^* = \sup_{z} \frac{p(z \mid X)}{p(z)}$.
+
+#+ATTR_REVEAL: :frag (appear)
+Define $D_{\inf}[P_{Z \mid X} \Vert P_Z] = \log M^*$.
+
+#+ATTR_REVEAL: :frag (appear)
+$K$ is geometric.
+
+#+ATTR_REVEAL: :frag (appear)
+$H[K \mid X] \geq D_{\inf}[P_{Z \mid X} \Vert P_Z]$.
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[K \mid X] = \exp(D_{\inf}[P_{Z \mid X} \Vert P_Z])$.
+
+* Greedy Poisson Rejection Sampling
+[[./img/gprs_alg.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_0.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_1.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_2.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_3.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_4.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_5.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_accept.png]]
+
+* How to find $\sigma$?
+#+ATTR_REVEAL: :frag (appear)
+Define
+#+ATTR_REVEAL: :frag (appear)
+$$
+W(h) = \int_0^h \min\left\{h \cdot p(z), p(z \mid X)\right\} \, dz
+$$
+
+#+ATTR_REVEAL: :frag (appear)
+Then
+#+ATTR_REVEAL: :frag (appear)
+$$
+\sigma(h) = \int_0^h \frac{1}{1 - W(\eta)} \, d\eta.
+$$
+
+* How to find $\sigma$?
+ #+REVEAL_HTML: <img src="./img/w_fn.png" class="r-stretch">
+
+* Analysis of GPRS
+#+ATTR_REVEAL: :frag (appear)
+*Codelength*
+#+ATTR_REVEAL: :frag (appear)
+$$
+H[K \mid X] \leq D_{KL}[P_{Z \mid X} \Vert P_Z] + \log(D_{KL}[P_{Z \mid X} \Vert P_Z] + 1) + \mathcal{O}(1)
+$$
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+H[K] \leq I[X; Z] + \log(I[X; Z] + 1) + \mathcal{O}(1)
+$$
+
+#+ATTR_REVEAL: :frag (appear)
+*Runtime*
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+\mathbb{E}[K \mid X] = \exp(D_{\inf}[P_{Z \mid X} \Vert P_Z])
+$$
+
+* Speeding up GPRS
+[[./img/gprs/gprs_accept.png]]
+
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_0.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_1.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_2.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_3.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_4.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_5.png]]
+
+
+* Analysis of faster GPRS
+#+ATTR_REVEAL: :frag (appear)
+Now, encode search path $\pi$.
+
+#+ATTR_REVEAL: :frag (appear)
+$H[\pi] \leq I[X; Z] + \log(I[X; Z] + 1) + \mathcal{O}(1)$
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Z])$
+
+* Some Open Questions
+#+ATTR_REVEAL: :frag (appear)
+- Fast algorithm for multivariate Gaussians?
+- Tighter general lower bound on runtime?
