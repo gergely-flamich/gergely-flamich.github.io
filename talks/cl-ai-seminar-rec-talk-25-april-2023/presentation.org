@@ -1,0 +1,360 @@
+#+TITLE: Relative Entropy Coding for Learned Data Compression
+#+author: Gergely Flamich, CBL, Department of Engineering
+#+date: 25/04/2023
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4>"
+#+OPTIONS: toc:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+
+* Data Compression Fundamentals
+#+ATTR_REVEAL: :frag (appear)
+Lossless data compression with *entropy coding*:
+#+ATTR_REVEAL: :frag (appear)
+ - Assume statistical model over data: $P_Z$
+ - Common symbols have short codes, uncommon symbols have longer codes
+ - Can losslessly compress $Z \sim P_Z$ using $\mathbb{H}[Z] + \mathcal{O}(1)$ bits on average
+ - Huffman coding, arithmetic coding, ANS
+
+* Lossy Data Compression
+# How many know what entropy coding is?
+#+ATTR_REVEAL: :frag (appear)
+[[./img/jpeg_example/transform_encoding.png]]
+#+ATTR_REVEAL: :frag (appear)
+[[./img/jpeg_example/transform_decoding.png]]
+
+* Data Compression Fundamentals
+#+ATTR_REVEAL: :frag (appear)
+ - Assume statistical model over two variables $P_{X, Z}$
+ - Mutual information:
+#+ATTR_REVEAL: :frag (appear)
+$$
+I[X; Z] = \mathbb{H}[Z] - \mathbb{H}[Z \mid X]
+$$
+#+ATTR_REVEAL: :frag (appear)
+*Question:* Does this have a compression interpretation?
+
+* Relative Entropy Coding / Channel Simulation
+#+ATTR_REVEAL: :frag (appear)
+Source $X$, latent $Z$, model $P_{X, Z}$
+
+#+ATTR_REVEAL: :frag (appear)
+*Encoder:*
+
+#+ATTR_REVEAL: :frag (appear)
+1. Receive $X \sim P_X$ from source
+2. Encode $Z \sim P_{Z \mid X}$ using $P_Z$
+
+#+ATTR_REVEAL: :frag (appear)
+*Decoder:*
+
+#+ATTR_REVEAL: :frag (appear)
+1. Recover $Z$ using $P_Z$
+2. Recover $\hat{X} \sim P_{X \mid Z}$
+
+* Relative Entropy Coding / Channel Simulation
+#+ATTR_REVEAL: :frag (appear)
+*Assumptions*
+#+ATTR_REVEAL: :frag (appear)
+ - $I[X; Z] < \infty$
+ - Can simulate $Z \sim P_Z$
+ - Encoder and decoder share PRNG seed
+#+ATTR_REVEAL: :frag (appear)
+*Under these assumptions:* We can encode $Z \sim P_{Z \mid X}$ using $I[Z; X]$ bits on average!
+
+* Applications of Relative Entropy Coding
+
+** Lossy Compression with Realism Constraints
+#+ATTR_REVEAL: :frag (appear)
+Rate-Distortion trade-off
+[[./img/applications/rd_tradeoff.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+Rate-Distortion-Perception trade-off
+[[./img/applications/rdp_tradeoff.png]]
+
+** Lossy Compression with Realism Constraints
+# +ATTR_REVEAL: :frag (appear)
+- Theis & Agustsson (2021): toy example with REC provably better than quantization.
+- Theis et al. (2022): compression with VDM.
+
+#+REVEAL_HTML: <img src="./img/applications/diffC.png" class="r-stretch" data-transition="appear">
+
+** Differential Privacy for federated learning
+Client: have secret $X$,
+$\epsilon$ -LDP mechanism $Z \sim P_{Z \mid X}$
+#+REVEAL_HTML: <img src="./img/applications/priv_unit_dp.png" class="r-stretch">
+Image from Bhowmick et al. (2018)
+
+Shah et al. (2021): Use REC to optimally encode $Z$
+
+** Model Compression
+#+REVEAL_HTML: <img src="./img/applications/variational_bnn.png" class="r-stretch">
+#+ATTR_REVEAL: :frag (appear)
+- Dataset $\mathcal{D} \sim P_{\mathcal{D}}$
+- NN $f(w, x)$ with weights $w$ with prior $P_w$
+- Train weight posterior $P_{w \mid \mathcal{D}}$ using ELBO
+- Encode $w \sim P_{w \mid \mathcal{D}}$ in $I[w; \mathcal{D}]$ bits
+
+#+ATTR_REVEAL: :frag (appear)
+Image from Blundell et al. (2015)
+
+** Model Compression
+Havasi et al. (2018): MIRACLE
+#+REVEAL_HTML: <img src="./img/applications/miracle.png" class="r-stretch">
+
+** Data Compression with INRs
+#+REVEAL_HTML: <img src="./img/applications/coin.png" class="r-stretch">
+Image from Dupont et al. (2021)
+
+#+ATTR_REVEAL: :frag (appear)
+*Problem*: Post-training quantization severely impacts performance!
+
+** Compress variational INRs!
+*COMBINER*: COMpression with Bayesian Implicit Neural Representations
+
+Variational INRs, train negative $\beta$ -ELBO:
+$$
+\mathbb{E}_{w, \mathcal{D}}[-\log p(\mathcal{D} \mid w)] + \beta \cdot I[w; \mathcal{D}]
+$$
+# +REVEAL_HTML: <section>
+#+REVEAL_HTML: <img src="./img/applications/combiner/psnr_kodak.png" width="45%">
+#+REVEAL_HTML: <img src="./img/applications/combiner/psnr_audio.png" width="45%">
+# +REVEAL_HTML: </section>
+
+* Current limitations of REC
+#+ATTR_REVEAL: :frag (appear)
+Current REC algorithms are:
+#+ATTR_REVEAL: :frag (appear)
+- Too slow (Agustsson & Theis, 2020):
+  - Average runtime of any general REC algorithm must scale at least $2^{I[X; Z]}$
+- Too limited:
+  - Uniforms only (Agustsson & Theis, 2020)
+  - 1D unimodal distributions only (F et al., 2022)
+- Too much codelength overhead
+
+#+ATTR_REVEAL: :frag (appear)
+*Open problem:* $\mathcal{O}(I[X; Z])$ runtime when both $P_{Z \mid X}$ and $P_Z$ are multivariate Gaussian?
+
+* Take home message: Overview and Applications
+#+ATTR_REVEAL: :frag (appear)
+- REC is a stochastic compression framework
+- Alternative to quantization and entropy coding
+- It finds applications in:
+  - Lossy compression with realism constraints
+  - Differentially private federated learning
+  - Model compression
+  - Compressing Bayesian INRs
+- Currently still too slow or limited
+
+* Poisson Processes
+#+ATTR_REVEAL: :frag (appear)
+ - Collection of random points in space
+ - Focus on spatio-temporal processes on $\mathbb{R}^D \times \mathbb{R}^+$
+ - Exponential inter-arrival times
+ - Spatial distribution $P_{X \mid T}$
+
+** Poisson Processes
+#+ATTR_REVEAL: :frag (appear)
+#+REVEAL_HTML: <img src="./img/pp_alg.png" class="r-stretch">
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/empty_pp.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1_x1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2_x2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_sim.png]]
+
+
+* Rejection Sampling
+#+ATTR_REVEAL: :frag (appear)
+- Sampling algorithm for target distribution $Q$.
+- Using proposal $P$
+- Bound on their density ratio $q/p$: $M$
+
+** Rejection Sampling
+#+ATTR_REVEAL: :frag (appear)
+#+REVEAL_HTML: <img src="./img/rs_alg.png" class="r-stretch">
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_0.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_1.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_2.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_3.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_4.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_5.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_6.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_7.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_8.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_9.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_10.png]]
+
+** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/rs/rs_accept.png]]
+
+* Channel Simulation with Rejection Sampling
+#+ATTR_REVEAL: :frag (appear)
+*Encoder:*
+#+ATTR_REVEAL: :frag (appear)
+- Receive $X \sim P_X$
+- Rejection sample from $P_{Z \mid X}$ using $P_Z$.
+- Send index $K$ of the accepted sample.
+
+#+ATTR_REVEAL: :frag (appear)
+*Decoder:*
+#+ATTR_REVEAL: :frag (appear)
+- Simulate the same $K$ samples from $P_Z$
+
+* Efficiency of RS
+#+ATTR_REVEAL: :frag (appear)
+Best possible bound is $M^* = \sup_{z} \frac{p(z \mid X)}{p(z)}$.
+
+#+ATTR_REVEAL: :frag (appear)
+Define $D_{\inf}[P_{Z \mid X} \Vert P_Z] = \log M^*$.
+
+#+ATTR_REVEAL: :frag (appear)
+$K$ is geometric.
+
+#+ATTR_REVEAL: :frag (appear)
+$H[K \mid X] \geq D_{\inf}[P_{Z \mid X} \Vert P_Z]$.
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[K \mid X] = \exp(D_{\inf}[P_{Z \mid X} \Vert P_Z])$.
+
+* Greedy Poisson Rejection Sampling
+#+REVEAL_HTML: <img src="./img/gprs_alg.png" class="r-stretch">
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_0.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_1.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_2.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_3.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_4.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_5.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_accept.png]]
+
+* How to find $\sigma$?
+#+ATTR_REVEAL: :frag (appear)
+\begin{align}
+\left(\sigma^{-1}\right)'(t) &= \mathbb{P}_{Z \sim Q}[r(Z) \geq \sigma^{-1}(t)] \\
+&\quad - \sigma^{-1}(t) \cdot \mathbb{P}_{Z \sim P}[r(Z) \geq \sigma^{-1}(t)]
+\end{align}
+
+* Analysis of GPRS
+#+ATTR_REVEAL: :frag (appear)
+*Codelength*
+#+ATTR_REVEAL: :frag (appear)
+$$
+H[K \mid X] \leq D_{KL}[P_{Z \mid X} \Vert P_Z] + \log(D_{KL}[P_{Z \mid X} \Vert P_Z] + 1) + \mathcal{O}(1)
+$$
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+H[K] \leq I[X; Z] + \log(I[X; Z] + 1) + \mathcal{O}(1)
+$$
+
+#+ATTR_REVEAL: :frag (appear)
+*Runtime*
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+\mathbb{E}[K \mid X] = \exp(D_{\inf}[P_{Z \mid X} \Vert P_Z])
+$$
+
+* Speeding up GPRS
+[[./img/gprs/gprs_accept.png]]
+
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_0.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_1.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_2.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_3.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_4.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_5.png]]
+
+
+* Analysis of faster GPRS
+#+ATTR_REVEAL: :frag (appear)
+Now, encode search path $\pi$.
+
+#+ATTR_REVEAL: :frag (appear)
+$H[\pi] \leq I[X; Z] + \log(I[X; Z] + 1) + \mathcal{O}(1)$
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Z])$
+
+* References
+- Agustsson, E., & Theis, L. (2020). Universally quantized neural compression. Advances in neural information processing systems, 33, 12367-12376.
+
+- A. Bhowmick, J. Duchi, J. Freudiger, G. Kapoor, and R. Rogers. Protection against reconstruction and its applications in private federated learning. arXiv preprint arXiv:1812.00984, 2018.
+
+- Blundell, C., Cornebise, J., Kavukcuoglu, K., & Wierstra, D. (2015, June). Weight uncertainty in neural network. In International conference on machine learning.
+
+* References
+- G F, Stratis Markou, and Jose Miguel Hernandez-Lobato. Fast relative entropy coding
+with A* coding. In Proceedings of the 39th International Conference on Machine Learning
+
+- M. Havasi, R. Peharz, and J. M. Hern ́andez-Lobato. Minimal Random Code Learning: Getting Bits Back from Compressed Model Parameters. In International Conference on Learning Representations, 2019.
+
+* References
+- A. Shah, W.-N. Chen, J. Balle, P. Kairouz, and L. Theis. Optimal compression of locally differentially private mechanisms. In Artificial Intelligence and Statistics, 2022. URL https://arxiv.org/abs/2111.00092.
+
+- Theis, L., & Agustsson, E. (2021). On the advantages of stochastic encoders. arXiv preprint arXiv:2102.09270.
+
+- Theis, L., Salimans, T., Hoffman, M. D., & Mentzer, F. (2022). Lossy compression with gaussian diffusion. arXiv preprint arXiv:2206.08889.

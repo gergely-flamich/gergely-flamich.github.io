@@ -8,7 +8,7 @@ layout: default
           <h1 class="post-title">
            {% if site.title == "blank" -%}<span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }} {{ site.last_name }}{%- else -%}{{ site.title }}{%- endif %}
           </h1>
-          <p class="desc">{{ page.subtitle }}</p>
+          <p class="desc">{{ page.subtitle }} <a href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url}}" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> Curriculum Vitae</a></p>
         </header>
 
         <article>
@@ -36,7 +36,7 @@ layout: default
           </div>
           {%- endif %}
 
-          <div class="clearfix">
+          <div class="clearfix",  style="text-align: justify; text-justify: inter-word;"">
             {{ content }}
           </div>
 

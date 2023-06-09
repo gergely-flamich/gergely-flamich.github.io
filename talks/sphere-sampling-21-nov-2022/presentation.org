@@ -1,0 +1,84 @@
+#+TITLE: Sampling L_p-spherical distributions
+#+author: Gergely Flamich
+#+date: 21/11/2022
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4>"
+#+OPTIONS: toc:nil
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t'
+#+REVEAL_THEME: white
+
+
+* Notation
+#+ATTR_REVEAL: :frag (appear)
+ - $\lVert x \rVert_p \stackrel{def}{=} \left( \sum_{k = 1}^n \lvert x_k \rvert^p \right)^{1 / p}$
+ - $B_p^n \stackrel{def}{=} \left\{x \in \mathbb{R}^n \mid \lVert x \rVert_p \leq 1 \right\}$
+ - $S_p^n \stackrel{def}{=} \partial B^{n + 1}_p$
+ - $\mathcal{B}_p^n$ - uniform distribution on $B_p^n$
+ - $\mathcal{S}_p^n$ - uniform distribution on $S_p^n$.
+
+* In Pictures
+   [[./img/lp_spheres.png]]
+
+* First attempt
+#+ATTR_REVEAL: :frag (appear)
+ - For $\mathcal{B}_p^n:$ Rejection sample
+ - Uniform proposal on $C^n = [-1, 1]^n$
+
+* Problem w/ first attempt
+#+ATTR_REVEAL: :frag (appear)
+$\text{Accept prob} = \mathrm{Vol}(B_p^n) \, / \, \mathrm{Vol}(C^n)$
+# $$\mathrm{Vol}(B_p^n) = 2^n\frac{\Gamma\left(1 + \frac{1}{p}\right)^n}{\Gamma\left(1 + \frac{n}{p}\right)}$$
+#+ATTR_REVEAL: :frag (appear)
+   [[./img/cube_sphere_vol_ratio.png]]
+
+* Second attempt
+#+ATTR_REVEAL: :frag (appear)
+ - $n$ -dimensional Gaussian: $X \sim \mathcal{N}(0, I)$
+ - *Observation:* for $O \in \mathrm{SO}(n)$: $$ X \sim OX \quad \Rightarrow \frac{X}{\lVert X \rVert_2} \sim \frac{OX}{\lVert X \rVert_2} = \frac{OX}{\lVert OX \rVert_2} $$
+ - *Hence:* $X \, / \, \lVert X \rVert_2 \sim \mathcal{S}^{n-1}_2$
+
+* Why did this trick work?
+#+ATTR_REVEAL: :frag (appear)
+ Spherical symmetry $\Leftrightarrow$ " $L_2$ -symmetry "
+
+#+ATTR_REVEAL: :frag (appear)
+ $$\mathcal{N}(x \mid 0, I) \propto e^{-\frac{\lVert x \rVert_2^2}{2}}$$
+
+#+ATTR_REVEAL: :frag (appear)
+ $p$ - generalized Gaussian:
+
+#+ATTR_REVEAL: :frag (appear)
+ $$\mathcal{N}_p(x \mid 0, I) \propto e^{-\frac{\lVert x \rVert_p^p}{2}}$$
+
+* Recipe for L_p spheres
+#+ATTR_REVEAL: :frag (appear)
+- Draw $X \sim \mathcal{N}_p(x \mid 0, I)$.
+- Then $$ X \, / \, \lVert X \rVert_p \sim \mathcal{S}^{n - 1}_p $$
+- Drawing $X$ can be done dimensionwise!
+
+* L_p spherical distributions
+#+ATTR_REVEAL: :frag (appear)
+- $L_p$ spherical RV: $$Z = R \times U, \quad U \sim \mathcal{S}_p^n, R > 0$$
+- $Z \sim \mathcal{S}_p^n$: $\quad R = 1$.
+- $Z \sim \mathcal{N}_p$: $\quad R^p \sim \chi^2(2n \, /\, p)$.
+- $Z \sim \mathcal{B}_p^n$: $\quad \mathbb{P}[R < r] = \min\{r, 1\}^n$.
+
+* How special is our trick?
+#+ATTR_REVEAL: :frag (appear)
+   [[./img/factorial_lp_spherical_dists.png]]
+
+
+* A third way for L_p balls
+#+ATTR_REVEAL: :frag (appear)
+- Let $U \sim \mathcal{S}^{n - 1}_p$
+- Then $U = U_{1:n} = (U_1, \dots, U_{n})$
+- $U_{1:k} \sim ?$
+
+#+ATTR_REVEAL: :frag (appear)
+*Theorem:* $U_{1:n - p} \sim \mathcal{B}^{n - p}_p$
+
+* References
+- Wang, X. (2005). Volumes of generalized unit balls. Mathematics Magazine, 78(5), 390-395.
+- Sinz, F., Gerwinn, S., & Bethge, M. (2009). Characterization of the p-generalized normal distribution. Journal of Multivariate Analysis, 100(5), 817-820.
+- Barthe, F., Guédon, O., Mendelson, S., & Naor, A. (2005). A probabilistic approach to the geometry of the ℓpn-ball. The Annals of Probability, 33(2), 480-513.
