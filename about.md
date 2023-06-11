@@ -22,7 +22,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hello there! I'm Gergely Flamich (pronounced <span style="font-family:sans-serif;">[[gɛrˈgɛj flɒmih]](https://en.wikipedia.org/wiki/Help:IPA/Hungarian)</span>, but in English, I usually go by Greg), and I'm originally from Vác, Hungary. 
+Hello there! I'm Gergely Flamich (pronounced <span style="font-weight:normal;">[[gɛrˈgɛj flɒmih]](https://en.wikipedia.org/wiki/Help:IPA/Hungarian)</span>, but in English, I usually go by Greg), and I'm originally from Vác, Hungary. 
 I am a PhD student in Advanced Machine Learning at the [Computational and Biological Learning Lab](https://www.cbl-cambridge.org/) (since Oct 2020), supervised by [José Miguel Hernández Lobato](https://jmhl.org/). 
 I hold an MPhil degree in [Machine Learning and Machine Intelligence](https://www.mlmi.eng.cam.ac.uk/) from the University of Cambridge and a Joint BSc Honours degree in Mathematics and Computer Science from the University of St Andrews.
 

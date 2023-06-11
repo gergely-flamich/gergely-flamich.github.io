@@ -6,10 +6,13 @@ description: Slides and other material for the talks I have given.
 nav: true
 nav_order: 1
 ---
-<!-- _pages/publications.md -->
-## 2023
- - **05 April**: [CBL research talk on greedy Poisson rejection sampling]()
- - **25 April**: [AI Seminar talk in the Cambridge CL on Channel simulation]()
 
-## 2022
- - **21 November**: [CBL tea talk on sphere sampling]()
+<!-- _pages/publications.md -->
+{%- for entry in site.data.talks %}
+  <h2 class="year">{{entry.year}}</h2>
+  {%- for talk in entry.talks %}
+  - **{{talk.day}} {{talk.month}}:** <a href="{{talk.slides | prepend: '/talks/' | relative_url}}" target="_blank">{{talk.title}}</a>
+    <br /> *{{talk.occasion}}*
+
+  {% endfor %}
+{% endfor %}

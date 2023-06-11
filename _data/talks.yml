@@ -1,0 +1,23 @@
+- year: 2023
+  talks:
+    - title: Relative Entropy Coding for Learned Data Compression
+      month: April
+      day: 25
+      occasion: AI Seminar at the Cambridge Computer Lab
+      slides: cl-ai-seminar-rec-talk-25-april-2023/presentation.html
+      recording: 
+
+    - title: Channel Simulation with Poisson Processes
+      month: April
+      day: 05
+      occasion: CBL Research Talk
+      slides: cbl-research-talk-05-april-2023/presentation.html
+
+- year: 2022
+  talks:
+    - title: Sampling $$L_p$$-spherical distributions
+      month: November
+      day: 21
+      occasion: CBL Tea Talk
+      slides: sphere-sampling-21-nov-2022/presentation.html
+
