@@ -35,3 +35,6 @@ Hence, I am focusing on addressing this issue by developing fast, general-purpos
 In addition to my theoretical work, I am also interested in applying relative entropy coding algorithms to neural compression, utilizing generative models such as [variational autoencoders](https://arxiv.org/abs/2010.01185) and [implicit neural representations](https://arxiv.org/abs/2305.19185).
 
 From July 2022 until Dec 2022, I worked with [Lucas Theis](http://theis.io/) as a Student Researcher at Google Brain, during which time we developed [adaptive greedy rejection sampling and bits-back quantization](https://arxiv.org/abs/2304.10407).
+
+Judit, my wonderful sister, is an amazing painter. 
+Check out her work on [Instagram](https://www.instagram.com/j.flamich.art/)!
