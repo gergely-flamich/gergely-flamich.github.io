@@ -8,6 +8,7 @@
 #+REVEAL_THEME: white
 #+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
 #+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 * In Collaboration With
 
@@ -86,7 +87,7 @@ H[K] \leq D_{KL}[Q \,\Vert\, P] + \log(D_{KL}[Q \,\Vert\, P] + 1) + \mathcal{O}(
 #+ATTR_REVEAL: :frag (appear)
 When $Q \gets P_{X \mid Y}$ and $P \gets P_X$, average over $Y$:
 \[
-H[X \mid S] \leq H[K] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)
+H[K] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)
 \]
 
 ** GRS Analysis Cont'd
@@ -193,7 +194,7 @@ Apply AGRS to our Gaussian example:
 2. Connection to Poisson Functional Representation (Li and El Gamal, 2017)? See Greedy Poisson Rejection Sampling (F., 2023)
 3. Specialized algorithms for Gaussians?
 
-* References I
+* References
 - P. Harsha, R. Jain, D. McAllester, and J. Radhakrishnan, “The communication complexity of correlation,” IEEE Transactions on Information Theory, vol. 56, no. 1, pp. 438–449, 2010.
 - C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.
 - F. “Greedy Poisson Rejection Sampling,” arXiv preprint arXiv:2305.15313, 2023.
