@@ -29,38 +29,24 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2>Adaptive Greedy Rejection Sampling</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>26/06/2023</h4><h6>gergely-flamich.github.io</h6>
+<section id="sec-title-slide"><h2>Adaptive Greedy Rejection Sampling</h2><h2></h2></br><h4><u>Gergely Flamich</u> and Lucas Theis</h4><h4>26/06/2023</h4><h6>gergely-flamich.github.io</h6>
 </section>
 
-<section id="slide-orgd740e4e">
-<h2 id="orgd740e4e"><span class="section-number-2">1.</span> In Collaboration With</h2>
+<section id="slide-org1a75264">
+<h2 id="org1a75264"><span class="section-number-2">1.</span> In Collaboration With</h2>
 <img src="./img/lucas_profile.jpg" class="r-stretch">
 <p>
 Lucas Theis
 </p>
 
 </section>
-<section id="slide-org6a83e51">
-<h2 id="org6a83e51"><span class="section-number-2">2.</span> Background</h2>
+<section id="slide-org4144f25">
+<h2 id="org4144f25"><span class="section-number-2">2.</span> Background</h2>
 <div class="outline-text-2" id="text-2">
 </div>
 </section>
-<section id="slide-org1b12942">
-<h3 id="org1b12942"><span class="section-number-3">2.1.</span> Lossy compression</h3>
-
-<div id="org66b439a" class="figure">
-<p><img src="./img/jpeg_example/transform_encoding.png" alt="transform_encoding.png" class="fragment (appear)" />
-</p>
-</div>
-
-<div id="orge16cb1e" class="figure">
-<p><img src="./img/jpeg_example/transform_decoding.png" alt="transform_decoding.png" class="fragment (appear)" />
-</p>
-</div>
-
-</section>
-<section id="slide-orgf0132f9">
-<h3 id="orgf0132f9"><span class="section-number-3">2.2.</span> Channel Simulation</h3>
+<section id="slide-org25d467a">
+<h3 id="org25d467a"><span class="section-number-3">2.1.</span> Channel Simulation</h3>
 <p class="fragment (appear)">
 Correlated r.v.s \(X, Y \sim P_{X, Y}\)
 </p>
@@ -74,21 +60,40 @@ Bob wants to simulate \(X \sim P_{X \mid Y}\)
 </p>
 
 <p class="fragment (appear)">
-When common randomness \(S\) available:
+How many bits does Alice need to send to Bob?
+</p>
+
+<p class="fragment (appear)">
+When common randomness \(S\) available (SFRL):
 \[
-H[X \mid S] \leq I[X; Y] + \log (I[X; Y] + 1) + \mathcal{O}(1).
+H[X \mid S] \leq I[X; Y] + \log (I[X; Y] + 1) + 4.
 \]
 </p>
 
 
 </section>
-<section id="slide-org6713422">
-<h2 id="org6713422"><span class="section-number-2">3.</span> Greedy Rejection Sampling</h2>
+<section id="slide-org362fa1b">
+<h3 id="org362fa1b"><span class="section-number-3">2.2.</span> Lossy compression</h3>
+
+<div id="org7857821" class="figure">
+<p><img src="./img/jpeg_example/transform_encoding.png" alt="transform_encoding.png" class="fragment (appear)" />
+</p>
+</div>
+
+<div id="org03251a4" class="figure">
+<p><img src="./img/jpeg_example/transform_decoding.png" alt="transform_decoding.png" class="fragment (appear)" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org12ea880">
+<h2 id="org12ea880"><span class="section-number-2">3.</span> Greedy Rejection Sampling</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 </section>
-<section id="slide-org3345ae2">
-<h3 id="org3345ae2"><span class="section-number-3">3.1.</span> Greedy Rejection Sampling</h3>
+<section id="slide-org0cdcd5e">
+<h3 id="org0cdcd5e"><span class="section-number-3">3.1.</span> Greedy Rejection Sampling</h3>
 <p class="fragment (appear)">
 Originally proposed by Harsha et al. (2006) for discrete distributions.
 </p>
@@ -98,19 +103,19 @@ We extend it to Borel probability measures over Polish spaces.
 </p>
 
 </section>
-<section id="slide-orgd95a459">
-<h3 id="orgd95a459"><span class="section-number-3">3.2.</span> GRS Example</h3>
+<section id="slide-orge774d9f">
+<h3 id="orge774d9f"><span class="section-number-3">3.2.</span> GRS Example</h3>
 <p class="fragment (appear)">
 Target \(Q = \mathcal{N}(\mu, \sigma^2)\), proposal \(P = \mathcal{N}(0, 1)\)
 </p>
 
-<img src="./img/grs_example/original_grs.png" class="fragment (appear)" style="width:50%; margin:0px;">
+<img src="./img/grs_example/original_grs.png" class="fragment (appear)" style="width:46%; margin:0px;">
 <p class="fragment (appear)" style="margin:0px">Change of variables: \(U = F_P(X)\)</p>
-<img src="./img/grs_example/cdf_grs.png" class="fragment (appear)" style="width:50%; margin-top:0px;">
+<img src="./img/grs_example/cdf_grs.png" class="fragment (appear)" style="width:46%; margin-top:0px;">
 
 </section>
-<section id="slide-orgb4bf972">
-<h3 id="orgb4bf972"><span class="section-number-3">3.3.</span> GRS Example Cont'd</h3>
+<section id="slide-orgc65cbdb">
+<h3 id="orgc65cbdb"><span class="section-number-3">3.3.</span> GRS Example Cont'd</h3>
 <div class="r-stack">
 <img src="./img/grs_example/lower_cut_grs.png" class="fragment (appear)" style="width:50%; margin:0px auto;">
 <img src="./img/grs_example/lower_cut_with_rejected_grs.png" class="fragment (appear)" style="width:50%; margin:0px auto;">
@@ -119,8 +124,8 @@ Target \(Q = \mathcal{N}(\mu, \sigma^2)\), proposal \(P = \mathcal{N}(0, 1)\)
 <img src="./img/grs_example/upper_cut_grs.png" class="fragment (appear)" style="width:50%; margin-top:0px;">
 
 </section>
-<section id="slide-org6c796e9">
-<h3 id="org6c796e9"><span class="section-number-3">3.4.</span> GRS Coding</h3>
+<section id="slide-orgf0aa867">
+<h3 id="orgf0aa867"><span class="section-number-3">3.4.</span> GRS Coding</h3>
 <p class="fragment (appear)">
 To encode sample:
 </p>
@@ -138,24 +143,24 @@ Transmit \(K\) using a Zeta coding distribution:
 </p>
 
 </section>
-<section id="slide-orga89e1eb">
-<h3 id="orga89e1eb"><span class="section-number-3">3.5.</span> GRS Analysis</h3>
+<section id="slide-orgd683175">
+<h3 id="orgd683175"><span class="section-number-3">3.5.</span> GRS Analysis</h3>
 <p class="fragment (appear)">
 For fixed \(Q\) and \(P\):
 \[
-H[K] \leq D_{KL}[Q \,\Vert\, P] + \log(D_{KL}[Q \,\Vert\, P] + 1) + \mathcal{O}(1)
+H[K] \leq D_{KL}[Q \,\Vert\, P] + \log(D_{KL}[Q \,\Vert\, P] + 1) + 4
 \]
 </p>
 <p class="fragment (appear)">
 When \(Q \gets P_{X \mid Y}\) and \(P \gets P_X\), average over \(Y\):
 \[
-H[K] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)
+H[K] \leq I[X; Y] + \log(I[X; Y] + 1) + 4
 \]
 </p>
 
 </section>
-<section id="slide-org192969e">
-<h3 id="org192969e"><span class="section-number-3">3.6.</span> GRS Analysis Cont'd</h3>
+<section id="slide-org589ff88">
+<h3 id="org589ff88"><span class="section-number-3">3.6.</span> GRS Analysis Cont'd</h3>
 <p class="fragment (appear)">
 \[
 \mathbb{E}[K + 1] = 2^{D_{\infty}[Q \,\Vert\, P]}
@@ -167,11 +172,11 @@ D_{\infty}[Q \,\Vert\, P] = \log\left(\mathrm{ess\,sup}_{x \in \Omega}\left\{\fr
 </p>
 
 </section>
-<section id="slide-orgf2a1817">
-<h3 id="orgf2a1817"><span class="section-number-3">3.7.</span> The Gaussian Case</h3>
+<section id="slide-orga69f5c1">
+<h3 id="orga69f5c1"><span class="section-number-3">3.7.</span> The Gaussian Case</h3>
 <p class="fragment (appear)">
 \[
-X \sim \mathcal{N}(\mu, \sigma^2I), \quad \mu \sim \mathcal{N}(0, \rho^2I)
+X \mid \mu \sim \mathcal{N}(\mu, \rho^2I), \quad \mu \sim \mathcal{N}(0, \sigma^2I)
 \]
 </p>
 <p class="fragment (appear)">
@@ -183,13 +188,13 @@ P_{X} = \mathcal{N}(0, (\sigma^2 + \rho^2)I)
 <p class="fragment (appear)">
 Now, we find:
 \[
-\mathbb{E}[K] = \infty
+\mathbb{E}[K + 1] = \infty
 \]
 </p>
 
 </section>
-<section id="slide-org431be13">
-<h3 id="org431be13"><span class="section-number-3">3.8.</span> The Gaussian Case: Overdispersion</h3>
+<section id="slide-org6f950ea">
+<h3 id="org6f950ea"><span class="section-number-3">3.8.</span> The Gaussian Case: Overdispersion</h3>
 <p class="fragment (appear)">
 Use overdispersed marginal:
 \[
@@ -201,13 +206,13 @@ P_s = \mathcal{N}(0, (s^2 + \rho^2)I), \quad \sigma^2 < s^2
 
 
 </section>
-<section id="slide-org5a6a2f6">
-<h2 id="org5a6a2f6"><span class="section-number-2">4.</span> Adaptive Greedy Rejection Sampling</h2>
+<section id="slide-orgfbf6067">
+<h2 id="orgfbf6067"><span class="section-number-2">4.</span> Adaptive Greedy Rejection Sampling</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 </section>
-<section id="slide-orgf9e5845">
-<h3 id="orgf9e5845"><span class="section-number-3">4.1.</span> GRS Example Revisited</h3>
+<section id="slide-orga3c158b">
+<h3 id="orga3c158b"><span class="section-number-3">4.1.</span> GRS Example Revisited</h3>
 <div class="r-stack">
 <img src="./img/grs_example/cdf_grs.png" class="fragment (appear)" style="width:50%; margin:0px auto;">
 <img src="./img/grs_example/upper_cut_grs.png" class="fragment (appear)" style="width:50%; margin:0px auto;">
@@ -219,8 +224,8 @@ P_s = \mathcal{N}(0, (s^2 + \rho^2)I), \quad \sigma^2 < s^2
 </div>
 
 </section>
-<section id="slide-org1998d1f">
-<h3 id="org1998d1f"><span class="section-number-3">4.2.</span> AGRS Coding</h3>
+<section id="slide-org242fdb9">
+<h3 id="org242fdb9"><span class="section-number-3">4.2.</span> AGRS Coding</h3>
 <p class="fragment (appear)">
 Need suitable sequence of bounds \(B_1, B_2, \dots\).
 </p>
@@ -238,8 +243,8 @@ where \(C = I[X;Y] + \mathbb{E}[\log P(B_{m_{K}})]\).
 </p>
 
 </section>
-<section id="slide-orgc8020c5">
-<h3 id="orgc8020c5"><span class="section-number-3">4.3.</span> AGRS with Dithered Quantization</h3>
+<section id="slide-orgacdff65">
+<h3 id="orgacdff65"><span class="section-number-3">4.3.</span> AGRS with Dithered Quantization</h3>
 <p class="fragment (appear)">
 \[
 \lfloor c + U \rceil - U \stackrel{d}{=} c + U'
@@ -253,14 +258,14 @@ If \(c \in [1/2, M - 3/2)\), then \(\lfloor c + U \rceil \in [0:M - 1]\).
 
 <p class="fragment (appear)">
 \[
-\frac{1}{M}\left(\lfloor c + U \rceil - U\right) \sim \mathrm{Unif}(c/M - 1/2M, c/M + 1/2M).
+\frac{\lfloor c + U \rceil - U}{M} \sim \mathrm{Unif}\left(\frac{c}{M} - \frac{1}{2M}, \frac{c}{M} + \frac{1}{2M} \right).
 \]
 </p>
 
 
 </section>
-<section id="slide-orge8514cd">
-<h3 id="orge8514cd"><span class="section-number-3">4.4.</span> AGRS with Dithered Quantization Cont'd</h3>
+<section id="slide-org43203c4">
+<h3 id="org43203c4"><span class="section-number-3">4.4.</span> AGRS with Dithered Quantization Cont'd</h3>
 <p class="fragment (appear)">
 With DQ, we can encode any bound with size \(1 / M\).
 </p>
@@ -274,8 +279,8 @@ What about bounds with arbitrary rational sizes?
 </p>
 
 </section>
-<section id="slide-org4510e85">
-<h3 id="org4510e85"><span class="section-number-3">4.5.</span> AGRS for 1D Gaussians</h3>
+<section id="slide-org68a36ed">
+<h3 id="org68a36ed"><span class="section-number-3">4.5.</span> AGRS for 1D Gaussians</h3>
 <p class="fragment (appear)">
 Apply AGRS to our Gaussian example:
 </p>
@@ -286,8 +291,8 @@ Apply AGRS to our Gaussian example:
 </div>
 
 </section>
-<section id="slide-org04d2a7a">
-<h2 id="org04d2a7a"><span class="section-number-2">5.</span> Future directions</h2>
+<section id="slide-org9c399d8">
+<h2 id="org9c399d8"><span class="section-number-2">5.</span> Future directions</h2>
 <ol>
 <li class="fragment appear">Is there a sampling algorithm with \(\mathcal{O}\left(2^{D_{KL}[Q \,\Vert\, P]}\right)\) or is \(2^{D_{\infty}[Q \,\Vert\, P]}\) tight?</li>
 <li class="fragment appear">Connection to Poisson Functional Representation (Li and El Gamal, 2017)? See Greedy Poisson Rejection Sampling (F., 2023)</li>
@@ -296,14 +301,19 @@ Apply AGRS to our Gaussian example:
 </ol>
 
 </section>
-<section id="slide-org8799881">
-<h2 id="org8799881"><span class="section-number-2">6.</span> References I</h2>
+<section id="slide-org85cc001">
+<h2 id="org85cc001"><span class="section-number-2">6.</span> References</h2>
 <ul>
 <li>P. Harsha, R. Jain, D. McAllester, and J. Radhakrishnan, “The communication complexity of correlation,” IEEE Transactions on Information Theory, vol. 56, no. 1, pp. 438–449, 2010.</li>
 <li>C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.</li>
 <li>F. “Greedy Poisson Rejection Sampling,” arXiv preprint arXiv:2305.15313, 2023.</li>
 
 </ul>
+
+</section>
+<section id="slide-orgae03183">
+<h2 id="orgae03183"><span class="section-number-2">7.</span> BBQ</h2>
+<img src="./img/bbq.png" style="width:100%; margin:0px auto;">
 </section>
 </section>
 </div>

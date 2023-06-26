@@ -3,7 +3,7 @@
 #+date: 26/06/2023
 
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
-#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4><u>Gergely Flamich</u> and Lucas Theis</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
 #+OPTIONS: toc:nil
 #+REVEAL_THEME: white
 #+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
@@ -17,12 +17,6 @@ Lucas Theis
 
 * Background
 
-** Lossy compression
-#+ATTR_REVEAL: :frag (appear)
-[[./img/jpeg_example/transform_encoding.png]]
-#+ATTR_REVEAL: :frag (appear)
-[[./img/jpeg_example/transform_decoding.png]]
-
 ** Channel Simulation
 #+ATTR_REVEAL: :frag (appear)
 Correlated r.v.s $X, Y \sim P_{X, Y}$
@@ -34,10 +28,20 @@ Alice receives $Y \sim P_Y$
 Bob wants to simulate $X \sim P_{X \mid Y}$
 
 #+ATTR_REVEAL: :frag (appear)
-When common randomness $S$ available:
+How many bits does Alice need to send to Bob?
+
+#+ATTR_REVEAL: :frag (appear)
+When common randomness $S$ available (SFRL):
 $$
-H[X \mid S] \leq I[X; Y] + \log (I[X; Y] + 1) + \mathcal{O}(1).
+H[X \mid S] \leq I[X; Y] + \log (I[X; Y] + 1) + 4.
 $$
+
+
+** Lossy compression
+#+ATTR_REVEAL: :frag (appear)
+[[./img/jpeg_example/transform_encoding.png]]
+#+ATTR_REVEAL: :frag (appear)
+[[./img/jpeg_example/transform_decoding.png]]
 
 
 * Greedy Rejection Sampling
@@ -53,9 +57,9 @@ We extend it to Borel probability measures over Polish spaces.
 #+ATTR_REVEAL: :frag (appear)
 Target $Q = \mathcal{N}(\mu, \sigma^2)$, proposal $P = \mathcal{N}(0, 1)$
 
-#+REVEAL_HTML: <img src="./img/grs_example/original_grs.png" class="fragment (appear)" style="width:50%; margin:0px;">
+#+REVEAL_HTML: <img src="./img/grs_example/original_grs.png" class="fragment (appear)" style="width:46%; margin:0px;">
 #+REVEAL_HTML: <p class="fragment (appear)" style="margin:0px">Change of variables: \(U = F_P(X)\)</p>
-#+REVEAL_HTML: <img src="./img/grs_example/cdf_grs.png" class="fragment (appear)" style="width:50%; margin-top:0px;">
+#+REVEAL_HTML: <img src="./img/grs_example/cdf_grs.png" class="fragment (appear)" style="width:46%; margin-top:0px;">
 
 ** GRS Example Cont'd
 #+REVEAL_HTML: <div class="r-stack">
@@ -82,12 +86,12 @@ Transmit $K$ using a Zeta coding distribution:
 #+ATTR_REVEAL: :frag (appear)
 For fixed $Q$ and $P$:
 \[
-H[K] \leq D_{KL}[Q \,\Vert\, P] + \log(D_{KL}[Q \,\Vert\, P] + 1) + \mathcal{O}(1)
+H[K] \leq D_{KL}[Q \,\Vert\, P] + \log(D_{KL}[Q \,\Vert\, P] + 1) + 4
 \]
 #+ATTR_REVEAL: :frag (appear)
 When $Q \gets P_{X \mid Y}$ and $P \gets P_X$, average over $Y$:
 \[
-H[K] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)
+H[K] \leq I[X; Y] + \log(I[X; Y] + 1) + 4
 \]
 
 ** GRS Analysis Cont'd
@@ -103,7 +107,7 @@ D_{\infty}[Q \,\Vert\, P] = \log\left(\mathrm{ess\,sup}_{x \in \Omega}\left\{\fr
 ** The Gaussian Case
 #+ATTR_REVEAL: :frag (appear)
 \[
-X \sim \mathcal{N}(\mu, \sigma^2I), \quad \mu \sim \mathcal{N}(0, \rho^2I)
+X \mid \mu \sim \mathcal{N}(\mu, \rho^2I), \quad \mu \sim \mathcal{N}(0, \sigma^2I)
 \]
 #+ATTR_REVEAL: :frag (appear)
 Then:
@@ -113,7 +117,7 @@ P_{X} = \mathcal{N}(0, (\sigma^2 + \rho^2)I)
 #+ATTR_REVEAL: :frag (appear)
 Now, we find:
 $$
-\mathbb{E}[K] = \infty
+\mathbb{E}[K + 1] = \infty
 $$
 
 ** The Gaussian Case: Overdispersion
@@ -165,7 +169,7 @@ If $c \in [1/2, M - 3/2)$, then $\lfloor c + U \rceil \in [0:M - 1]$.
 
 #+ATTR_REVEAL: :frag (appear)
 \[
-\frac{1}{M}\left(\lfloor c + U \rceil - U\right) \sim \mathrm{Unif}(c/M - 1/2M, c/M + 1/2M).
+\frac{\lfloor c + U \rceil - U}{M} \sim \mathrm{Unif}\left(\frac{c}{M} - \frac{1}{2M}, \frac{c}{M} + \frac{1}{2M} \right).
 \]
 
 
@@ -198,3 +202,6 @@ Apply AGRS to our Gaussian example:
 - P. Harsha, R. Jain, D. McAllester, and J. Radhakrishnan, “The communication complexity of correlation,” IEEE Transactions on Information Theory, vol. 56, no. 1, pp. 438–449, 2010.
 - C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.
 - F. “Greedy Poisson Rejection Sampling,” arXiv preprint arXiv:2305.15313, 2023.
+
+* BBQ
+#+REVEAL_HTML: <img src="./img/bbq.png" style="width:100%; margin:0px auto;">
