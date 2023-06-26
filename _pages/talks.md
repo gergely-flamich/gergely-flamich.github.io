@@ -13,6 +13,7 @@ nav_order: 1
   {%- for talk in entry.talks %}
   - **{{talk.day}} {{talk.month}}:** <a href="{{talk.slides | prepend: '/talks/' | relative_url}}" target="_blank">{{talk.title}}</a>
     <br /> *{{talk.occasion}}*
+    {%if talk.extra %}<br />Additional material: *{{talk.extra}}*{% endif %}
 
   {% endfor %}
 {% endfor %}
