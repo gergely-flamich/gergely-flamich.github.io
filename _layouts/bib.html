@@ -133,6 +133,11 @@
           {{ entry.note | strip }}
         </div>
 
+        <!-- If the paper received an award -->
+        {%- if entry.award -%}
+        Received <b>{{entry.award}}</b>
+        {%- endif -%}
+        
           <!-- Links/Buttons -->
           <div class="links">
           {%- if entry.abstract %}
