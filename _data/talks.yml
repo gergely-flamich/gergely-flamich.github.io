@@ -1,5 +1,12 @@
 - year: 2023
   talks:
+    - title: Relative Entropy Coding with Greedy Poisson Rejection Sampling
+      month: September
+      day: 29
+      occasion: Presentation at the 2023 Div-F conference at the Engineering Department at Cambridge
+      slides: div-f-conference-29-sep-2023/presentation.html
+      recording: 
+
     - title: Adaptive Greedy Rejection Sampling
       month: June
       day: 26
