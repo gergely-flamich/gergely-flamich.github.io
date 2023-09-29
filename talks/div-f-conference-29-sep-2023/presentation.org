@@ -19,7 +19,7 @@
 #+REVEAL_HTML: <img src="./img/collaborators/daniel_goc.jpg" width=23%>
 #+REVEAL_HTML: <img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
 
-* Background
+* What is Relative Entropy Coding?
 
 ** Lossy compression
 #+ATTR_REVEAL: :frag (appear)
@@ -34,7 +34,7 @@
 Get an image $Y \sim P_Y$
 
 #+ATTR_REVEAL: :frag (appear)
-Transform and quantize: $X = \lfloor f(Y) \rfloor$
+Transform and quantize: $X = f(Y)$
 
 #+ATTR_REVEAL: :frag (appear)
 Inverse transform to reconstruct: $\hat{Y} = g(X)$
@@ -87,11 +87,11 @@ $I[X; Y]$ can be *finite* even when $H[X]$ is *infinite*!
 
 ** Model Compression
 #+REVEAL_HTML: <img src="./img/applications/variational_bnn.png" class="r-stretch">
-#+ATTR_REVEAL: :frag (appear)
-- Dataset $\mathcal{D} \sim P_{\mathcal{D}}$
-- NN $f(w, x)$ with weights $w$ with prior $P_w$
-- Train weight posterior $P_{w \mid \mathcal{D}}$ using ELBO
-- Encode $w \sim P_{w \mid \mathcal{D}}$ in $I[w; \mathcal{D}]$ bits
+# +ATTR_REVEAL: :frag (appear)
+# - Dataset $\mathcal{D} \sim P_{\mathcal{D}}$
+# - NN $f(w, x)$ with weights $w$ with prior $P_w$
+# - Train weight posterior $P_{w \mid \mathcal{D}}$ using ELBO
+# - Encode $w \sim P_{w \mid \mathcal{D}}$ in $I[w; \mathcal{D}]$ bits
 
 #+ATTR_REVEAL: :frag (appear)
 Image from Blundell et al. (2015)
@@ -147,69 +147,69 @@ Current REC algorithms are:
  - Collection of random points in space
  - Focus on spatio-temporal processes on $\mathbb{R}^D \times \mathbb{R}^+$
  - Exponential inter-arrival times
- - Spatial distribution $P_{X \mid T}$
+ - Spatial distribution $P_{X}$
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/empty_pp.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_t1.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_x1.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_t1_x1.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_t2.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_x2.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_t2_x2.png]]
 
-** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+** Example with $P_{X} = \mathcal{N}(0, 1)$
 [[./img/pp/pp_sim.png]]
 
 
 ** Greedy Poisson Rejection Sampling
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_0.png]]
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_1.png]]
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_2.png]]
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_3.png]]
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_4.png]]
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_5.png]]
 
-** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/gprs/gprs_accept.png]]
 
 ** How to find the function?
 
 #+ATTR_REVEAL: :frag (appear)
 $$
-\sigma(h) = \int_0^h \frac{1}{w_Q(\eta) - \eta \cdot w_P(\eta)} \, d\eta,
+\sigma(h) = \int_0^h \frac{1}{w_{X \mid Y}(\eta) - \eta \cdot w_X(\eta)} \, d\eta,
 $$
 #+ATTR_REVEAL: :frag (appear)
 where
 $$
-w_P(h) = \mathbb{P}_{Z \sim P}\left[\frac{dQ}{dP}(Z) \geq h \right]
+w_X(h) = \mathbb{P}_{Z \sim P_X}\left[\frac{dP_{X \mid Y}}{dP_X}(Z) \geq h \right]
 $$
 $$
-w_Q(h) = \mathbb{P}_{Z \sim Q}\left[\frac{dQ}{dP}(Z) \geq h \right]
+w_{X \mid Y}(h) = \mathbb{P}_{Z \sim P_{X \mid Y}}\left[\frac{dP_{X \mid Y}}{dP_X}(Z) \geq h \right]
 $$
 
 ** Analysis of GPRS
@@ -233,17 +233,17 @@ $$
 ** Speeding up GPRS
 [[./img/gprs/gprs_accept.png]]
 
-** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** Fast GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/fast_gprs/fast_gprs_0.png]]
-** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/fast_gprs/fast_gprs_1.png]]
-** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/fast_gprs/fast_gprs_2.png]]
-** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/fast_gprs/fast_gprs_3.png]]
-** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/fast_gprs/fast_gprs_4.png]]
-** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+** Fast GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_1.png]] 
+** Fast GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_2.png]] 
+** Fast GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_3.png]] 
+** Fast GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_4.png]] 
+** Fast GPRS with $P_X = \mathcal{N}(0, 1), P_{X \mid Y} = \mathcal{N}(1, 1/16)$
 [[./img/fast_gprs/fast_gprs_5.png]]
 
 ** Analysis of faster GPRS
