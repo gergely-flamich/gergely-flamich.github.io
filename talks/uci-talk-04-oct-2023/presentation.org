@@ -5,13 +5,24 @@
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 # This is needed to make the speaker notes work
 #+REVEAL_REVEAL_JS_VERSION: 4
-#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4>"
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
 #+OPTIONS: toc:nil
 #+REVEAL_THEME: white
 #+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
 #+REVEAL_HLEVEL:0
 #+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 #+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* Talk Overview
+#+BEGIN_NOTES
+quant usually *integral* to TC
+#+END_NOTES
+
+#+ATTR_REVEAL: :frag (appear)
+1. Transform coding & problems with $\lfloor \cdot \rceil$
+2. What is REC?
+3. How can we use REC?
+4. An example of a REC algorithm
 
 * In Collaboration With
 
@@ -20,17 +31,13 @@
 #+REVEAL_HTML: <img src="./img/collaborators/daniel_goc.jpg" width=23%>
 #+REVEAL_HTML: <img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
 
-* Talk Overview
-#+ATTR_REVEAL: :frag (appear)
-1. Transform coding & problems with $\lfloor \cdot \rceil$
-2. What is REC?
-3. How can we use REC?
-4. An example of a REC algorithm
-
-
 * Motivation
 
 ** Example: Lossy Image Compression
+#+BEGIN_NOTES
+transform coding
+#+END_NOTES
+
 #+ATTR_REVEAL: :frag (appear)
 [[./img/jpeg_example/transform_encoding.png]]
 
@@ -58,12 +65,13 @@ $\mathbb{H}[Y]$ bits is best we can do to compress $Y$
 $X = f(Y)$
 
 #+BEGIN_NOTES
-assume $f$ maps into $\mathbb{R}^D$
+- assume $f$ maps into $\mathbb{R}^D$
+- invertible or approximately invertible
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-- Pick $f$ such that $P_{X \mid Y}$ is "nice"
-  - KLT/DCT
+- Pick $f$ such that $P_X$ or $P_{X \mid Y}$ is "nice"
+  - DCT
   - inference network of VAE
 - $\mathbb{H}[X]$ might still be infinite
 
@@ -96,6 +104,7 @@ $\mathbb{H}[\hat{X}] < \infty$
 ** Relative Entropy Coding
 #+BEGIN_NOTES
 - $\epsilon$ is an RV
+- lose information stochastically
 - setup is more general than this
 #+END_NOTES
 
@@ -107,32 +116,32 @@ $\mathbb{H}[\hat{X}] < \infty$
 
 #+REVEAL_HTML: <div class="tick-list">
 #+ATTR_REVEAL: :frag (appear)
-- Precise control over $P_{X \mid Y}$ via $\epsilon$!
 - Can use reparameterization trick!
+- Precise control over $P_{X \mid Y}$ via $f$ and $\epsilon$!
 #+REVEAL_HTML: </div>
 
 #+ATTR_REVEAL: :frag (appear)
 *But:*
 #+REVEAL_HTML: <div class="problem-list">
 #+ATTR_REVEAL: :frag (appear)
-- How do we send $X$?
+- How do we encode $X$?
 - How many bits do we need?
 #+REVEAL_HTML: </div>
 
 ** Rough Idea for Achievability
 #+ATTR_REVEAL: :frag (appear)
-*Assume:*
+Communication problem between Alice and Bob, who:
 #+ATTR_REVEAL: :frag (appear)
-- Sender / receiver share $P_X$
-- They share a PRNG seed $S$
-- $P_X$ is easy to sample from
+- share their PRNG seed $S$
+- share $P_X$
+- can easily sample from $P_X$
 
 #+ATTR_REVEAL: :frag (appear)
-*Encoding procedure:*
+*Alice*
 #+ATTR_REVEAL: :frag (appear)
-1. Simulate $N$ samples $X_1, \dots, X_N \sim P_X$
-2. Pick one of the samples $X_K$.
-3. Encode $K$ using $\approx \log K$ bits.
+1. Simulates $N$ samples $X_1, \dots, X_N \sim P_X^{\otimes N}$
+2. Picks $K \in [1:N]$ such that $P_{X_K} \approx P_{X \mid Y}$.
+3. Encodes $K$ using $\approx \log K$ bits.
 
 #+BEGIN_NOTES
 - e.g. rejection sampling: always pick last sample
@@ -143,22 +152,18 @@ $\mathbb{H}[\hat{X}] < \infty$
 #+ATTR_REVEAL: :frag (appear)
 When common randomness $S$ available, there exists an algorithm, such that (Li and El Gamal, 2017):
 $$
-{\color{red} I[X; Y]} \leq H[X \mid S] \leq {\color{red} I[X; Y]} + {\color{blue} \log (I[X; Y] + 1) + 4}
+{\color{red} I[X; Y]} \leq \mathbb{H}[X \mid S] \leq {\color{red} I[X; Y]} + {\color{blue} \log (I[X; Y] + 1) + 4}
 $$
 
-
 #+ATTR_REVEAL: :frag (appear)
-$I[X; Y]$ - Information in $P_{X, Y}$ compared to $P_X \otimes P_Y$
-
-#+ATTR_REVEAL: :frag (appear)
-$I[X; Y]$ can be *finite* even when $H[X]$ is *infinite*!
+$I[X; Y]$ can be *finite* even when $\mathbb{H}[X]$ is *infinite*!
 
 ** Time Complexity
 #+ATTR_REVEAL: :frag (appear)
 \begin{align}
 \mathbb{E}[K] &\geq 2^{\mathbb{E}[\log K]} \\
-&\geq 2^{\mathbb{H}[X \mid S]} \\
-&\geq 2^{I[X; Y]} \\
+&\geq 2^{\mathbb{H}[X \mid S] - 1} \\
+&\geq 2^{I[X; Y] - 1} \\
 \end{align}
 
 #+ATTR_REVEAL: :frag (appear)
@@ -171,11 +176,16 @@ This is *THE* limitation of REC in practice currently
 ** Lossy Compression with Realism Constraints
 #+ATTR_REVEAL: :frag (appear)
 Rate-Distortion trade-off
-[[./img/applications/rd_tradeoff.png]]
-
+$$
+R(D) = \min_{P_{\hat{Y} \mid Y}} I[Y; \hat{Y}]\,\, \text{s.t.}\,\, \mathbb{E}[\Delta(Y, \hat{Y})] \leq D
+$$
 #+ATTR_REVEAL: :frag (appear)
 Rate-Distortion-Perception trade-off
-[[./img/applications/rdp_tradeoff.png]]
+#+ATTR_REVEAL: :frag (appear)
+\begin{align}
+R(D, P) = \min_{P_{\hat{Y} \mid Y}} &\, I[Y; \hat{Y}]\,\, \text{s.t.}\\
+\mathbb{E}&[\Delta(Y, \hat{Y})] \leq D \,\,\,\,\, d(P_Y, P_{\hat{Y}}) \leq P
+\end{align} 
 
 ** Lossy Compression with Realism Constraints
 # +ATTR_REVEAL: :frag (appear)
@@ -213,6 +223,9 @@ Image from Dupont et al. (2021)
 #+ATTR_REVEAL: :frag (appear)
 *RECOMBINER*: Robust and Enhanced COMBINER
 
+#+ATTR_REVEAL: :frag (appear)
+💡Gradient descent is the transform!
+
 ** Compress variational INRs!
 #+REVEAL_HTML: <img src="./img/applications/recombiner_img.png" width="100%">
 
@@ -224,18 +237,18 @@ Image from Dupont et al. (2021)
 # +REVEAL_HTML: </section>
 
 * Current limitations of REC
-#+ATTR_REVEAL: :frag (appear)
-Current REC algorithms are:
+#+REVEAL_HTML: <div class="cross-list">
 #+ATTR_REVEAL: :frag (appear)
 - Too slow (Agustsson & Theis, 2020):
-  - Average runtime of any general REC algorithm must scale at least $2^{I[X; Z]}$
+  - Average runtime of any general REC algorithm must scale at least $2^{I[X; Y]}$
 - Too limited:
   - Uniforms only (Agustsson & Theis, 2020)
-  - 1D unimodal distributions only (F et al., 2022)
+  - 1D unimodal distributions only (F., 2022)
 - Too much codelength overhead
+#+REVEAL_HTML: </div>
 
 #+ATTR_REVEAL: :frag (appear)
-*Open problem:* $\mathcal{O}(I[X; Z])$ runtime when both $P_{Z \mid X}$ and $P_Z$ are multivariate Gaussian?
+*Open problem:* $\mathcal{O}(I[X; Y])$ runtime when both $P_{Y \mid X}$ and $P_Y$ are multivariate Gaussian?
 
 * Take home message: Overview and Applications
 #+ATTR_REVEAL: :frag (appear)
@@ -348,7 +361,7 @@ $$
 #+ATTR_REVEAL: :frag (appear)
 #+ATTR_REVEAL: :frag (appear)
 \begin{align}
-H[X \mid S] &\leq I[X; Y] + \log (I[X; Y] + 1) \\
+\mathbb{H}[X \mid S] &\leq I[X; Y] + \log (I[X; Y] + 1) \\
 &\quad + 2 + \frac{1}{1 + I[X; Y] \cdot \ln 2}
 \end{align}
 
@@ -381,7 +394,7 @@ $$
 Now, encode search path $\pi$.
 
 #+ATTR_REVEAL: :frag (appear)
-$H[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)$
+$\mathbb{H}[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)$
 
 #+ATTR_REVEAL: :frag (appear)
 $\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Z])$
@@ -390,6 +403,7 @@ $\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Z])$
 This is *optimal*.
 
 * Take home message: GPRS
+#+ATTR_REVEAL: :frag (appear)
 - GPRS is a rejection sampler using Poisson processes
 - Can be used for relative entropy coding
 - Has an optimally efficient variant for 1D, unimodal distributions
