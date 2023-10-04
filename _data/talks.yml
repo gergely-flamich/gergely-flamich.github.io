@@ -1,5 +1,12 @@
 - year: 2023
   talks:
+    - title: An Introduction to Relative Entropy Coding
+      month: October
+      day: 04
+      occasion: Talk at Stephan Mandt's group at UC Irvine
+      slides: uci-talk-04-oct-2023/presentation.html
+      recording: 
+
     - title: Relative Entropy Coding with Greedy Poisson Rejection Sampling
       month: September
       day: 29
