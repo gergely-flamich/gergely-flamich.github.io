@@ -4,7 +4,7 @@ title: about
 permalink: /
 subtitle: >
   <a href='https://www.cbl-cambridge.org/people/gf332'>PhD Student</a> in Machine Learning, CBL, University of Cambridge. 
-cv_pdf: 'cv_minimal.pdf'
+cv_pdf: 'MLcvMinimal/CV_Gergely_Flamich.pdf'
 
 profile:
   align: right
