@@ -2,6 +2,13 @@
   talks:
     - title: An Introduction to Relative Entropy Coding
       month: October
+      day: 18
+      occasion: Talk at Deniz Gündüz's group at Imperial College London
+      slides: imperial-talk-18-oct-2023/presentation.html
+      recording: 
+
+    - title: An Introduction to Relative Entropy Coding
+      month: October
       day: 04
       occasion: Talk at Stephan Mandt's group at UC Irvine
       slides: uci-talk-04-oct-2023/presentation.html
