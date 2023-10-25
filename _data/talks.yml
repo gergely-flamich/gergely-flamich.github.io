@@ -1,5 +1,12 @@
 - year: 2023
   talks:
+    - title: Relative Entropy Coding
+      month: October
+      day: 25
+      occasion: CBL Research talk
+      slides: cbl-research-talk-25-oct-2023/presentation.html
+      recording: 
+
     - title: An Introduction to Relative Entropy Coding
       month: October
       day: 18
