@@ -406,7 +406,7 @@ Now, encode search path $\pi$.
 $\mathbb{H}[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)$
 
 #+ATTR_REVEAL: :frag (appear)
-$\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Z])$
+$\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Y])$
 
 #+ATTR_REVEAL: :frag (appear)
 This is *optimal*.
