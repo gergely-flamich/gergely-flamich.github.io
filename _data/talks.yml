@@ -1,5 +1,33 @@
 - year: 2023
   talks:
+    - title: Compression with Bayesian Implicit Neural Representations
+      month: December
+      day: 10
+      occasion: Slides and video presentation accompanying our paper at NeurIPS 2023
+      slides: combiner-neurips-2023/presentation.html
+      recording: 
+
+    - title: Greedy Poisson Rejection Sampling
+      month: December
+      day: 10
+      occasion: Slides and video presentation accompanying my paper at NeurIPS 2023
+      slides: gprs-neurips-2023/presentation.html
+      recording: 
+
+    - title: Faster Relative Entropy Coding with Greedy Rejection Coding
+      month: December
+      day: 10
+      occasion: Slides and video presentation accompanying our paper at NeurIPS 2023
+      slides: grc-neurips-2023/presentation.html
+      recording: 
+
+    - title: A Poisson Process Model of Monte Carlo
+      month: November
+      day: 13
+      occasion: CBL Reading Group Presentation
+      slides: cbl-reading-group-13-nov-2023/presentation.html
+      recording: 
+
     - title: Relative Entropy Coding
       month: October
       day: 25
@@ -55,4 +83,29 @@
       day: 21
       occasion: CBL Tea Talk
       slides: sphere-sampling-21-nov-2022/presentation.html
+
+    - title:  Fast Relative Entropy Coding with A* coding
+      month: July
+      day: 19
+      occasion: Slides and video presentation accompanying our paper at ICML 2022
+      slides: 
+      recording: https://slideslive.com/38983496
+
+- year: 2020
+  talks:
+    - title: Compressing Images by Encoding Their Latent Representations with Relative Entropy Coding
+      month: December
+      day: 6
+      occasion: Slides and video presentation accompanying our paper at NeurIPS 2020
+      slides: 
+      recording: https://slideslive.com/38936798
+
+- year: 2019
+  talks:
+    - title: Compression Without Quantization
+      month: December
+      day: 13
+      occasion: Poster spotlight (0:00 - 1:32) accompanying our paper at the Information Theory and Machine Learning Workshop at NeurIPS 2019
+      slides: 
+      recording: https://slideslive.com/38922763 
 
