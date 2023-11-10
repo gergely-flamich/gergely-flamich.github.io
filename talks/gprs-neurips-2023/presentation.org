@@ -1,0 +1,216 @@
+#+TITLE: Greedy Poisson Rejection Sampling
+#+author: Gergely Flamich
+#+date: 
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io/talks</h6>"
+#+OPTIONS: toc:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* Motivation
+
+** Example: Lossy Image Compression
+#+BEGIN_NOTES
+- transform coding
+- REC: replacement for quant + EC
+- second part: example of transform
+#+END_NOTES
+
+#+ATTR_REVEAL: :frag (appear)
+[[./img/jpeg_example/transform_encoding.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+[[./img/jpeg_example/transform_decoding.png]]
+
+** The Setup
+#+ATTR_REVEAL: :frag (appear)
+Get some data $Y \sim P_Y$
+
+#+ATTR_REVEAL: :frag (appear)
+$X = f(Y)$
+
+#+ATTR_REVEAL: :frag (appear)
+$\hat{X} = \lfloor X \rceil$
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{H}[\hat{X}] < \infty$
+
+#+ATTR_REVEAL: :frag (appear)
+🤔 $\lfloor \cdot \rceil$ not differentiable
+
+
+* The Alternative: Relative Entropy Coding
+#+ATTR_REVEAL: :frag (appear)
+💡 *stochastic* alternative to $\lfloor \cdot \rceil$ & entropy coding
+
+
+** Relative Entropy Coding
+#+BEGIN_NOTES
+- $\epsilon$ is an RV
+- lose information stochastically
+- setup is more general than this
+#+END_NOTES
+
+#+REVEAL_HTML: <div class="idea-list">
+#+ATTR_REVEAL: :frag (appear)
+💡 $X = f(Y) + \epsilon$
+
+#+ATTR_REVEAL: :frag (appear)
+💡 Send bits s.t. decoder can draw $X \sim P_{X \mid Y}$
+#+REVEAL_HTML: </div>
+
+#+ATTR_REVEAL: :frag (appear)
+✅ Can use reparameterization trick!
+
+#+ATTR_REVEAL: :frag (appear)
+🤔 How do we encode $X$?
+
+* Greedy Poisson Rejection Sampling
+
+** Recap of the Problem
+#+ATTR_REVEAL: :frag (appear)
+Correlated r.v.s $X, Y \sim P_{X, Y}$
+
+#+ATTR_REVEAL: :frag (appear)
+Alice receives $Y \sim P_Y$
+
+#+ATTR_REVEAL: :frag (appear)
+Bob wants to simulate $X \sim P_{X \mid Y}$
+
+#+ATTR_REVEAL: :frag (appear)
+Alice and Bob share $P_{X}$
+
+#+ATTR_REVEAL: :frag (appear)
+Share common randomness $S$
+
+#+ATTR_REVEAL: :frag (appear)
+*Shorthand:* $P = P_X$, $Q = P_{X \mid Y}$
+
+** Poisson Processes
+#+ATTR_REVEAL: :frag (appear)
+ - Collection of random points in space
+ - Focus on spatio-temporal processes on $\mathbb{R}^D \times \mathbb{R}^+$
+ - Exponential inter-arrival times
+ - Spatial distribution $P$
+ - We will pick it as the common randomness!
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/empty_pp.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x1.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1_x1.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x2.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2_x2.png]]
+
+** Example with $P = \mathcal{N}(0, 1)$
+[[./img/pp/pp_sim.png]]
+
+
+** Greedy Poisson Rejection Sampling
+💡 Delete some of the points, encode index of the first point that remains
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_0.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_1.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_2.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_3.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_4.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_5.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_accept.png]]
+
+
+** How to find the graph?
+#+ATTR_REVEAL: :frag (appear)
+$$
+\varphi(x) = \int_0^{\frac{dQ}{dP}(x)} \frac{1}{w_Q(\eta) - \eta \cdot w_P(\eta)} \, d\eta,
+$$
+#+ATTR_REVEAL: :frag (appear)
+where
+$$
+w_P(h) = \mathbb{P}_{Z \sim P}\left[\frac{dQ}{dP}(Z) \geq h \right]
+$$
+$$
+w_Q(h) = \mathbb{P}_{Z \sim Q}\left[\frac{dQ}{dP}(Z) \geq h \right]
+$$
+
+** Analysis of GPRS
+#+ATTR_REVEAL: :frag (appear)
+*Codelength*
+#+ATTR_REVEAL: :frag (appear)
+#+ATTR_REVEAL: :frag (appear)
+\begin{align}
+\mathbb{H}[X \mid S] &\leq I[X; Y] + \log (I[X; Y] + 1) + 6
+\end{align}
+
+#+ATTR_REVEAL: :frag (appear)
+*Runtime*
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+\mathbb{E}[K \mid Y] = \exp(D_{\infty}[P_{X \mid Y} \Vert P_X])
+$$
+
+** Speeding up GPRS
+
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_0.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_1.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_2.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_3.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_4.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_5.png]]
+
+** Analysis of faster GPRS
+#+ATTR_REVEAL: :frag (appear)
+Now, encode search path $\pi$.
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{H}[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)$
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[\lvert\pi\rvert] = \mathcal{O}(I[X; Y])$
+
+#+ATTR_REVEAL: :frag (appear)
+This is *optimal*.
+
+* Take home message: GPRS
+#+ATTR_REVEAL: :frag (appear)
+- GPRS is a rejection sampler using Poisson processes
+- Can be used for relative entropy coding
+- Has an optimally efficient variant for 1D, unimodal distributions
