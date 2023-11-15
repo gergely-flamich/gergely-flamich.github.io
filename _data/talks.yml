@@ -4,7 +4,7 @@
       month: December
       day: 10
       occasion: Slides and video presentation accompanying our paper at NeurIPS 2023
-      slides: combiner-neurips-2023/presentation.html
+      slides: combiner-neurips-2023/COMBINER_presentation.pdf
       recording: 
 
     - title: Greedy Poisson Rejection Sampling
@@ -18,14 +18,14 @@
       month: December
       day: 10
       occasion: Slides and video presentation accompanying our paper at NeurIPS 2023
-      slides: grc-neurips-2023/presentation.html
+      slides: grc-neurips-2023/NeurIPS_2023_Presentation_on_GRC.pdf
       recording: 
 
     - title: A Poisson Process Model of Monte Carlo
       month: November
       day: 13
       occasion: CBL Reading Group Presentation
-      slides: cbl-reading-group-13-nov-2023/presentation.html
+      slides: cbl-reading-group-13-nov-2023/Poisson_Processes_Reading_Group_Notes.pdf
       recording: 
 
     - title: Relative Entropy Coding
