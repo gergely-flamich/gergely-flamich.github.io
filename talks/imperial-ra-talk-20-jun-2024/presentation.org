@@ -1,0 +1,224 @@
+#+TITLE: Practical Channel Simulation for Better Neural Data Compression
+#+author: Gergely Flamich
+#+date: 20/06/2024
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* In Collaboration With
+
+#+REVEAL_HTML: <img src="./img/collaborators/jiajun_he.jpg" width=23% >
+#+REVEAL_HTML: <img src="./img/collaborators/zongyu_guo.jpg" width=23%>
+#+REVEAL_HTML: <img src="./img/collaborators/daniel_goc.jpg" width=23%>
+#+REVEAL_HTML: <img src="./img/collaborators/lennie_wells.jpg" width=23%>
+#+REVEAL_HTML: <img src="./img/collaborators/stratis_markou.jpg" width=23%>
+#+REVEAL_HTML: <img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
+
+* motivation and background
+
+** realistic lossy compression
+#+REVEAL_HTML: <img src="./img/classic_vs_gen_compression.png" width=80% >
+
+Right-hand image from Careil et al. [1]
+
+** differentially private federated learning
+#+REVEAL_HTML: <img src="./img/federated_learning_sketch.png" width=100% >
+
+** transform coding
+
+[[./img/transform_coding.png]]
+
+** desiderata
+**Transform:** computationally lightweight
+
+**Encoder/Decoder:** short codelength, fast runtime
+
+** formal problem statement
+#+ATTR_REVEAL: :frag (appear)
+1. $X, Y \sim P_{X, Y}$
+2. Given $X \sim P_X$, encoder sends code $C$ so that decoder can compute $Y \sim P_{Y \mid X}$
+3. Li and El Gamal [2]:
+#+ATTR_REVEAL: :frag (appear)
+$$
+{\color{red} I[X; Y]} \leq \mathbb{E}[|C|] \leq {\color{red} I[X; Y]} + {\color{blue} \log (I[X; Y] + 1) + 4}
+$$
+#+REVEAL_HTML: <div class="tick-list">
+#+ATTR_REVEAL: :frag (appear)
+- short codelength
+#+REVEAL_HTML: </div>
+
+
+** core problem
+#+BEGIN_NOTES
+One-shot setting: we received data $X$, now we're encoding it
+
+two angles of inquiry:
+ 1. use structure of problem
+ 2. can we strengthen the bound?
+    - remove computational assumption
+    - sharpen lower bound
+#+END_NOTES
+
+
+Agustsson and Theis [3]:
+#+REVEAL_HTML: <img src="./img/agustsson_and_theis_lemma.png" width=100% >
+#+REVEAL_HTML: <div class="cross-list">
+#+ATTR_REVEAL: :frag (appear)
+- fast runtime
+#+REVEAL_HTML: </div>
+
+* Sharper computational bounds
+
+** Complexity measures
+#+ATTR_REVEAL: :frag (appear)
+$D_{KL}[Q || P] = \mathbb{E}_X\left[\log \frac{dQ}{dP}(X)\right]$
+
+#+ATTR_REVEAL: :frag (appear)
+$D_\infty[Q || P] = \sup_x\left\{ \log \frac{dQ}{dP}(x) \right\}$
+
+#+ATTR_REVEAL: :frag (appear)
+Can have $D_{KL}[Q || P] \ll D_\infty[Q || P]$
+
+** General results
+F. and Wells [5]:
+#+REVEAL_HTML: <img src="./img/infty_div_thm.png" width=100% >
+
+** A different computational framework
+#+ATTR_REVEAL: :frag (appear)
+Let $Q \gets P_{Y \mid X}$ and $P \gets P_Y$.
+
+#+ATTR_REVEAL: :frag (appear)
+Goc and F. [6]:
+
+#+ATTR_REVEAL: :frag (appear)
+#+REVEAL_HTML: <img src="./img/a_star_like_def.png" width=60% class="fragment appear">
+
+#+ATTR_REVEAL: :frag (appear)
+$X_1, X_2, \dots, X_N, \dots, X_K \sim P$
+
+** sample complexity results
+Goc and F. [6]:
+#+REVEAL_HTML: <img src="./img/a_star_like_runtime.png" width=100% >
+
+* Fast channel simulation
+#+ATTR_REVEAL: :frag (appear)
+- Sampling as search
+- Exploit structure to accelerate search
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_0.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_1.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_2.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_3.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_4.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_5.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_accept.png]]
+
+
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_0.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_1.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_2.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_3.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_4.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_5.png]]
+
+
+** Analysis of faster GPRS
+#+ATTR_REVEAL: :frag (appear)
+Now, encode search path $\pi$.
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{H}[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)$
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[\lvert\pi\rvert] = I[X; Y] + \mathcal{O}(1)$
+
+#+ATTR_REVEAL: :frag (appear)
+This is *optimal*.
+
+
+* Computationally Lightweight ML-based data compression
+** Data Compression with INRs
+#+REVEAL_HTML: <img src="./img/applications/coin.png" class="r-stretch">
+Image from Dupont et al. [4]
+
+#+REVEAL_HTML: <div class="tick-list">
+#+ATTR_REVEAL: :frag (appear)
+- computationally lightweight
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="cross-list">
+#+ATTR_REVEAL: :frag (appear)
+- short codelength
+#+REVEAL_HTML: </div>
+
+** Compress variational INRs!
+
+#+REVEAL_HTML: <img src="./img/applications/variational_bnn.png" class="r-stretch">
+Image from Blundell et al. [7]
+
+#+ATTR_REVEAL: :frag (appear)
+💡Gradient descent is the transform!
+
+** Compress variational INRs!
+#+REVEAL_HTML: <img src="./img/applications/recombiner_img.png" width="100%">
+
+** Compress variational INRs!
+#+REVEAL_HTML: <img src="./img/applications/recombiner.png" width="100%">
+
+* Theory: What next?
+#+ATTR_REVEAL: :frag (appear)
+ - Might not need perfect solution: think of error correcting codes (e.g. LDPC)
+ - Exploit different types of structure
+ - Duality between source and channel coding
+
+* Applications: What next?
+#+ATTR_REVEAL: :frag (appear)
+ - Realism constraints for INR-based compression
+ - More sophisticated coding distributions
+ - Apply to different types of neural representations
+
+* Contributions
+#+ATTR_REVEAL: :frag (appear)
+ - First linear-in-the-mutual-information runtime algorithm
+ - Established more precise lower bounds on sampling-based channel simulation algorithms
+ - Created state-of-the-art INR codec
+
+* References I
+ - [1] Careil, M., Muckley, M. J., Verbeek, J., & Lathuilière, S. Towards image compression with perfect realism at ultra-low bitrates. ICLR 2024.
+ - [2] C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.
+ - [3] E. Agustsson and L. Theis. "Universally quantized neural compression" In NeurIPS 2020.
+
+* References II
+ - [4] E. Dupont, A. Golinski, M. Alizadeh, Y. W. Teh and Arnaud Doucet. "COIN: compression with implicit neural representations" arXiv preprint arXiv:2103.03123, 2021.
+ - [5] G. F., L. Wells, Some Notes on the Sample Complexity of Approximate Channel Simulation. To appear at Learning to Compress workshop @ ISIT 2024.
+ - [6] D. Goc, G. F. On Channel Simulation with Causal Rejection Samplers. To appear at ISIT 2024
+
+* References III
+ - [7] C. Blundell, J. Cornebise, K. Kavukcuoglu and D. Wierstra. Weight uncertainty in neural network. In ICML 2015.
