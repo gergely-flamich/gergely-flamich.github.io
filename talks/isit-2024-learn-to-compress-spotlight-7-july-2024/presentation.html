@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Some Notes on the Sample Complexity of Approximate Channel Simulation</title>
+<meta name="author" content="Gergely Flamich and Lennie Wells"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="./presentation_styles.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Some Notes on the Sample Complexity of Approximate Channel Simulation</h2><h2></h2></br><h4>Gergely Flamich and Lennie Wells</h4><h4>07/06/2024</h4><h6>gergely-flamich.github.io</h6>
+</section>
+
+<section id="slide-org3532bc8">
+<h2 id="org3532bc8">In Collaboration With</h2>
+<img src="./img/collaborators/lennie_wells.jpg" width=33%>
+
+</section>
+<section id="slide-org7f188f4">
+<h2 id="org7f188f4">Studying channel simulation helps approximate sampling!</h2>
+
+</section>
+<section id="slide-orgd7172e3">
+<h2 id="orgd7172e3">Approximate Sampling</h2>
+<div class="r-stack">
+<img src="./img/motivation/example_1.png" width=120% class="fragment">
+<img src="./img/motivation/example_2.png" width=120% class="fragment">
+<img src="./img/motivation/example_3.png" width=120% class="fragment">
+<img src="./img/motivation/example_4.png" width=120% class="fragment">
+</div>
+
+<p class="fragment (appear)">
+If we want \(TV[Q\, || \tilde{Q}] \leq \epsilon\), how big should \(N\) be?
+</p>
+
+</section>
+<section id="slide-orgd2913dd">
+<h2 id="orgd2913dd">Idea: Use exact sampler</h2>
+<p class="fragment (appear)">
+\(K\) - selection rule of exact sampler
+</p>
+
+<div class="fragment (appear)">
+\begin{align*}
+TV[Q\, || \tilde{Q}] &= \mathbb{P}[K > N] \cdot TV[Q\, || \tilde{Q}] \\
+& \leq \mathbb{P}[K > N]
+\end{align*}
+
+</div>
+
+<p class="fragment (appear)">
+Block and Polyanskiy (2023):
+</p>
+
+<p class="fragment (appear)">
+\[
+N \geq {\color{blue}\frac{2}{1 - \epsilon} \log \left(\frac{2}{\epsilon}\right)} \exp\left(\frac{{\color{red}4} \cdot KL[Q\, ||\, P]}{\epsilon}\right)
+\]
+</p>
+
+
+</section>
+<section id="slide-orgc5a7a72">
+<h2 id="orgc5a7a72">Poisson Functional Representation</h2>
+<p class="fragment (appear)">
+\(X_1, X_2, \dots\) where \(X_i \sim P\)
+</p>
+
+<p class="fragment (appear)">
+Augment with Poisson process \(T_1, T_2, \dots\)
+</p>
+
+<p class="fragment (appear)">
+Select \(K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(X_k)\right\}\)
+</p>
+
+</section>
+<section id="slide-org92da5ca">
+<h2 id="org92da5ca">Poisson Functional Representation</h2>
+<p>
+\(K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(X_k)\right\}\)
+</p>
+<div class="r-stack">
+<img src="./img/pfr/pfr_1.png" width=100% class="fragment">
+<img src="./img/pfr/pfr_2.png" width=100% class="fragment">
+<img src="./img/pfr/pfr_3.png" width=100% class="fragment">
+<img src="./img/pfr/pfr_4.png" width=100% class="fragment">
+</div>
+
+</section>
+<section id="slide-org459eed6">
+<h2 id="org459eed6">How is this useful?</h2>
+<div class="fragment (appear)">
+\begin{align*}
+\mathbb{P}[K > N] = \mathbb{P}[\log K > \log N]
+\leq \frac{\mathbb{E}[\log K]}{\log N}
+\end{align*}
+
+</div>
+
+<p class="fragment (appear)">
+Hence, to ensure \(TV[Q\, || \tilde{Q}] \leq \epsilon\), pick
+</p>
+<p class="fragment (appear)">
+\[
+N \geq \exp\left( \frac{\mathbb{E}[\log K]}{\epsilon} \right)
+\]
+</p>
+
+<p class="fragment (appear)">
+Li and El Gamal (2018): \(\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + e^{-1} + \ln 2\)
+</p>
+
+</section>
+<section id="slide-orgaa310b0">
+<h2 id="orgaa310b0">Final Result</h2>
+<p class="fragment (appear)">
+\[
+N \geq \exp\left( \frac{KL[Q\, ||\, P] + e^{-1} + \ln 2}{\epsilon} \right)
+\]
+</p>
+
+<p class="fragment (appear)">
+Furthermore:
+</p>
+
+<p class="fragment (appear)">
+\[
+\mathbb{H}[K] \leq KL[Q\, ||\, P] +  \log (KL[Q\, ||\, P] + 1) + \mathcal{O}(1)
+\]
+</p>
+
+</section>
+<section id="slide-org4242133">
+<h2 id="org4242133">Contributions</h2>
+<ol>
+<li class="fragment appear">Demonstrated that results from channel simulation can be used to improve approximate sampling bounds</li>
+<li class="fragment appear">For general \(f\) - divergences, improve bound to
+\[
+   \ln\left(\frac{1}{(1 - \gamma) \epsilon}\right) \left(f'\right)^{-1}\left( \frac{D_f[Q\, ||\, P]}{\gamma \epsilon} \right)
+   \]</li>
+<li class="fragment appear">See paper for additional sampling complexity bounds.</li>
+
+</ol>
+
+</section>
+<section id="slide-org73608be">
+<h2 id="org73608be">References</h2>
+<ul>
+<li>Block, A., &amp; Polyanskiy, Y. (2023, July). The sample complexity of approximate rejection sampling with applications to smoothed online learning. In The Thirty Sixth Annual Conference on Learning Theory (pp. 228-273).</li>
+<li>Li, C. T., &amp; El Gamal, A. (2018). Strong functional representation lemma and applications to coding theorems. IEEE Transactions on Information Theory, 64(11), 6967-6978.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+slideNumber:'c/t', transition:'none'
+});
+
+</script>
+</body>
+</html>

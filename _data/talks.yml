@@ -1,3 +1,19 @@
+- year: 2024
+  talks:
+    - title: Some Notes on the Sample Complexity of Approximate Channel Simulation
+      month: July
+      day: 7
+      occasion: Spotlight talk at the Learning to Compress workshop @ ISIT 2024
+      slides: isit-2024-learn-to-compress-spotlight-7-july-2024/presentation.html
+      recording: 
+
+    - title: Practical Channel Simulation
+      month: June
+      day: 20
+      occasion: Job talk for a Research Associate position at Imperial College London
+      slides: imperial-ra-talk-20-jun-2024/presentation.html
+      recording: 
+
 - year: 2023
   talks:
     - title: Compression with Bayesian Implicit Neural Representations
@@ -5,21 +21,21 @@
       day: 10
       occasion: Slides and video presentation accompanying our paper at NeurIPS 2023
       slides: combiner-neurips-2023/COMBINER_presentation.pdf
-      recording: 
+      recording: https://slideslive.com/39010698 
 
     - title: Greedy Poisson Rejection Sampling
       month: December
       day: 10
       occasion: Slides and video presentation accompanying my paper at NeurIPS 2023
       slides: gprs-neurips-2023/presentation.html
-      recording: 
+      recording: https://slideslive.com/39009648
 
     - title: Faster Relative Entropy Coding with Greedy Rejection Coding
       month: December
       day: 10
       occasion: Slides and video presentation accompanying our paper at NeurIPS 2023
       slides: grc-neurips-2023/NeurIPS_2023_Presentation_on_GRC.pdf
-      recording: 
+      recording: https://slideslive.com/39011034
 
     - title: A Poisson Process Model of Monte Carlo
       month: November

@@ -1,0 +1,18 @@
+.problem-list ul li {
+    list-style-type: "🤔";
+    padding-left: 0.5em;
+}
+
+.tick-list ul li {
+    list-style-type: "✅";
+    padding-left: 0.5em;
+}
+.cross-list ul > li {
+    list-style-type: "❌";
+    padding-left: 0.5em;
+}
+
+.cross-list ul > li > ul > li {
+    list-style-type: initial;
+    padding-left: initial;
+}

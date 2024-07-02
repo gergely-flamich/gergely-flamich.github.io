@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Practical Channel Simulation for Better Neural Data Compression</title>
+<meta name="author" content="Gergely Flamich"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="./presentation_styles.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Practical Channel Simulation for Better Neural Data Compression</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>20/06/2024</h4><h6>gergely-flamich.github.io</h6>
+</section>
+
+<section id="slide-org6fd30a5">
+<h2 id="org6fd30a5">In Collaboration With</h2>
+<img src="./img/collaborators/jiajun_he.jpg" width=23% >
+<img src="./img/collaborators/zongyu_guo.jpg" width=23%>
+<img src="./img/collaborators/daniel_goc.jpg" width=23%>
+<img src="./img/collaborators/lennie_wells.jpg" width=23%>
+<img src="./img/collaborators/stratis_markou.jpg" width=23%>
+<img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
+
+</section>
+<section id="slide-orge26e99e">
+<h2 id="orge26e99e">motivation and background</h2>
+<div class="outline-text-2" id="text-orge26e99e">
+</div>
+</section>
+<section id="slide-orgbf9e754">
+<h3 id="orgbf9e754">realistic lossy compression</h3>
+<img src="./img/classic_vs_gen_compression.png" width=80% >
+
+<p>
+Right-hand image from Careil et al. [1]
+</p>
+
+</section>
+<section id="slide-orgd13b627">
+<h3 id="orgd13b627">differentially private federated learning</h3>
+<img src="./img/federated_learning_sketch.png" width=100% >
+
+</section>
+<section id="slide-org0f91b0e">
+<h3 id="org0f91b0e">transform coding</h3>
+
+<div id="orgd75a7e9" class="figure">
+<p><img src="./img/transform_coding.png" alt="transform_coding.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org15ce5e1">
+<h3 id="org15ce5e1">desiderata</h3>
+<p>
+<b><b>Transform:</b></b> computationally lightweight
+</p>
+
+<p>
+<b><b>Encoder/Decoder:</b></b> short codelength, fast runtime
+</p>
+
+</section>
+<section id="slide-org8ea8614">
+<h3 id="org8ea8614">formal problem statement</h3>
+<ol>
+<li class="fragment appear">\(X, Y \sim P_{X, Y}\)</li>
+<li class="fragment appear">Given \(X \sim P_X\), encoder sends code \(C\) so that decoder can compute \(Y \sim P_{Y \mid X}\)</li>
+<li class="fragment appear">Li and El Gamal [2]:</li>
+
+</ol>
+<p class="fragment (appear)">
+\[
+{\color{red} I[X; Y]} \leq \mathbb{E}[|C|] \leq {\color{red} I[X; Y]} + {\color{blue} \log (I[X; Y] + 1) + 4}
+\]
+</p>
+<div class="tick-list">
+<ul>
+<li class="fragment appear">short codelength</li>
+
+</ul>
+</div>
+
+
+</section>
+<section id="slide-org85df0d3">
+<h3 id="org85df0d3">core problem</h3>
+<aside class="notes">
+<p>
+One-shot setting: we received data \(X\), now we're encoding it
+</p>
+
+<p>
+two angles of inquiry:
+</p>
+<ol>
+<li>use structure of problem</li>
+<li>can we strengthen the bound?
+<ul>
+<li>remove computational assumption</li>
+<li>sharpen lower bound</li>
+
+</ul></li>
+
+</ol>
+
+</aside>
+
+
+<p>
+Agustsson and Theis [3]:
+</p>
+<img src="./img/agustsson_and_theis_lemma.png" width=100% >
+<div class="cross-list">
+<ul>
+<li class="fragment appear">fast runtime</li>
+
+</ul>
+</div>
+
+</section>
+<section id="slide-orga773ecb">
+<h2 id="orga773ecb">Sharper computational bounds</h2>
+<div class="outline-text-2" id="text-orga773ecb">
+</div>
+</section>
+<section id="slide-org069fffb">
+<h3 id="org069fffb">Complexity measures</h3>
+<p class="fragment (appear)">
+\(D_{KL}[Q || P] = \mathbb{E}_X\left[\log \frac{dQ}{dP}(X)\right]\)
+</p>
+
+<p class="fragment (appear)">
+\(D_\infty[Q || P] = \sup_x\left\{ \log \frac{dQ}{dP}(x) \right\}\)
+</p>
+
+<p class="fragment (appear)">
+Can have \(D_{KL}[Q || P] \ll D_\infty[Q || P]\)
+</p>
+
+</section>
+<section id="slide-org649ca19">
+<h3 id="org649ca19">General results</h3>
+<p>
+F. and Wells [5]:
+</p>
+<img src="./img/infty_div_thm.png" width=100% >
+
+</section>
+<section id="slide-orgf0ae257">
+<h3 id="orgf0ae257">A different computational framework</h3>
+<p class="fragment (appear)">
+Let \(Q \gets P_{Y \mid X}\) and \(P \gets P_Y\).
+</p>
+
+<p class="fragment (appear)">
+Goc and F. [6]:
+</p>
+
+<img src="./img/a_star_like_def.png" width=60% class="fragment appear">
+
+<p class="fragment (appear)">
+\(X_1, X_2, \dots, X_N, \dots, X_K \sim P\)
+</p>
+
+</section>
+<section id="slide-org7c54a75">
+<h3 id="org7c54a75">sample complexity results</h3>
+<p>
+Goc and F. [6]:
+</p>
+<img src="./img/a_star_like_runtime.png" width=100% >
+
+</section>
+<section id="slide-org16ea338">
+<h2 id="org16ea338">Fast channel simulation</h2>
+<ul>
+<li class="fragment appear">Sampling as search</li>
+<li class="fragment appear">Exploit structure to accelerate search</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb605998">
+<h3 id="orgb605998">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgc5ae7f6" class="figure">
+<p><img src="./img/gprs/gprs_0.png" alt="gprs_0.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org1790c40">
+<h3 id="org1790c40">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org741430e" class="figure">
+<p><img src="./img/gprs/gprs_1.png" alt="gprs_1.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org2ff0a2f">
+<h3 id="org2ff0a2f">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org8984388" class="figure">
+<p><img src="./img/gprs/gprs_2.png" alt="gprs_2.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orga26e55f">
+<h3 id="orga26e55f">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgf14a77c" class="figure">
+<p><img src="./img/gprs/gprs_3.png" alt="gprs_3.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org5bd278c">
+<h3 id="org5bd278c">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgc6efbee" class="figure">
+<p><img src="./img/gprs/gprs_4.png" alt="gprs_4.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org9a11f3e">
+<h3 id="org9a11f3e">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org48098dc" class="figure">
+<p><img src="./img/gprs/gprs_5.png" alt="gprs_5.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgc82b5b1">
+<h3 id="orgc82b5b1">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org90a74f9" class="figure">
+<p><img src="./img/gprs/gprs_accept.png" alt="gprs_accept.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgf82a274">
+<h3 id="orgf82a274">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgcf6cedc" class="figure">
+<p><img src="./img/fast_gprs/fast_gprs_0.png" alt="fast_gprs_0.png" />
+</p>
+</div>
+</section>
+<section id="slide-org3a1f746">
+<h3 id="org3a1f746">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org155706a" class="figure">
+<p><img src="./img/fast_gprs/fast_gprs_1.png" alt="fast_gprs_1.png" />
+</p>
+</div>
+</section>
+<section id="slide-orge3831d3">
+<h3 id="orge3831d3">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgcc2fe56" class="figure">
+<p><img src="./img/fast_gprs/fast_gprs_2.png" alt="fast_gprs_2.png" />
+</p>
+</div>
+</section>
+<section id="slide-org4d6e62f">
+<h3 id="org4d6e62f">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org8ea0f9d" class="figure">
+<p><img src="./img/fast_gprs/fast_gprs_3.png" alt="fast_gprs_3.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgd4e2788">
+<h3 id="orgd4e2788">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org68d2c12" class="figure">
+<p><img src="./img/fast_gprs/fast_gprs_4.png" alt="fast_gprs_4.png" />
+</p>
+</div>
+</section>
+<section id="slide-org360fd4e">
+<h3 id="org360fd4e">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org973434e" class="figure">
+<p><img src="./img/fast_gprs/fast_gprs_5.png" alt="fast_gprs_5.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org31d27e5">
+<h3 id="org31d27e5">Analysis of faster GPRS</h3>
+<p class="fragment (appear)">
+Now, encode search path \(\pi\).
+</p>
+
+<p class="fragment (appear)">
+\(\mathbb{H}[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)\)
+</p>
+
+<p class="fragment (appear)">
+\(\mathbb{E}[\lvert\pi\rvert] = I[X; Y] + \mathcal{O}(1)\)
+</p>
+
+<p class="fragment (appear)">
+This is <b>optimal</b>.
+</p>
+
+
+</section>
+<section id="slide-org2a99c30">
+<h2 id="org2a99c30">Computationally Lightweight ML-based data compression</h2>
+<div class="outline-text-2" id="text-org2a99c30">
+</div>
+</section>
+<section id="slide-orgf863727">
+<h3 id="orgf863727">Data Compression with INRs</h3>
+<img src="./img/applications/coin.png" class="r-stretch">
+<p>
+Image from Dupont et al. [4]
+</p>
+
+<div class="tick-list">
+<ul>
+<li class="fragment appear">computationally lightweight</li>
+
+</ul>
+</div>
+<div class="cross-list">
+<ul>
+<li class="fragment appear">short codelength</li>
+
+</ul>
+</div>
+
+</section>
+<section id="slide-org6575e5b">
+<h3 id="org6575e5b">Compress variational INRs!</h3>
+<img src="./img/applications/variational_bnn.png" class="r-stretch">
+<p>
+Image from Blundell et al. [7]
+</p>
+
+<p class="fragment (appear)">
+💡Gradient descent is the transform!
+</p>
+
+</section>
+<section id="slide-org84b0a20">
+<h3 id="org84b0a20">Compress variational INRs!</h3>
+<img src="./img/applications/recombiner_img.png" width="100%">
+
+</section>
+<section id="slide-orgf6b7753">
+<h3 id="orgf6b7753">Compress variational INRs!</h3>
+<img src="./img/applications/recombiner.png" width="100%">
+
+</section>
+<section id="slide-org2ad0f9c">
+<h2 id="org2ad0f9c">Theory: What next?</h2>
+<ul>
+<li class="fragment appear">Might not need perfect solution: think of error correcting codes (e.g. LDPC)</li>
+<li class="fragment appear">Exploit different types of structure</li>
+<li class="fragment appear">Duality between source and channel coding</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd759fc7">
+<h2 id="orgd759fc7">Applications: What next?</h2>
+<ul>
+<li class="fragment appear">Realism constraints for INR-based compression</li>
+<li class="fragment appear">More sophisticated coding distributions</li>
+<li class="fragment appear">Apply to different types of neural representations</li>
+
+</ul>
+
+</section>
+<section id="slide-org3fa494a">
+<h2 id="org3fa494a">Contributions</h2>
+<ul>
+<li class="fragment appear">First linear-in-the-mutual-information runtime algorithm</li>
+<li class="fragment appear">Established more precise lower bounds on sampling-based channel simulation algorithms</li>
+<li class="fragment appear">Created state-of-the-art INR codec</li>
+
+</ul>
+
+</section>
+<section id="slide-orgad4f14a">
+<h2 id="orgad4f14a">References I</h2>
+<ul>
+<li>[1] Careil, M., Muckley, M. J., Verbeek, J., &amp; Lathuilière, S. Towards image compression with perfect realism at ultra-low bitrates. ICLR 2024.</li>
+<li>[2] C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.</li>
+<li>[3] E. Agustsson and L. Theis. "Universally quantized neural compression" In NeurIPS 2020.</li>
+
+</ul>
+
+</section>
+<section id="slide-org0ddb8e9">
+<h2 id="org0ddb8e9">References II</h2>
+<ul>
+<li>[4] E. Dupont, A. Golinski, M. Alizadeh, Y. W. Teh and Arnaud Doucet. "COIN: compression with implicit neural representations" arXiv preprint arXiv:2103.03123, 2021.</li>
+<li>[5] G. F., L. Wells, Some Notes on the Sample Complexity of Approximate Channel Simulation. To appear at Learning to Compress workshop @ ISIT 2024.</li>
+<li>[6] D. Goc, G. F. On Channel Simulation with Causal Rejection Samplers. To appear at ISIT 2024</li>
+
+</ul>
+
+</section>
+<section id="slide-orge2ec2d5">
+<h2 id="orge2ec2d5">References III</h2>
+<ul>
+<li>[7] C. Blundell, J. Cornebise, K. Kavukcuoglu and D. Wierstra. Weight uncertainty in neural network. In ICML 2015.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+slideNumber:'c/t', transition:'none'
+});
+
+</script>
+</body>
+</html>
