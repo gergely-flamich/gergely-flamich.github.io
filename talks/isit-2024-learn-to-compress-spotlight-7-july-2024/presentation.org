@@ -22,10 +22,10 @@
 
 * Approximate Sampling
 #+REVEAL_HTML: <div class="r-stack">
-#+REVEAL_HTML: <img src="./img/motivation/example_1.png" width=120% class="fragment">
-#+REVEAL_HTML: <img src="./img/motivation/example_2.png" width=120% class="fragment">
-#+REVEAL_HTML: <img src="./img/motivation/example_3.png" width=120% class="fragment">
-#+REVEAL_HTML: <img src="./img/motivation/example_4.png" width=120% class="fragment">
+#+REVEAL_HTML: <img src="./img/motivation/example_1.svg" width=120% class="fragment">
+#+REVEAL_HTML: <img src="./img/motivation/example_2.svg" width=120% class="fragment">
+#+REVEAL_HTML: <img src="./img/motivation/example_3.svg" width=120% class="fragment">
+#+REVEAL_HTML: <img src="./img/motivation/example_4.svg" width=120% class="fragment">
 #+REVEAL_HTML: </div>
 
 #+ATTR_REVEAL: :frag (appear)
@@ -37,7 +37,7 @@ $K$ - selection rule of exact sampler
 
 #+ATTR_REVEAL: :frag (appear)
 \begin{align*}
-TV[Q\, || \tilde{Q}] &= \mathbb{P}[K > N] \cdot TV[Q\, || \tilde{Q}] \\
+TV[Q\, || \tilde{Q}] &= \mathbb{P}[K > N] \cdot TV[Q\, || P] \\
 & \leq \mathbb{P}[K > N]
 \end{align*}
 
@@ -63,18 +63,39 @@ Select $K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(X
 * Poisson Functional Representation
 $K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(X_k)\right\}$
 #+REVEAL_HTML: <div class="r-stack">
-#+REVEAL_HTML: <img src="./img/pfr/pfr_1.png" width=100% class="fragment">
-#+REVEAL_HTML: <img src="./img/pfr/pfr_2.png" width=100% class="fragment">
-#+REVEAL_HTML: <img src="./img/pfr/pfr_3.png" width=100% class="fragment">
-#+REVEAL_HTML: <img src="./img/pfr/pfr_4.png" width=100% class="fragment">
+#+REVEAL_HTML: <img src="./img/pfr/pfr_1.svg" width=100% class="fragment">
+#+REVEAL_HTML: <img src="./img/pfr/pfr_2.svg" width=100% class="fragment">
+#+REVEAL_HTML: <img src="./img/pfr/pfr_3.svg" width=100% class="fragment">
+#+REVEAL_HTML: <img src="./img/pfr/pfr_4.svg" width=100% class="fragment">
 #+REVEAL_HTML: </div>
 
 * How is this useful?
+# #+ATTR_REVEAL: :frag (appear)
+#+REVEAL_HTML: <div class="r-stack" style="margin-bottom:-5%">
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+\mathbb{P}[K > N] \color{white} = \mathbb{P}[\log K > \log N]
+\leq \frac{\mathbb{E}[\log K]}{\log N} = \epsilon
+\end{align*}
+
 #+ATTR_REVEAL: :frag (appear)
 \begin{align*}
 \mathbb{P}[K > N] = \mathbb{P}[\log K > \log N]
-\leq \frac{\mathbb{E}[\log K]}{\log N}
+\color{white} \leq \frac{\mathbb{E}[\log K]}{\log N} = \epsilon
 \end{align*}
+
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+\mathbb{P}[K > N] = \mathbb{P}[\log K > \log N]
+ \leq \frac{\mathbb{E}[\log K]}{\log N} \color{white} = \epsilon
+\end{align*}
+
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+\mathbb{P}[K > N] = \mathbb{P}[\log K > \log N]
+\leq \frac{\mathbb{E}[\log K]}{\log N} = \epsilon
+\end{align*}
+#+REVEAL_HTML: </div>
 
 #+ATTR_REVEAL: :frag (appear)
 Hence, to ensure $TV[Q\, || \tilde{Q}] \leq \epsilon$, pick
@@ -84,12 +105,12 @@ N \geq \exp\left( \frac{\mathbb{E}[\log K]}{\epsilon} \right)
 $$
 
 #+ATTR_REVEAL: :frag (appear)
-Li and El Gamal (2018): $\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + e^{-1} + \ln 2$
+Li and El Gamal (2018): $\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + e^{-1} + \log 2$
 
 * Final Result
 #+ATTR_REVEAL: :frag (appear)
 $$
-N \geq \exp\left( \frac{KL[Q\, ||\, P] + e^{-1} + \ln 2}{\epsilon} \right)
+N \geq \exp\left( \frac{KL[Q\, ||\, P] + e^{-1} + \log 2}{\epsilon} \right)
 $$
 
 #+ATTR_REVEAL: :frag (appear)
@@ -106,11 +127,21 @@ $$
 1. Demonstrated that results from channel simulation can be used to improve approximate sampling bounds
 2. For general $f$ - divergences, improve bound to
    $$
-   \ln\left(\frac{1}{(1 - \gamma) \epsilon}\right) \left(f'\right)^{-1}\left( \frac{D_f[Q\, ||\, P]}{\gamma \epsilon} \right)
+   \log\left(\frac{1}{(1 - \gamma) \epsilon}\right) \left(f'\right)^{-1}\left( \frac{D_f[Q\, ||\, P]}{\gamma \epsilon} \right) \quad \gamma \in (0, 1)
    $$
 3. See paper for additional sampling complexity bounds.
 
 * References
 - Block, A., & Polyanskiy, Y. (2023, July). The sample complexity of approximate rejection sampling with applications to smoothed online learning. In The Thirty Sixth Annual Conference on Learning Theory (pp. 228-273).
 - Li, C. T., & El Gamal, A. (2018). Strong functional representation lemma and applications to coding theorems. IEEE Transactions on Information Theory, 64(11), 6967-6978.
+
+* More general bounds
+Block and Polyanskiy (2023):
+$$
+N \geq {\color{blue}\frac{2}{1 - \epsilon} \log \left(\frac{2}{\epsilon}\right)} \left(f'\right)^{-1}\left(\frac{{\color{red}4} \cdot D_f[Q\, ||\, P]}{\epsilon}\right)
+$$
+Ours: for $\gamma \in (0, 1)$
+$$
+N \geq {\color{blue}\log\left(\frac{1}{(1 - \gamma) \epsilon}\right)} \left(f'\right)^{-1}\left( \frac{D_f[Q\, ||\, P]}{\gamma \epsilon} \right)
+$$
 
