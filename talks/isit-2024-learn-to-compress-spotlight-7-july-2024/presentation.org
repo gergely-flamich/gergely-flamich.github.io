@@ -105,12 +105,12 @@ N \geq \exp\left( \frac{\mathbb{E}[\log K]}{\epsilon} \right)
 $$
 
 #+ATTR_REVEAL: :frag (appear)
-Li and El Gamal (2018): $\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + e^{-1} + \log 2$
+Li and El Gamal (2018): $\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + \mathcal{O}(1)$
 
 * Final Result
 #+ATTR_REVEAL: :frag (appear)
 $$
-N \geq \exp\left( \frac{KL[Q\, ||\, P] + e^{-1} + \log 2}{\epsilon} \right)
+N \geq \exp\left( \frac{KL[Q\, ||\, P] + \mathcal{O}(1)}{\epsilon} \right)
 $$
 
 #+ATTR_REVEAL: :frag (appear)

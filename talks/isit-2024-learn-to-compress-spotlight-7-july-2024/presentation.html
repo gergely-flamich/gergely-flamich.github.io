@@ -22,17 +22,17 @@
 <section id="sec-title-slide"><h2>Some Notes on the Sample Complexity of Approximate Channel Simulation</h2><h2></h2></br><h4>Gergely Flamich and Lennie Wells</h4><h4>07/06/2024</h4><h6>gergely-flamich.github.io</h6>
 </section>
 
-<section id="slide-org00ca4ef">
-<h2 id="org00ca4ef">In Collaboration With</h2>
+<section id="slide-org23b4037">
+<h2 id="org23b4037">In Collaboration With</h2>
 <img src="./img/collaborators/lennie_wells.jpg" width=33%>
 
 </section>
-<section id="slide-org567118e">
-<h2 id="org567118e">Studying channel simulation helps approximate sampling!</h2>
+<section id="slide-orgba2ace4">
+<h2 id="orgba2ace4">Studying channel simulation helps approximate sampling!</h2>
 
 </section>
-<section id="slide-org3f0c5b0">
-<h2 id="org3f0c5b0">Approximate Sampling</h2>
+<section id="slide-org9d39977">
+<h2 id="org9d39977">Approximate Sampling</h2>
 <div class="r-stack">
 <img src="./img/motivation/example_1.svg" width=120% class="fragment">
 <img src="./img/motivation/example_2.svg" width=120% class="fragment">
@@ -45,8 +45,8 @@ If we want \(TV[Q\, || \tilde{Q}] \leq \epsilon\), how big should \(N\) be?
 </p>
 
 </section>
-<section id="slide-orgc57904c">
-<h2 id="orgc57904c">Idea: Use exact sampler</h2>
+<section id="slide-orgcfc4ffd">
+<h2 id="orgcfc4ffd">Idea: Use exact sampler</h2>
 <p class="fragment (appear)">
 \(K\) - selection rule of exact sampler
 </p>
@@ -71,8 +71,8 @@ N \geq {\color{blue}\frac{2}{1 - \epsilon} \log \left(\frac{2}{\epsilon}\right)}
 
 
 </section>
-<section id="slide-orgc416afb">
-<h2 id="orgc416afb">Poisson Functional Representation</h2>
+<section id="slide-org95f745e">
+<h2 id="org95f745e">Poisson Functional Representation</h2>
 <p class="fragment (appear)">
 \(X_1, X_2, \dots\) where \(X_i \sim P\)
 </p>
@@ -86,8 +86,8 @@ Select \(K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(
 </p>
 
 </section>
-<section id="slide-orgb8e9a2d">
-<h2 id="orgb8e9a2d">Poisson Functional Representation</h2>
+<section id="slide-org9f0092b">
+<h2 id="org9f0092b">Poisson Functional Representation</h2>
 <p>
 \(K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(X_k)\right\}\)
 </p>
@@ -99,8 +99,8 @@ Select \(K = \mathrm{arg\,min}_{k \in \mathbb{N}}\left\{T_k \Big/ \frac{dQ}{dP}(
 </div>
 
 </section>
-<section id="slide-org2b08bed">
-<h2 id="org2b08bed">How is this useful?</h2>
+<section id="slide-orga8d2b93">
+<h2 id="orga8d2b93">How is this useful?</h2>
 <div class="r-stack" style="margin-bottom:-5%">
 <div class="fragment (appear)">
 \begin{align*}
@@ -145,15 +145,15 @@ N \geq \exp\left( \frac{\mathbb{E}[\log K]}{\epsilon} \right)
 </p>
 
 <p class="fragment (appear)">
-Li and El Gamal (2018): \(\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + e^{-1} + \log 2\)
+Li and El Gamal (2018): \(\mathbb{E}[\log K] \leq KL[Q\, ||\, P] + \mathcal{O}(1)\)
 </p>
 
 </section>
-<section id="slide-org6202b0d">
-<h2 id="org6202b0d">Final Result</h2>
+<section id="slide-orgd177cf2">
+<h2 id="orgd177cf2">Final Result</h2>
 <p class="fragment (appear)">
 \[
-N \geq \exp\left( \frac{KL[Q\, ||\, P] + e^{-1} + \log 2}{\epsilon} \right)
+N \geq \exp\left( \frac{KL[Q\, ||\, P] + \mathcal{O}(1)}{\epsilon} \right)
 \]
 </p>
 
@@ -168,8 +168,8 @@ Furthermore:
 </p>
 
 </section>
-<section id="slide-org2471b79">
-<h2 id="org2471b79">Contributions</h2>
+<section id="slide-orgae9eb36">
+<h2 id="orgae9eb36">Contributions</h2>
 <ol>
 <li class="fragment appear">Demonstrated that results from channel simulation can be used to improve approximate sampling bounds</li>
 <li class="fragment appear">For general \(f\) - divergences, improve bound to
@@ -181,8 +181,8 @@ Furthermore:
 </ol>
 
 </section>
-<section id="slide-org2b58396">
-<h2 id="org2b58396">References</h2>
+<section id="slide-org058ce40">
+<h2 id="org058ce40">References</h2>
 <ul>
 <li>Block, A., &amp; Polyanskiy, Y. (2023, July). The sample complexity of approximate rejection sampling with applications to smoothed online learning. In The Thirty Sixth Annual Conference on Learning Theory (pp. 228-273).</li>
 <li>Li, C. T., &amp; El Gamal, A. (2018). Strong functional representation lemma and applications to coding theorems. IEEE Transactions on Information Theory, 64(11), 6967-6978.</li>
@@ -190,8 +190,8 @@ Furthermore:
 </ul>
 
 </section>
-<section id="slide-orgfea05f2">
-<h2 id="orgfea05f2">More general bounds</h2>
+<section id="slide-org886dcf1">
+<h2 id="org886dcf1">More general bounds</h2>
 <p>
 Block and Polyanskiy (2023):
 \[
