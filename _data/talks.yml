@@ -1,5 +1,12 @@
 - year: 2024
   talks:
+    - title: An Introduction to Relative Entropy Coding and Its Applications
+      month: July
+      day: 31
+      occasion: Invited talk at the Hungarian Machine Learning Days in Budapest
+      slides: hungarian-ml-days-31-july-2024/presentation.html
+      recording: 
+
     - title: Some Notes on the Sample Complexity of Approximate Channel Simulation
       month: July
       day: 7
