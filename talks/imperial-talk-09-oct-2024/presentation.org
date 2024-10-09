@@ -1,0 +1,205 @@
+#+TITLE: Bits-Back Coding as Error Correction with Side Information
+#+author: Gergely Flamich
+#+date: 09/10/2024
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* In Collaboration With
+
+#+REVEAL_HTML: <img src="./img/jiajun_he.jpg" width=23% >
+#+REVEAL_HTML: <img src="./img/lucas_theis.jpg" width=23%>
+
+* Bits-back Coding
+
+\begin{align*}
+&\text{error correction} \\
+&\quad\quad\quad\quad+\text{ invertible sampling } \\
+&\quad\quad\quad\quad\quad\quad\quad\quad= \text{bits-back coding}
+\end{align*}
+
+** Error correction
+#+REVEAL_HTML: <img src="./img/channel_coding_cover_and_thomas.png" width=100% >
+Image from [1].
+
+
+#+ATTR_REVEAL: :frag (appear)
+I will pick $p(y \mid x)$ instead of assuming it is fixed.
+
+** Repetition code
+\begin{align*}
+0 &\mapsto 000 \\
+1 &\mapsto 111
+\end{align*}
+
+#+ATTR_REVEAL: :frag (appear)
+can perfectly decode if
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+y = x + \epsilon, \quad \epsilon \in B_1(0)
+\end{align*}
+
+** a puzzle
+#+ATTR_REVEAL: :frag (appear)
+- source $P$ over $\Omega$
+- entropy code $\mathtt{enc}_P: \Omega \to \{0, 1\}^*$
+\\
+#+ATTR_REVEAL: :frag (appear)
+If $X \sim P$, then $\mathtt{enc}_P(X) \sim ?$
+
+** the "solution"
+#+ATTR_REVEAL: :frag (appear)
+- $\mathbb{E}[\lvert\mathtt{enc}_P(X)\rvert] \approx \mathbb{H}[X]$
+- $\mathbb{H}[\mathtt{enc}_P(X)] = \mathbb{H}[X]$
+\\
+#+ATTR_REVEAL: :frag (appear)
+$\therefore \mathtt{enc}_P(X) \stackrel{approx}{\sim} \mathrm{Bern}(1/2)^{\otimes \mathbb{H}[X]}$
+
+** invertible sampling
+#+ATTR_REVEAL: :frag (appear)
+- extend $\mathtt{enc}_P: \{0, 1\}^* \times \Omega \to \{0, 1\}^*$
+- $\mathtt{enc}_P^{-1} = \mathtt{dec}_P$
+- let $m = (b_1, b_2, \dots), \quad b_i \sim \mathrm{Bern}(1/2)$
+\\
+#+ATTR_REVEAL: :frag (appear)
+If $m', X' \gets \mathtt{dec}_P(m)$, what is $X' \sim ?$
+
+#+ATTR_REVEAL: :frag (appear)
+$X' \sim P$!
+
+** bits-back coding
+#+ATTR_REVEAL: :frag (appear)
+*Error correction:* For source $P_X$ design $P_{Y \mid X}$
+\\
+#+ATTR_REVEAL: :frag (appear)
+*Encoding*, given $m$ and $X \sim P_X$:
+#+ATTR_REVEAL: :frag (appear)
+- *Decode:* $m', y \gets  \mathtt{dec}_{\color{red} P_{Y \mid X}}(m)$
+- *Encode:* $m'' \gets \mathtt{enc}_{\color{blue} P_{Y}}(m', y)$
+
+#+ATTR_REVEAL: :frag (appear)
+*Decoding*, given $m''$:
+#+ATTR_REVEAL: :frag (appear)
+- *Decode:* $m', y \gets \mathtt{dec}_{\color{blue} P_{Y}}(m'')$
+- *Error correction:* recover $x$ from $y$
+- *Encode:* $m \gets \mathtt{enc}_{\color{red} P_{Y \mid X}}(m', y)$
+
+** bits-back coding efficiency
+\begin{align*}
+\vert m'' \vert - \vert m \vert
+&\approx  -\log P_{Y}(y) - \big(-\log P_{Y \mid X}(y \mid x)\big) \\
+&= -\log \frac{P_X(x)}{P_{X \mid Y}(x \mid y)} \\
+&= - \log P_X(x)
+\end{align*}
+
+#+ATTR_REVEAL: :frag (appear)
+What have we gained?
+
+* Warm-up: ANS
+ANS - Asymmetric Numeral Systems [2, 3]
+\\
+#+ATTR_REVEAL: :frag (appear)
+- $x \in \{0, 1, 2\}$
+- $P_X(x) = \frac{|\mathfrak{z}(x)|}{n}$
+
+#+REVEAL_HTML: <img src="./img/ans.png" width=100% class="fragment appear">
+
+#+ATTR_REVEAL: :frag (appear)
+Set $(Y \mid X=x) \sim \mathrm{Unif}(\mathfrak{z}(x))$
+
+* Case study 1: unordered data
+Have:
+#+REVEAL_HTML: <img src="./img/ordered_graph.png"  style="margin:0px;width:10%">
+Want to encode:
+#+REVEAL_HTML:<img src="./img/equivalence_class.png" style="margin:0px;width:29%">
+
+** Shuffle coding [4]
+*Idea:* canonical representative $\leftrightarrow$ equivalence class ("sorting")
+#+REVEAL_HTML: <img src="./img/shuffle_coding.png" width=80% class="fragment appear">
+
+* Case study 2: rotational symmetries in LLMs [5]
+#+REVEAL_HTML: <img src="./img/standard_vs_slicegpt.png" width=100% class="fragment appear">
+#+ATTR_REVEAL: :frag (appear)
+$f(x \mid W) = f(x \mid QW)$
+
+** SVD: error correction for matrices
+\begin{align*}
+W = UDV^\top
+\end{align*}
+Unique up to a sign change:
+\begin{gather*}
+UDV^\top = \sigma UDV^\top \sigma \\
+\text{where } \sigma = \mathrm{diag}(\pm 1, \pm 1, \dots, \pm 1)
+\end{gather*}
+
+** bits-back from llms
+#+REVEAL_HTML: <img src="./img/llm_bits_back.png" width=100% class="fragment appear">
+
+** results
+#+REVEAL_HTML: <img src="./img/llm_bits_back_results.png" width=100% class="fragment appear">
+
+** some notes caveats
+#+ATTR_REVEAL: :frag (appear)
+- $\sigma$ is the side information
+- $P_{Y \mid X}$ is supported on a $P_Y$ null set
+- Numerical errors in SVD
+- Use block coding!
+
+* Case study 3: bits-back + relative entropy coding
+Relative entropy coding:
+#+ATTR_REVEAL: :frag (appear)
+- $x, y \sim P_{x, y}$
+- shared randomness $z$
+- *want:* encode $y \sim P_{y \mid x}$
+
+#+ATTR_REVEAL: :frag (appear)
+*Idea:* What happens if we set $z$ as the side information in bits-back coding?
+
+** dithered quantization
+#+ATTR_REVEAL: :frag (appear)
+- $c \in \mathbb{R}$
+- $U, U' \sim \mathrm{Unif}(-1/2, 1/2)$
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+\lfloor c + U \rceil - U \sim c + U'
+\end{align*}
+
+** DQ for REC
+For $c \in [0, b)$ for $b \in \mathbb{N}$:
+
+#+ATTR_REVEAL: :frag (appear)
+- *encode:* set $K = \lfloor c + U \rceil$, encode $K$
+- *decode:* set $y = K - U$
+
+#+ATTR_REVEAL: :frag (appear)
+equivalent to:
+#+ATTR_REVEAL: :frag (appear)
+ - $P_y = \mathrm{Unif}(0, 1)$
+ - $P_{y \mid x} \mathrm{Unif}(x - 1/(2b) , x + 1/(2b))$
+
+#+ATTR_REVEAL: :frag (appear)
+Could we extend to uniform target with width $a/b$?
+
+** bits-back quantization
+#+REVEAL_HTML: <img src="./img/bbq.png" width=100% >
+
+* References
+** References I
+- [1] Cover, T. M., & Thomas, J. A. (1991). Elements of information theory.
+- [2] Duda, J. (2009). Asymmetric numeral systems. arXiv preprint arXiv:0902.0271.
+- [3] Bamler, R. (2022). Understanding entropy coding with asymmetric numeral systems (ans): a statistician's perspective. arXiv preprint arXiv:2201.01741
+
+** References II
+- [4] Kunze, J., Severo, D., Zani, G., van de Meent, J. W., & Townsend, J. (2024). Entropy coding of unordered data structures. arXiv preprint arXiv:2408.08837.
+- [5] He, J., Flamich, G., & Hernández-Lobato, J. M. (2024). Getting Free Bits Back from Rotational Symmetries in LLMs. arXiv preprint arXiv:2410.01309.
+- [6] Flamich, G., & Theis, L. (2023, June). Adaptive greedy rejection sampling. In 2023 IEEE International Symposium on Information Theory (ISIT) (pp. 454-459). IEEE.
+
