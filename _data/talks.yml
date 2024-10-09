@@ -1,5 +1,12 @@
 - year: 2024
   talks:
+    - title: Bits-Back Coding as Error Correction with Side Information
+      month: Oct
+      day: 09
+      occasion: Talk at the Information Processing and Communications Lab at Imperial College London
+      slides: imperial-talk-09-oct-2024/presentation.html
+      recording: 
+
     - title: An Introduction to Relative Entropy Coding and Its Applications
       month: July
       day: 31
