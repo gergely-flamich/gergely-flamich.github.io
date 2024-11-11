@@ -21,15 +21,13 @@
 <div class="slides">
 <section id="sec-title-slide"><h2>Bits-Back Coding as Error Correction with Side Information</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>09/10/2024</h4><h6>gergely-flamich.github.io</h6>
 </section>
-
-<section id="slide-orgbcfebd8">
-<h2 id="orgbcfebd8">In Collaboration With</h2>
+<section id="slide-orgf3a7fb5">
+<h2 id="orgf3a7fb5">In Collaboration With</h2>
 <img src="./img/jiajun_he.jpg" width=23% >
 <img src="./img/lucas_theis.jpg" width=23%>
-
 </section>
-<section id="slide-org97aee5e">
-<h2 id="org97aee5e">Bits-back Coding</h2>
+<section id="slide-org6afe3c0">
+<h2 id="org6afe3c0">Bits-back Coding</h2>
 <div>
 \begin{align*}
 &\text{error correction} \\
@@ -38,10 +36,9 @@
 \end{align*}
 
 </div>
-
 </section>
-<section id="slide-org3f7c08f">
-<h3 id="org3f7c08f">Error correction</h3>
+<section id="slide-org5513191">
+<h3 id="org5513191">Error correction</h3>
 <img src="./img/channel_coding_cover_and_thomas.png" width=100% >
 <p>
 Image from [1].
@@ -51,10 +48,9 @@ Image from [1].
 <p class="fragment (appear)">
 I will pick \(p(y \mid x)\) instead of assuming it is fixed.
 </p>
-
 </section>
-<section id="slide-org9a79880">
-<h3 id="org9a79880">Repetition code</h3>
+<section id="slide-org34babff">
+<h3 id="org34babff">Repetition code</h3>
 <div>
 \begin{align*}
 0 &\mapsto 000 \\
@@ -72,10 +68,9 @@ y = x + \epsilon, \quad \epsilon \in B_1(0)
 \end{align*}
 
 </div>
-
 </section>
-<section id="slide-org672212b">
-<h3 id="org672212b">a puzzle</h3>
+<section id="slide-orgae334f5">
+<h3 id="orgae334f5">a puzzle</h3>
 <ul>
 <li class="fragment appear">source \(P\) over \(\Omega\)</li>
 <li class="fragment appear">entropy code \(\mathtt{enc}_P: \Omega \to \{0, 1\}^*\)</li>
@@ -87,10 +82,9 @@ y = x + \epsilon, \quad \epsilon \in B_1(0)
 <p class="fragment (appear)">
 If \(X \sim P\), then \(\mathtt{enc}_P(X) \sim ?\)
 </p>
-
 </section>
-<section id="slide-org1542467">
-<h3 id="org1542467">the "solution"</h3>
+<section id="slide-org7a37344">
+<h3 id="org7a37344">the "solution"</h3>
 <ul>
 <li class="fragment appear">\(\mathbb{E}[\lvert\mathtt{enc}_P(X)\rvert] \approx \mathbb{H}[X]\)</li>
 <li class="fragment appear">\(\mathbb{H}[\mathtt{enc}_P(X)] = \mathbb{H}[X]\)</li>
@@ -102,10 +96,9 @@ If \(X \sim P\), then \(\mathtt{enc}_P(X) \sim ?\)
 <p class="fragment (appear)">
 \(\therefore \mathtt{enc}_P(X) \stackrel{approx}{\sim} \mathrm{Bern}(1/2)^{\otimes \mathbb{H}[X]}\)
 </p>
-
 </section>
-<section id="slide-org06ab027">
-<h3 id="org06ab027">invertible sampling</h3>
+<section id="slide-orged697ea">
+<h3 id="orged697ea">invertible sampling</h3>
 <ul>
 <li class="fragment appear">extend \(\mathtt{enc}_P: \{0, 1\}^* \times \Omega \to \{0, 1\}^*\)</li>
 <li class="fragment appear">\(\mathtt{enc}_P^{-1} = \mathtt{dec}_P\)</li>
@@ -122,10 +115,9 @@ If \(m', X' \gets \mathtt{dec}_P(m)\), what is \(X' \sim ?\)
 <p class="fragment (appear)">
 \(X' \sim P\)!
 </p>
-
 </section>
-<section id="slide-org09858d1">
-<h3 id="org09858d1">bits-back coding</h3>
+<section id="slide-org15b4fa1">
+<h3 id="org15b4fa1">bits-back coding</h3>
 <p class="fragment (appear)">
 <b>Error correction:</b> For source \(P_X\) design \(P_{Y \mid X}\)
 <br />
@@ -148,10 +140,9 @@ If \(m', X' \gets \mathtt{dec}_P(m)\), what is \(X' \sim ?\)
 <li class="fragment appear"><b>Encode:</b> \(m \gets \mathtt{enc}_{\color{red} P_{Y \mid X}}(m', y)\)</li>
 
 </ul>
-
 </section>
-<section id="slide-org70e4a50">
-<h3 id="org70e4a50">bits-back coding efficiency</h3>
+<section id="slide-orgd3215ab">
+<h3 id="orgd3215ab">bits-back coding efficiency</h3>
 <div>
 \begin{align*}
 \vert m'' \vert - \vert m \vert
@@ -165,10 +156,9 @@ If \(m', X' \gets \mathtt{dec}_P(m)\), what is \(X' \sim ?\)
 <p class="fragment (appear)">
 What have we gained?
 </p>
-
 </section>
-<section id="slide-orgfdda8f0">
-<h2 id="orgfdda8f0">Warm-up: ANS</h2>
+<section id="slide-org56f022b">
+<h2 id="org56f022b">Warm-up: ANS</h2>
 <p>
 ANS - Asymmetric Numeral Systems [2, 3]
 <br />
@@ -184,10 +174,9 @@ ANS - Asymmetric Numeral Systems [2, 3]
 <p class="fragment (appear)">
 Set \((Y \mid X=x) \sim \mathrm{Unif}(\mathfrak{z}(x))\)
 </p>
-
 </section>
-<section id="slide-orgb268a1b">
-<h2 id="orgb268a1b">Case study 1: unordered data</h2>
+<section id="slide-orgeafdd8f">
+<h2 id="orgeafdd8f">Case study 1: unordered data</h2>
 <p>
 Have:
 </p>
@@ -196,26 +185,23 @@ Have:
 Want to encode:
 </p>
 <img src="./img/equivalence_class.png" style="margin:0px;width:29%">
-
 </section>
-<section id="slide-org104f0d3">
-<h3 id="org104f0d3">Shuffle coding [4]</h3>
+<section id="slide-orgbbcc251">
+<h3 id="orgbbcc251">Shuffle coding [4]</h3>
 <p>
 <b>Idea:</b> canonical representative \(\leftrightarrow\) equivalence class ("sorting")
 </p>
 <img src="./img/shuffle_coding.png" width=80% class="fragment appear">
-
 </section>
-<section id="slide-org695c6cd">
-<h2 id="org695c6cd">Case study 2: rotational symmetries in LLMs [5]</h2>
+<section id="slide-org56caba5">
+<h2 id="org56caba5">Case study 2: rotational symmetries in LLMs [5]</h2>
 <img src="./img/standard_vs_slicegpt.png" width=100% class="fragment appear">
 <p class="fragment (appear)">
 \(f(x \mid W) = f(x \mid QW)\)
 </p>
-
 </section>
-<section id="slide-org8d3c636">
-<h3 id="org8d3c636">SVD: error correction for matrices</h3>
+<section id="slide-org2dc78a2">
+<h3 id="org2dc78a2">SVD: error correction for matrices</h3>
 <div>
 \begin{align*}
 W = UDV^\top
@@ -232,20 +218,17 @@ UDV^\top = \sigma UDV^\top \sigma \\
 \end{gather*}
 
 </div>
-
 </section>
-<section id="slide-orgd0fa991">
-<h3 id="orgd0fa991">bits-back from llms</h3>
+<section id="slide-org6a31194">
+<h3 id="org6a31194">bits-back from llms</h3>
 <img src="./img/llm_bits_back.png" width=100% class="fragment appear">
-
 </section>
-<section id="slide-org1e92701">
-<h3 id="org1e92701">results</h3>
+<section id="slide-org3f5ee49">
+<h3 id="org3f5ee49">results</h3>
 <img src="./img/llm_bits_back_results.png" width=100% class="fragment appear">
-
 </section>
-<section id="slide-org0c8dfd0">
-<h3 id="org0c8dfd0">some notes caveats</h3>
+<section id="slide-orgc23e554">
+<h3 id="orgc23e554">some notes caveats</h3>
 <ul>
 <li class="fragment appear">\(\sigma\) is the side information</li>
 <li class="fragment appear">\(P_{Y \mid X}\) is supported on a \(P_Y\) null set</li>
@@ -253,10 +236,9 @@ UDV^\top = \sigma UDV^\top \sigma \\
 <li class="fragment appear">Use block coding!</li>
 
 </ul>
-
 </section>
-<section id="slide-org211757c">
-<h2 id="org211757c">Case study 3: bits-back + relative entropy coding</h2>
+<section id="slide-orgd50e5ee">
+<h2 id="orgd50e5ee">Case study 3: bits-back + relative entropy coding</h2>
 <p>
 Relative entropy coding:
 </p>
@@ -270,10 +252,9 @@ Relative entropy coding:
 <p class="fragment (appear)">
 <b>Idea:</b> What happens if we set \(z\) as the side information in bits-back coding?
 </p>
-
 </section>
-<section id="slide-org8c8d598">
-<h3 id="org8c8d598">dithered quantization</h3>
+<section id="slide-orgacdac08">
+<h3 id="orgacdac08">dithered quantization</h3>
 <ul>
 <li class="fragment appear">\(c \in \mathbb{R}\)</li>
 <li class="fragment appear">\(U, U' \sim \mathrm{Unif}(-1/2, 1/2)\)</li>
@@ -285,10 +266,9 @@ Relative entropy coding:
 \end{align*}
 
 </div>
-
 </section>
-<section id="slide-orgd1ffafc">
-<h3 id="orgd1ffafc">DQ for REC</h3>
+<section id="slide-org78a6c4c">
+<h3 id="org78a6c4c">DQ for REC</h3>
 <p>
 For \(c \in [0, b)\) for \(b \in \mathbb{N}\):
 </p>
@@ -311,30 +291,27 @@ equivalent to:
 <p class="fragment (appear)">
 Could we extend to uniform target with width \(a/b\)?
 </p>
-
 </section>
-<section id="slide-org32c5049">
-<h3 id="org32c5049">bits-back quantization</h3>
+<section id="slide-org7412b42">
+<h3 id="org7412b42">bits-back quantization</h3>
 <img src="./img/bbq.png" width=100% >
-
 </section>
-<section id="slide-org0ccab46">
-<h2 id="org0ccab46">References</h2>
-<div class="outline-text-2" id="text-org0ccab46">
+<section id="slide-org99934fc">
+<h2 id="org99934fc">References</h2>
+<div class="outline-text-2" id="text-org99934fc">
 </div>
 </section>
-<section id="slide-org839b3ae">
-<h3 id="org839b3ae">References I</h3>
+<section id="slide-org7a1c9f6">
+<h3 id="org7a1c9f6">References I</h3>
 <ul>
 <li>[1] Cover, T. M., &amp; Thomas, J. A. (1991). Elements of information theory.</li>
 <li>[2] Duda, J. (2009). Asymmetric numeral systems. arXiv preprint arXiv:0902.0271.</li>
 <li>[3] Bamler, R. (2022). Understanding entropy coding with asymmetric numeral systems (ans): a statistician's perspective. arXiv preprint arXiv:2201.01741</li>
 
 </ul>
-
 </section>
-<section id="slide-org3584b0a">
-<h3 id="org3584b0a">References II</h3>
+<section id="slide-org61a1930">
+<h3 id="org61a1930">References II</h3>
 <ul>
 <li>[4] Kunze, J., Severo, D., Zani, G., van de Meent, J. W., &amp; Townsend, J. (2024). Entropy coding of unordered data structures. arXiv preprint arXiv:2408.08837.</li>
 <li>[5] He, J., Flamich, G., &amp; Hernández-Lobato, J. M. (2024). Getting Free Bits Back from Rotational Symmetries in LLMs. arXiv preprint arXiv:2410.01309.</li>
