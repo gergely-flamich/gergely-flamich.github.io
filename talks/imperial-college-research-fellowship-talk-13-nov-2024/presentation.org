@@ -1,0 +1,188 @@
+#+TITLE: Adaptive Compression and Compression for Adaptation
+#+author: Gergely Flamich
+#+date: 13/11/2024
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* About me
+
+** Education
+#+BEGIN_NOTES
+#+END_NOTES
+#+BEGIN_EXPORT html
+<ul style="list-style-type:'';">
+ <li class="fragment :appear">
+  <img src="./img/st_andrews_shield.png" width=40% class="bullet" > <div style="display:inline; float:right;">2014 - 2018</div>
+  <ul>
+   <li>Joint BSc in Maths & Computer Science</li>
+   <li><b>Valedictorian</b> in Computer Science</li>
+  </ul>
+ </li>
+ <li></li>
+ <li class="fragment :appear">
+  <img src="./img/cambridge_shield.jpg" width=40% class="bullet"> <div style="display:inline; float:right;">2018 - 2019, 2020 - now</div>
+  <ul>
+   <li>MPhil, graduated with <b>commendation</b></li>
+   <li>PhD, about to finish</li>
+  </ul>
+ </li>
+#+END_EXPORT
+
+** Experience
+#+BEGIN_NOTES
+ - data compression exciting new field cross-pollination
+   - revolutionised by new ML and maths techniques
+ - strong theory & applied skills
+ - 3 paper spotlight awards
+ - invented new optimal data compression algorithms
+   - These algorithms can compress certain types of data in less than a second, a task that previously would have taken thousands of years.
+ - supervised 25 undergraduate students
+ - Review for all major ML conferences, now *expert reviewer* for TMLR
+#+END_NOTES
+#+BEGIN_EXPORT html
+<ul style="list-style-type:'';">
+  <li class="fragment :appear">
+  <img src="./img/cambridge_shield.jpg" width=40% class="bullet">
+  <ul>
+   <li>Thesis topic: data compression</li>
+   <li>13 papers, 10+ collabs., top ML and IT venues</b></li>
+   <li>Supervised <b>3 MPhil theses, 2 undergraduate research projects</b></li>
+  </ul>
+ </li>
+ <li></li>
+ <li class="fragment :appear">
+  <img src="./img/google_research_logo.png" width=40% class="bullet">
+  <ul>
+   <li>2022: Invented compression algorithm</li>
+   <li>2024: Will work on machine translation</li>
+  </ul>
+ </li>
+</ul>
+
+#+END_EXPORT
+
+* The Proposed Project
+#+BEGIN_NOTES
+significant impact:
+ - smarter communication infrastructure
+ - easing the burden on scientific data storage,
+ - facilitating new scientific discoveries.
+#+END_NOTES
+
+** Adaptive Compression
+#+BEGIN_NOTES
+Scientific merit and novelty?
+#+END_NOTES
+
+#+ATTR_REVEAL: :frag (appear)
+🤔 Huge volume of data, new needs
+
+#+ATTR_REVEAL: :frag (appear)
+💡ML revolution in data compression
+
+#+ATTR_REVEAL: :frag (appear)
+🎯 Develop algorithms that: are 🚀 faster or 🔒 private
+
+#+attr_reveal: :frag (appear)
+🎯 Application: 📈 scalable, ⚡-efficient ML-based compressors with 🖼️ improved realism
+
+#+attr_reveal: :frag (appear)
+🎯 Practice: compress 🧬 scientific data, 🎥 video
+
+** Compression for adaptation
+#+BEGIN_NOTES
+Are LLMs just statistical parrots, or do they understand? - challenge what this even means
+#+END_NOTES
+#+ATTR_REVEAL: :frag (appear)
+🤔 Can language models (ever) understand data?
+
+#+ATTR_REVEAL: :frag (appear)
+💡"Occams razor:" *algorithmic information theory*
+
+#+ATTR_REVEAL: :frag (appear)
+🎯 Theory: *rule extrapolation* and *algorithmic causality*.
+
+#+ATTR_REVEAL: :frag (appear)
+🎯 Application: improved 🛠️ algorithm design, AI tools for scientists 👩‍🔬
+
+* Why Imperial?
+#+BEGIN_NOTES
+- Capabilities
+- Themes
+- Cross-cutting sub-themes
+#+END_NOTES
+#+BEGIN_EXPORT html
+<div class="r-stack">
+ <img src="./img/imperial_academic_strategy.png" width=50%>
+ <img src="./img/imperial_academic_strategy_inner.png" width=50%  class="fragment :appear">
+ <img src="./img/imperial_academic_strategy_middle.png" width=50%  class="fragment :appear">
+ <img src="./img/imperial_academic_strategy_outer.png" width=50%  class="fragment :appear">
+</div>
+#+END_EXPORT
+
+* the sponsor and host lab
+#+BEGIN_NOTES
+ Deniz:
+  - Internationally recognised expert on JSSC
+  - Management
+  - Chair of IT society: network + 
+
+ Appropriateness in lab:
+  - Big, active group
+  - Foundational AI hub
+  - Internationally recognised
+
+#+END_NOTES
+#+BEGIN_EXPORT html
+ <figure>
+  <img src="./img/Deniz-Gunduz.jpg" alt="Deniz Gunduz" style="width:17%">
+  <figcaption>Prof Deniz Gunduz</figcaption>
+</figure>
+#+END_EXPORT
+
+#+ATTR_REVEAL: :frag (appear)
+- 🎯 management
+- 🤝 network
+- 🔬 collaboration
+# 🚀💡
+* how the ICRF will benefit me
+#+BEGIN_NOTES
+I am a practical person; thus, my ultimate vision is to see my work bring tangible benefits to society
+
+Deniz mentioned: I can be part of this initiative:
+
+Julie is in this
+
+
+ - Courses via the Postdoc and Fellows Development centre
+   - management
+   - grant writing
+- *Imperial Futures: Schools of Convergence Science* Artificial & Human Intelligence
+#+END_NOTES
+
+#+REVEAL_HTML: <div class="tick-list">
+#+ATTR_REVEAL: :frag (appear)
+- Develop next-gen 🗜️ not possible in 🏭
+- Imperial Futures program
+- Commercialisation support for my work
+- Establish independence, smooth transition to lectureship
+#+REVEAL_HTML: </div>
+
+* Envisioned Outcomes
+
+#+REVEAL_HTML: <div class="tick-list">
+- Demonstrated practical, real-world advantage of my compression algorithms over state-of-the-art
+- Established independence, research supported by successful grant applications
+- Well on my way to commercialise my work
+#+REVEAL_HTML: </div>
+
