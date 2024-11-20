@@ -48,6 +48,7 @@
    - These algorithms can compress certain types of data in less than a second, a task that previously would have taken thousands of years.
  - supervised 25 undergraduate students
  - Review for all major ML conferences, now *expert reviewer* for TMLR
+ - I made one of the first important contributions to field
 #+END_NOTES
 #+BEGIN_EXPORT html
 <ul style="list-style-type:'';">
@@ -91,10 +92,10 @@ Scientific merit and novelty?
 💡ML revolution in data compression
 
 #+ATTR_REVEAL: :frag (appear)
-🎯 Develop algorithms that: are 🚀 faster or 🔒 private
+🎯 REC:  🚀 faster and 🔒 private data compressors
 
 #+attr_reveal: :frag (appear)
-🎯 Application: 📈 scalable, ⚡-efficient ML-based compressors with 🖼️ improved realism
+🎯 Application: 📈 scalable, ⚡-efficient adaptive ML-based compressors: INRs
 
 #+attr_reveal: :frag (appear)
 🎯 Practice: compress 🧬 scientific data, 🎥 video
@@ -164,7 +165,7 @@ Deniz mentioned: I can be part of this initiative:
 Julie is in this
 
 
- - Courses via the Postdoc and Fellows Development centre
+ - Courses via Early Career Researcher Institute
    - management
    - grant writing
 - *Imperial Futures: Schools of Convergence Science* Artificial & Human Intelligence
@@ -173,8 +174,7 @@ Julie is in this
 #+REVEAL_HTML: <div class="tick-list">
 #+ATTR_REVEAL: :frag (appear)
 - Develop next-gen 🗜️ not possible in 🏭
-- Imperial Futures program
-- Commercialisation support for my work
+- Enterprise Lab
 - Establish independence, smooth transition to lectureship
 #+REVEAL_HTML: </div>
 
@@ -182,7 +182,7 @@ Julie is in this
 
 #+REVEAL_HTML: <div class="tick-list">
 - Demonstrated practical, real-world advantage of my compression algorithms over state-of-the-art
-- Established independence, research supported by successful grant applications
+- Established independence, research supported by successful grant applications (e.g. UKRI FLF)
 - Well on my way to commercialise my work
 #+REVEAL_HTML: </div>
 
