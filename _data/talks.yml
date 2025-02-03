@@ -1,5 +1,20 @@
+- year: 2025
+  talks:
+    - title: Data Compression with Relative Entropy Coding
+      month: Feb
+      day: 04
+      occasion: Presentation for PhD thesis defence
+      slides: phd-thesis-defence-04-feb-2025/presentation.html
+      recording:
 - year: 2024
   talks:
+    - title: Adaptive Compression and Compression for Adaptation
+      month: Nov
+      day: 13
+      occasion: Job talk for the 2024 Imperial College Research Fellowship
+      slides: imperial-college-research-fellowship-talk-13-nov-2024/presentation.html
+      recording: 
+
     - title: Bits-Back Coding as Error Correction with Side Information
       month: Oct
       day: 09
