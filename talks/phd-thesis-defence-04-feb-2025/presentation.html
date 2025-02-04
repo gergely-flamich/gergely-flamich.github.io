@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>An Introduction to Relative Entropy Coding and Its Applications</title>
+<title>Data Compression with Relative Entropy Coding</title>
 <meta name="author" content="Gergely Flamich"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -19,284 +19,571 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2>An Introduction to Relative Entropy Coding and Its Applications</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>31/07/2024</h4><h6>gergely-flamich.github.io</h6>
+<section id="sec-title-slide"><h2>Data Compression with Relative Entropy Coding</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>04/02/2025</h4><h6>gergely-flamich.github.io</h6>
 </section>
-
-<section id="slide-orgacbfadd">
-<h2 id="orgacbfadd">In Collaboration With</h2>
-<img src="./img/collaborators/jiajun_he.jpg" width=23% >
-<img src="./img/collaborators/zongyu_guo.jpg" width=23%>
-<img src="./img/collaborators/daniel_goc.jpg" width=23%>
-<img src="./img/collaborators/lennie_wells.jpg" width=23%>
-<img src="./img/collaborators/stratis_markou.jpg" width=23%>
-<img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
-
-</section>
-<section id="slide-org5ba3376">
-<h2 id="org5ba3376">why care?</h2>
-<div class="outline-text-2" id="text-org5ba3376">
+<section id="slide-orgef32fbd">
+<h2 id="orgef32fbd">what is data compression?</h2>
+<div class="outline-text-2" id="text-orgef32fbd">
 </div>
 </section>
-<section id="slide-org31cadce">
-<h3 id="org31cadce">transform coding</h3>
+<section id="slide-org650cb4e">
+<h3 id="org650cb4e">lossless compression</h3>
+<ul>
+<li class="fragment appear">Source: \(x \sim P\)</li>
+<li class="fragment appear">Code: \(C_P(x)\)</li>
+<li class="fragment appear">Decode: \[ C_P^{-1}(C_P(x)) = x \]</li>
+<li class="fragment appear">Measure of efficiency: \[ \mathbb{E}[\vert C(x) \vert] \]</li>
 
-<div id="org96efafb" class="figure">
-<p><img src="./img/transform_coding.png" alt="transform_coding.png" />
+</ul>
+</section>
+<section id="slide-org904ab3d">
+<h3 id="org904ab3d">lossy compression</h3>
+<ul>
+<li class="fragment appear">Encode: \(C_P(x)\)</li>
+<li class="fragment appear">Decode: \[D_P(C_P(x)) = \hat{x} \approx x\]</li>
+<li class="fragment appear">Measures of efficiency:
+<ul>
+<li class="fragment appear"><b>Rate:</b> \(\mathbb{E}[\vert C(x) \vert]\)</li>
+<li class="fragment appear"><b>Distortion:</b> \(\mathbb{E}[\Delta(x, \hat{x})]\)</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-orgf09abb3">
+<h3 id="orgf09abb3">transform coding</h3>
+
+<div id="org1adb8b2" class="figure">
+<p><img src="./img/transform_coding.png" alt="transform_coding.png" class="fragment (appear)" />
 </p>
 </div>
 
+<p class="fragment (appear)">
+Usual transform: \(Q(f(x))\)
+</p>
 </section>
-<section id="slide-orge81c0c3">
-<h3 id="orge81c0c3">realistic lossy compression</h3>
+<section id="slide-orgc6097bb">
+<h2 id="orgc6097bb">what is relative entropy coding?</h2>
+<div class="outline-text-2" id="text-orgc6097bb">
+</div>
+</section>
+<section id="slide-org3613af9">
+<h3 id="org3613af9">as a lossy compression mechanism</h3>
+<p class="fragment (appear)">
+💡 <b>Idea:</b> perturb instead of quantise
+</p>
+
+<ul>
+<li class="fragment appear">Source: \(x \sim P\)</li>
+<li class="fragment appear">Shared randomness: \(z \sim P_z\)</li>
+<li class="fragment appear">Code: \(C_P(x, z)\)</li>
+<li class="fragment appear">Decode \[ D_P(C_P(x, z), z) \sim P_{y \mid x}\]</li>
+
+</ul>
+</section>
+<section id="slide-orged43ee7">
+<h3 id="orged43ee7">''implementing'' relative entropy coding</h3>
+
+<div id="orge6cfb74" class="figure">
+<p><img src="./img/rec_sketch.png" alt="rec_sketch.png" />
+</p>
+</div>
+</section>
+<section id="slide-org533e71a">
+<h2 id="org533e71a">why care?</h2>
+<div class="outline-text-2" id="text-org533e71a">
+</div>
+</section>
+<section id="slide-org6d0f5ea">
+<h3 id="org6d0f5ea">learned transform coding</h3>
+
+<div id="org0365082" class="figure">
+<p><img src="./img/transform_coding.png" alt="transform_coding.png" class="fragment (appear)" />
+</p>
+</div>
+<p class="fragment (appear)">
+can use reparameterisation trick!
+</p>
+</section>
+<section id="slide-orgec9988c">
+<h3 id="orgec9988c">realistic lossy compression</h3>
 <img src="./img/classic_vs_gen_compression.png" width=80% >
 
 <p>
 Right-hand image from Careil et al. [1]
 </p>
-
 </section>
-<section id="slide-org947108a">
-<h3 id="org947108a">differentially private federated learning</h3>
+<section id="slide-orgde63fc1">
+<h3 id="orgde63fc1">differentially private federated learning</h3>
 <img src="./img/federated_learning_sketch.png" width=100% >
-
 </section>
-<section id="slide-org85fe9b9">
-<h3 id="org85fe9b9">relative entropy coding</h3>
+<section id="slide-org1c0c890">
+<h2 id="org1c0c890">main thesis contributions</h2>
 <ol>
-<li class="fragment appear">\(X, Y \sim P_{X, Y}\)</li>
-<li class="fragment appear">Given \(X \sim P_X\), encoder sends code \(C\) so that decoder can compute \(Y \sim P_{Y \mid X}\)</li>
-<li class="fragment appear">Li and El Gamal [2]:</li>
+<li class="fragment appear">Established tight lower bounds for REC performance</li>
+<li class="fragment appear">Developed optimal REC algorithms</li>
+<li class="fragment appear">Applied REC to practical data compression problems</li>
 
 </ol>
-<p class="fragment (appear)">
-\[
-{\color{red} I[X; Y]} \leq \mathbb{E}[|C|] \leq {\color{red} I[X; Y]} + {\color{blue} \log (I[X; Y] + 1) + 4}
-\]
-</p>
-<div class="tick-list">
-<ul>
-<li class="fragment appear">short codelength</li>
-
-</ul>
+</section>
+<section id="slide-org060c944">
+<h2 id="org060c944">Fundamental Limits</h2>
+<div class="outline-text-2" id="text-org060c944">
 </div>
-
 </section>
-<section id="slide-org4f9f3fb">
-<h3 id="org4f9f3fb">lossy source coding</h3>
+<section id="slide-orgc67b6ed">
+<h3 id="orgc67b6ed">Communication Complexity</h3>
 <p class="fragment (appear)">
-<b>Usually:</b>
-</p>
-<ul>
-<li class="fragment appear">\(f^{-1} \circ \lfloor \cdot \rceil \circ f\)</li>
-<li class="fragment appear">\(f\) controls distortion</li>
-
-</ul>
-
-<p class="fragment (appear)">
-<b>Now:</b>
-</p>
-<ul>
-<li class="fragment appear">\(f^{-1} \circ (f + \epsilon)\)</li>
-<li class="fragment appear">\(f\) controls \(P_{Y \mid X}\)</li>
-
-</ul>
-
-</section>
-<section id="slide-orgc0d5262">
-<h3 id="orgc0d5262">common randomness</h3>
-<img src="./img/common_randomness_meme.jpg" width=55% class="fragment (appear)">
-
-</section>
-<section id="slide-org42e7fc1">
-<h3 id="org42e7fc1">solution 1: dither</h3>
-<p class="fragment (appear)">
-<b>Common randomness:</b> \(U \sim \mathrm{Unif}[-1/2, 1/2]\)
+Use \(\mathbb{H}[y \mid z]\) as proxy for rate. Li and El Gamal:
 </p>
 
 <p class="fragment (appear)">
 \[
-\lfloor x + U \rceil - U \sim  \mathrm{Unif}[x - 1/2, x + 1/2]
+I[x; y] \leq \mathbb{H}[y \mid z] \leq I[x; y] + \log(I[x; y] + 1) + \mathcal{O}(1)
 \]
 </p>
 
-<div class="invis-list">
-<ul>
-<li class="fragment appear"><b>Encoder:</b> receive \(X \sim P_X\), send \(K = \lfloor X + U\rceil\)</li>
-<li class="fragment appear"><b>Decoder:</b> compute \(Y = K - U\)</li>
-<li class="fragment appear"></li>
+<p class="fragment (appear)">
+❌ not tight!
+</p>
+</section>
+<section id="slide-orge4a329d">
+<h3 id="orge4a329d">The width function</h3>
+<p>
+\(Q \gets P_{y \mid x}, P \gets P_y\)
+</p>
 
-<li class="fragment appear">✅ Fast</li>
-<li class="fragment appear">❌ Can only simulate uniform distributions.</li>
-
-</ul>
+<div id="org4ac4b5a" class="figure">
+<p><img src="./img/theory/width_fn.png" alt="width_fn.png" class="fragment (appear)" />
+</p>
 </div>
 
+<p class="fragment (appear)">
+\(w_P\) is a probability density!
+</p>
 </section>
-<section id="slide-org2375e07">
-<h3 id="org2375e07">solution 2: selection sampling</h3>
-<img src="./img/selection_sampling_sketch.png" width=100% class="fragment (appear)">
-<div class="invis-list">
+<section id="slide-orge9c42ed">
+<h3 id="orge9c42ed">representing divergences</h3>
+<p class="fragment (appear)">
+KL divergence:
+</p>
+<div class="fragment (appear)">
+\begin{align*}
+D_{KL}[Q || P]
+&= -h_{Z \sim P}\left[\frac{dQ}{dP}(Z)\right] \\
+&= \log e + \mathbb{E}_{H \sim w_P}[\log H]
+\end{align*}
+
+</div>
+<p class="fragment (appear)">
+Channel simulation divergence:
+</p>
+<p class="fragment (appear)">
+\[ D_{CS}[Q || P] =  h[H] \]
+</p>
+<p class="fragment (appear)">
+\[ D_{KL}[Q || P] \leq D_{CS}[Q || P] \]
+</p>
+</section>
+<section id="slide-org7e312ee">
+<h3 id="org7e312ee">tight lower bound</h3>
+
+<div id="org325fd92" class="figure">
+<p><img src="./img/theory/one_shot_bound.png" alt="one_shot_bound.png" />
+</p>
+</div>
+</section>
+<section id="slide-org3cc0e75">
+<h3 id="org3cc0e75">behaviour of the lower bound</h3>
+
+<div id="org4b5074c" class="figure">
+<p><img src="./img/theory/csd_behaviour.png" alt="csd_behaviour.png" />
+</p>
+</div>
 <ul>
-<li class="fragment appear">✅ Can simulate any distribution</li>
-<li class="fragment appear">❌ Slow</li>
+<li class="fragment appear"><b>A:</b> \(P = \mathcal{L}(0, 1)\), \(Q = \mathcal{L}(0, b)\)</li>
+<li class="fragment appear"><b>B:</b> \(P = \mathcal{N}(0, 1)^{\otimes d}\), \(Q = \mathcal{N}(1, 1/4)^{\otimes d}\)</li>
 
 </ul>
+</section>
+<section id="slide-orgcbf70a7">
+<h3 id="orgcbf70a7">asymptotic lower bound</h3>
+
+<div id="org355c824" class="figure">
+<p><img src="./img/theory/asymptotic_result.png" alt="asymptotic_result.png" />
+</p>
+</div>
+</section>
+<section id="slide-org1f9876e">
+<h2 id="org1f9876e">Relative entropy coding using Poisson processes</h2>
+<div class="outline-text-2" id="text-org1f9876e">
+</div>
+</section>
+<section id="slide-org43553c0">
+<h3 id="org43553c0">Poisson Processes</h3>
+<ul>
+<li class="fragment appear">Collection of random points in space</li>
+<li class="fragment appear">Focus on <b>spatio-temporal</b> processes on \(\mathbb{R}^D \times \mathbb{R}^+\)</li>
+<li class="fragment appear">Exponential inter-arrival times</li>
+<li class="fragment appear">Spatial distribution \(P_{X \mid T}\)</li>
+<li class="fragment appear"><b>Idea:</b> use process as common randomness in REC</li>
+
+</ul>
+</section>
+<section id="slide-orgbde4cb4">
+<h3 id="orgbde4cb4">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="orgb0d8414" class="figure">
+<p><img src="./img/pp/empty_pp.png" alt="empty_pp.png" />
+</p>
+</div>
+</section>
+<section id="slide-org43b8880">
+<h3 id="org43b8880">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="orga769784" class="figure">
+<p><img src="./img/pp/pp_t1.png" alt="pp_t1.png" />
+</p>
+</div>
+</section>
+<section id="slide-orga3e82e0">
+<h3 id="orga3e82e0">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="org41a8f83" class="figure">
+<p><img src="./img/pp/pp_x1.png" alt="pp_x1.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgb8c0702">
+<h3 id="orgb8c0702">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="orgab68e4a" class="figure">
+<p><img src="./img/pp/pp_t1_x1.png" alt="pp_t1_x1.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgf03920f">
+<h3 id="orgf03920f">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="org9ec1b56" class="figure">
+<p><img src="./img/pp/pp_t2.png" alt="pp_t2.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgdae2011">
+<h3 id="orgdae2011">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="orgdb28a99" class="figure">
+<p><img src="./img/pp/pp_x2.png" alt="pp_x2.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgb22cafe">
+<h3 id="orgb22cafe">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="org9cb1987" class="figure">
+<p><img src="./img/pp/pp_t2_x2.png" alt="pp_t2_x2.png" />
+</p>
+</div>
+</section>
+<section id="slide-org1c3109a">
+<h3 id="org1c3109a">Example with \(P_{X \mid T} = \mathcal{N}(0, 1)\)</h3>
+
+<div id="orgbcdb6f4" class="figure">
+<p><img src="./img/pp/pp_sim.png" alt="pp_sim.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgaa1cdb0">
+<h3 id="orgaa1cdb0">Rejection Sampling</h3>
+<ul>
+<li class="fragment appear">Sampling algorithm for target distribution \(Q\).</li>
+<li class="fragment appear">Using proposal \(P\)</li>
+<li class="fragment appear">Bound on their density ratio \(q/p\): \(M\)</li>
+
+</ul>
+</section>
+<section id="slide-orga4e8d3c">
+<h3 id="orga4e8d3c">Rejection Sampling</h3>
+<img src="./img/rs_alg.png" class="r-stretch">
+</section>
+<section id="slide-org6e70516">
+<h3 id="org6e70516">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org317e15f" class="figure">
+<p><img src="./img/rs/rs_0.png" alt="rs_0.png" />
+</p>
+</div>
+</section>
+<section id="slide-org7c238a6">
+<h3 id="org7c238a6">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org381c35b" class="figure">
+<p><img src="./img/rs/rs_1.png" alt="rs_1.png" />
+</p>
+</div>
+</section>
+<section id="slide-org03265da">
+<h3 id="org03265da">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgc4ec7d9" class="figure">
+<p><img src="./img/rs/rs_2.png" alt="rs_2.png" />
+</p>
+</div>
+</section>
+<section id="slide-org27b2887">
+<h3 id="org27b2887">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org79b2851" class="figure">
+<p><img src="./img/rs/rs_3.png" alt="rs_3.png" />
+</p>
+</div>
+</section>
+<section id="slide-org72d355c">
+<h3 id="org72d355c">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org4c683cf" class="figure">
+<p><img src="./img/rs/rs_4.png" alt="rs_4.png" />
+</p>
+</div>
+</section>
+<section id="slide-org9a81818">
+<h3 id="org9a81818">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgd98b941" class="figure">
+<p><img src="./img/rs/rs_5.png" alt="rs_5.png" />
+</p>
+</div>
+</section>
+<section id="slide-org40c20bf">
+<h3 id="org40c20bf">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org33d9f18" class="figure">
+<p><img src="./img/rs/rs_6.png" alt="rs_6.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgd84944d">
+<h3 id="orgd84944d">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org55c06a8" class="figure">
+<p><img src="./img/rs/rs_7.png" alt="rs_7.png" />
+</p>
+</div>
+</section>
+<section id="slide-org9c8c4c2">
+<h3 id="org9c8c4c2">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="org5cab73e" class="figure">
+<p><img src="./img/rs/rs_8.png" alt="rs_8.png" />
+</p>
+</div>
+</section>
+<section id="slide-org332926d">
+<h3 id="org332926d">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orga507100" class="figure">
+<p><img src="./img/rs/rs_9.png" alt="rs_9.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgd30817c">
+<h3 id="orgd30817c">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgdf31785" class="figure">
+<p><img src="./img/rs/rs_10.png" alt="rs_10.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgf7a7bba">
+<h3 id="orgf7a7bba">RS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orga3bec97" class="figure">
+<p><img src="./img/rs/rs_accept.png" alt="rs_accept.png" />
+</p>
+</div>
+</section>
+<section id="slide-org90b9033">
+<h3 id="org90b9033">Greedy Poisson Rejection Sampling</h3>
+
+</section>
+<section id="slide-org8f7f64d">
+<h3 id="org8f7f64d">Motivation</h3>
+
+<div id="orgdfb31ef" class="figure">
+<p><img src="./img/theory/gprs_motivation_illustration.png" alt="gprs_motivation_illustration.png" />
+</p>
 </div>
 
-
+<p class="fragment (appear)">
+Fact: \((x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P\)
+</p>
 </section>
-<section id="slide-org5e87ce3">
-<h2 id="org5e87ce3">Greedy Poisson Rejection Sampling</h2>
-<ul>
-<li class="fragment appear">Sampling as search</li>
-<li class="fragment appear">Exploit structure to accelerate search</li>
-<li class="fragment appear">\(Q \gets P_{Y \mid X}\)</li>
-<li class="fragment appear">\(P \gets P_{Y}\)</li>
+<section id="slide-orgdaf33ad">
+<h3 id="orgdaf33ad">Can we do the same with Poisson processes?</h3>
+<p class="fragment (appear)">
+Yes!
+</p>
 
-</ul>
+<div class="fragment (appear)">
+\begin{align*}
+\varphi &= \sigma \circ \frac{dQ}{dP} \\
+\sigma(h) &= \int_0^h \frac{1}{\mathbb{P}[H \geq h]} \, dh
+\end{align*}
 
+</div>
 </section>
-<section id="slide-org7de644e">
-<h3 id="org7de644e">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org4e9d59c">
+<h3 id="org4e9d59c">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org0e6343a" class="figure">
+<div id="org8b870a5" class="figure">
 <p><img src="./img/gprs/gprs_0.png" alt="gprs_0.png" />
 </p>
 </div>
-
 </section>
-<section id="slide-org0b46aff">
-<h3 id="org0b46aff">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org06b55e7">
+<h3 id="org06b55e7">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org1d25e8d" class="figure">
+<div id="org86067c3" class="figure">
 <p><img src="./img/gprs/gprs_1.png" alt="gprs_1.png" />
 </p>
 </div>
-
 </section>
-<section id="slide-orgc5c77a4">
-<h3 id="orgc5c77a4">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org6b38dc4">
+<h3 id="org6b38dc4">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="orgac95707" class="figure">
+<div id="org501f327" class="figure">
 <p><img src="./img/gprs/gprs_2.png" alt="gprs_2.png" />
 </p>
 </div>
-
 </section>
-<section id="slide-org6b3fe87">
-<h3 id="org6b3fe87">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-orgf59ff45">
+<h3 id="orgf59ff45">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="orgc1bdad6" class="figure">
+<div id="org68e9cc5" class="figure">
 <p><img src="./img/gprs/gprs_3.png" alt="gprs_3.png" />
 </p>
 </div>
-
 </section>
-<section id="slide-org6228f54">
-<h3 id="org6228f54">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org582a79e">
+<h3 id="org582a79e">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org02ae3f6" class="figure">
+<div id="org0820477" class="figure">
 <p><img src="./img/gprs/gprs_4.png" alt="gprs_4.png" />
 </p>
 </div>
-
 </section>
-<section id="slide-orgb426a5b">
-<h3 id="orgb426a5b">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org89339d6">
+<h3 id="org89339d6">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org4090730" class="figure">
+<div id="orgd43da84" class="figure">
 <p><img src="./img/gprs/gprs_5.png" alt="gprs_5.png" />
 </p>
 </div>
-
 </section>
-<section id="slide-org4841c87">
-<h3 id="org4841c87">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org1d813ed">
+<h3 id="org1d813ed">GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org3f745ed" class="figure">
+<div id="org1caeaae" class="figure">
 <p><img src="./img/gprs/gprs_accept.png" alt="gprs_accept.png" />
 </p>
 </div>
-
-
 </section>
-<section id="slide-org68b6105">
-<h3 id="org68b6105">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org652866b">
+<h3 id="org652866b">Runtime of GPRS</h3>
 
-<div id="org8126f51" class="figure">
+<div id="org74b7171" class="figure">
+<p><img src="./img/theory/gprs_runtime.png" alt="gprs_runtime.png" />
+</p>
+</div>
+</section>
+<section id="slide-org366d3a4">
+<h3 id="org366d3a4">Codelength of GPRS</h3>
+
+<div id="org07232a8" class="figure">
+<p><img src="./img/theory/gprs_codelength.png" alt="gprs_codelength.png" />
+</p>
+</div>
+</section>
+<section id="slide-orgdff1931">
+<h3 id="orgdff1931">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+
+<div id="orgf389768" class="figure">
 <p><img src="./img/fast_gprs/fast_gprs_0.png" alt="fast_gprs_0.png" />
 </p>
 </div>
 </section>
-<section id="slide-org685212c">
-<h3 id="org685212c">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org1e76dee">
+<h3 id="org1e76dee">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org60bc414" class="figure">
+<div id="org853a67b" class="figure">
 <p><img src="./img/fast_gprs/fast_gprs_1.png" alt="fast_gprs_1.png" />
 </p>
 </div>
 </section>
-<section id="slide-org972e688">
-<h3 id="org972e688">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org87a9e2d">
+<h3 id="org87a9e2d">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="orgbc49d0f" class="figure">
+<div id="org82b81bd" class="figure">
 <p><img src="./img/fast_gprs/fast_gprs_2.png" alt="fast_gprs_2.png" />
 </p>
 </div>
 </section>
-<section id="slide-orgc37be4d">
-<h3 id="orgc37be4d">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org1417fa4">
+<h3 id="org1417fa4">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org845e123" class="figure">
+<div id="orga980f00" class="figure">
 <p><img src="./img/fast_gprs/fast_gprs_3.png" alt="fast_gprs_3.png" />
 </p>
 </div>
 </section>
-<section id="slide-orga88510e">
-<h3 id="orga88510e">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org963f40b">
+<h3 id="org963f40b">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org98a38c4" class="figure">
+<div id="orgc049245" class="figure">
 <p><img src="./img/fast_gprs/fast_gprs_4.png" alt="fast_gprs_4.png" />
 </p>
 </div>
 </section>
-<section id="slide-orgaca3db4">
-<h3 id="orgaca3db4">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
+<section id="slide-org278c7e7">
+<h3 id="org278c7e7">Fast GPRS with \(P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)\)</h3>
 
-<div id="org9c573aa" class="figure">
+<div id="orgd43bddd" class="figure">
 <p><img src="./img/fast_gprs/fast_gprs_5.png" alt="fast_gprs_5.png" />
 </p>
 </div>
-
-
 </section>
-<section id="slide-orge3e1cea">
-<h3 id="orge3e1cea">Analysis of faster GPRS</h3>
-<p class="fragment (appear)">
-Now, encode search path \(\pi\).
-</p>
+<section id="slide-org3582637">
+<h3 id="org3582637">Runtime of fast GPRS</h3>
 
-<p class="fragment (appear)">
-\(\mathbb{H}[\pi] \leq I[X; Y] + \log(I[X; Y] + 1) + \mathcal{O}(1)\)
+<div id="org3f6e025" class="figure">
+<p><img src="./img/theory/sac_gprs_runtime.png" alt="sac_gprs_runtime.png" />
 </p>
+</div>
 
-<p class="fragment (appear)">
-\(\mathbb{E}[\lvert\pi\rvert] = I[X; Y] + \mathcal{O}(1)\)
-</p>
-
-<p class="fragment (appear)">
+<p>
 This is <b>optimal</b>.
 </p>
-
-
 </section>
-<section id="slide-orgd919d9c">
-<h2 id="orgd919d9c">Computationally Lightweight ML-based data compression</h2>
-<div class="outline-text-2" id="text-orgd919d9c">
+<section id="slide-org9afe2f1">
+<h3 id="org9afe2f1">Codelength of fast GPRS</h3>
+<p>
+Now, encode search path \(\nu\).
+</p>
+
+
+<div id="orgddd0c34" class="figure">
+<p><img src="./img/theory/sac_gprs_codelength.png" alt="sac_gprs_codelength.png" />
+</p>
 </div>
 </section>
-<section id="slide-orga589f5b">
-<h3 id="orga589f5b">Data Compression with INRs</h3>
+<section id="slide-org5451570">
+<h2 id="org5451570">Computationally Lightweight ML-based data compression</h2>
+<div class="outline-text-2" id="text-org5451570">
+</div>
+</section>
+<section id="slide-org2697b82">
+<h3 id="org2697b82">Data Compression with INRs</h3>
 <img src="./img/applications/coin.png" class="r-stretch">
 <p>
 Image from Dupont et al. [4]
@@ -314,10 +601,9 @@ Image from Dupont et al. [4]
 
 </ul>
 </div>
-
 </section>
-<section id="slide-org7d56520">
-<h3 id="org7d56520">COMBINER</h3>
+<section id="slide-orge9a085d">
+<h3 id="orge9a085d">COMBINER</h3>
 <p>
 COMpression with Bayesian Implicit Neural Representations
 </p>
@@ -330,70 +616,44 @@ Image from Blundell et al. [7]
 <p class="fragment (appear)">
 💡Gradient descent is the transform!
 </p>
-
 </section>
-<section id="slide-org22d010e">
-<h3 id="org22d010e">COMBINER</h3>
+<section id="slide-orgeb557ae">
+<h3 id="orgeb557ae">COMBINER</h3>
 <img src="./img/applications/recombiner_img.png" width="100%">
-
 </section>
-<section id="slide-orge939e9c">
-<h3 id="orge939e9c">COMBINER</h3>
+<section id="slide-org1245105">
+<h3 id="org1245105">COMBINER</h3>
 <img src="./img/applications/recombiner.png" width="100%">
-
 </section>
-<section id="slide-org4d0f123">
-<h2 id="org4d0f123">Theory: What next?</h2>
-<ul>
-<li class="fragment appear">Might not need perfect solution: think of error correcting codes (e.g. LDPC)</li>
-<li class="fragment appear">Exploit different types of structure</li>
-<li class="fragment appear">Duality between source and channel coding</li>
-
-</ul>
-
-</section>
-<section id="slide-org90378f2">
-<h2 id="org90378f2">Applications: What next?</h2>
-<ul>
-<li class="fragment appear">Realism constraints for INR-based compression</li>
-<li class="fragment appear">Scale to high-resolution/high-volume data</li>
-
-</ul>
-
-</section>
-<section id="slide-orgeafca72">
-<h2 id="orgeafca72">Take-home messages</h2>
+<section id="slide-org6423977">
+<h2 id="org6423977">Take-home messages</h2>
 <ul>
 <li class="fragment appear"><b>Relative entropy coding</b> is a stochastic alternative to quantization for lossy source coding</li>
-<li class="fragment appear">Currently two flavours: <b>dither</b>-based, and <b>selection sampling</b></li>
+<li class="fragment appear">Analysed <b>selection sampling</b>-based REC algorithms</li>
 <li class="fragment appear"><b>Greedy Poisson rejection sampling</b> is an optimal selection sampler</li>
 <li class="fragment appear"><b>Implicit neural represenations</b> are an exciting, <b>compute-efficient</b> approach to data compression with huge potential</li>
 
 </ul>
-
 </section>
-<section id="slide-org4441bd8">
-<h2 id="org4441bd8">References I</h2>
+<section id="slide-orgedd9599">
+<h2 id="orgedd9599">References I</h2>
 <ul>
 <li>[1] Careil, M., Muckley, M. J., Verbeek, J., &amp; Lathuilière, S. Towards image compression with perfect realism at ultra-low bitrates. ICLR 2024.</li>
 <li>[2] C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.</li>
-<li>[3] E. Agustsson and L. Theis. "Universally quantized neural compression" In NeurIPS 2020.</li>
 
 </ul>
-
 </section>
-<section id="slide-orgc030aa2">
-<h2 id="orgc030aa2">References II</h2>
+<section id="slide-org678cc0d">
+<h2 id="org678cc0d">References II</h2>
 <ul>
 <li>[4] E. Dupont, A. Golinski, M. Alizadeh, Y. W. Teh and Arnaud Doucet. "COIN: compression with implicit neural representations" arXiv preprint arXiv:2103.03123, 2021.</li>
 <li>[5] G. F., L. Wells, Some Notes on the Sample Complexity of Approximate Channel Simulation. To appear at Learning to Compress workshop @ ISIT 2024.</li>
 <li>[6] D. Goc, G. F. On Channel Simulation with Causal Rejection Samplers. To appear at ISIT 2024</li>
 
 </ul>
-
 </section>
-<section id="slide-orgc942866">
-<h2 id="orgc942866">References III</h2>
+<section id="slide-org48efac1">
+<h2 id="org48efac1">References III</h2>
 <ul>
 <li>[7] C. Blundell, J. Cornebise, K. Kavukcuoglu and D. Wierstra. Weight uncertainty in neural network. In ICML 2015.</li>
 
