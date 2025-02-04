@@ -21,3 +21,8 @@
     list-style-type: initial;
     padding-left: initial;
 }
+
+mjx-assistive-mml {
+    right: 0;
+    bottom: 0;
+}
