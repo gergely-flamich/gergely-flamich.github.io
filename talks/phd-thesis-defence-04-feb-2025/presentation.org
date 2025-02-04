@@ -20,7 +20,7 @@
  - Source: $x \sim P$
  - Code: $C_P(x)$
  - Decode: $$ C_P^{-1}(C_P(x)) = x $$
- - Measure of efficiency: $$ \mathbb{E}[\vert C(x) \vert] $$
+ - Measure of efficiency: $$ \mathbb{E}[\vert C_P(x) \vert] $$
 
 ** lossy compression
 #+ATTR_REVEAL: :frag (appear)
@@ -28,7 +28,7 @@
  - Decode: $$D_P(C_P(x)) = \hat{x} \approx x$$
  - Measures of efficiency:
    #+ATTR_REVEAL: :frag (appear)
-   - *Rate:* $\mathbb{E}[\vert C(x) \vert]$
+   - *Rate:* $\mathbb{E}[\vert C_P(x) \vert]$
    - *Distortion:* $\mathbb{E}[\Delta(x, \hat{x})]$
 
 ** transform coding
