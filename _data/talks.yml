@@ -1,6 +1,12 @@
 - year: 2025
   talks:
     - title: Data Compression with Relative Entropy Coding
+      month: March
+      day: 05
+      occasion: Talk at the Information Theory Seminar at the Centre for Mathematical Sciences, Cambridge
+      slides: cms-info-theory-seminar-05-03-2025/presentation.html
+      recording:
+    - title: Data Compression with Relative Entropy Coding
       month: Feb
       day: 04
       occasion: Presentation for PhD thesis defence
