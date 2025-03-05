@@ -1,6 +1,6 @@
 #+TITLE: Data Compression with Relative Entropy Coding
 #+author: Gergely Flamich
-#+date: 04/02/2025
+#+date: 05/03/2025
 
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 # This is needed to make the speaker notes work
@@ -330,6 +330,12 @@ Image from Blundell et al. [7]
  - Analysed *selection sampling*-based REC algorithms
  - *Greedy Poisson rejection sampling* is an optimal selection sampler
  - *Implicit neural represenations* are an exciting, *compute-efficient* approach to data compression with huge potential
+
+* Open questions
+#+ATTR_REVEAL: :frag (appear)
+ - Fast Gaussian REC
+ - "Uniqueness" theorem for channel simulation divergence
+ - Practical implementation of common randomness
 
 * References I
  - [1] Careil, M., Muckley, M. J., Verbeek, J., & Lathuilière, S. Towards image compression with perfect realism at ultra-low bitrates. ICLR 2024.
