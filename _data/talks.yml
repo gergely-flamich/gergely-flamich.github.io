@@ -1,11 +1,20 @@
 - year: 2025
   talks:
+
+    - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
+      month: May
+      day: 09
+      occasion: Invited talk at the HUN-REN AI Symposium 2025
+      slides: ai-symposium-2025-hunren-09-05-2025/presentation.html
+      recording:
+
     - title: Data Compression with Relative Entropy Coding
       month: March
       day: 05
       occasion: Talk at the Information Theory Seminar at the Centre for Mathematical Sciences, Cambridge
       slides: cms-info-theory-seminar-05-03-2025/presentation.html
       recording:
+
     - title: Data Compression with Relative Entropy Coding
       month: Feb
       day: 04
