@@ -54,7 +54,12 @@ Multidimensional Quality Metrics (MQM) [2]
 *Examples:* BLEU, chrF
 
 #+ATTR_REVEAL: :frag (appear)
-*Purely syntactic:* compare to human reference translation
+*Purely semiotic:* compare to human reference translation
+
+#+ATTR_REVEAL: :frag (appear)
+✅ simple
+#+ATTR_REVEAL: :frag (appear)
+❌ limited by the human reference
 
 ** Neural Metrics
 #+ATTR_REVEAL: :frag (appear)
@@ -66,13 +71,13 @@ Multidimensional Quality Metrics (MQM) [2]
 #+REVEAL_HTML: <img src="./img/mqm_weights.png" width="50%" class="fragment (appear)">
 
 #+ATTR_REVEAL: :frag (appear)
-Take *source* and *hypothesis* and possibly a *reference*
+✅ Jointly assess accuracy and naturalness
 
-* Two birds with one score
+* Feeding Two birds with one score
 #+REVEAL_HTML: <img src="./img/scone.JPG" width=50% >
 
-* Two birds with one score
-Is it enough to assess quality using a single metric?
+* Feeding Two birds with one score
+Should we assess accuracy *and* naturalness jointly?
 
 #+REVEAL_HTML: <div class="r-stack">
 #+REVEAL_HTML: <img src="./img/wmt24_results.png" width=50% class="fragment">
@@ -111,7 +116,7 @@ Naturalness $\leftrightarrow$ Realism/Distinguishability
 
 ** Accuracy
 #+ATTR_REVEAL: :frag (appear)
-- Distortion metric: $\Delta$
+- Distortion metric: $\Delta(x, y^r, y^c) \geq 0$
 - Accuracy: average negative distortion
 #+REVEAL_HTML: <img src="./img/accuracy_def.png" width=80% class="fragment (appear)">
 
@@ -136,7 +141,7 @@ Naturalness $\leftrightarrow$ Realism/Distinguishability
 ** Naturalness: Definition II
 #+ATTR_REVEAL: :frag (appear)
 - Translation marginal $Q_y$
-- Distinguishability *is equivalent* to statistical distance $D(Q_y, R_y)$ (see our paper [5])
+- Distinguishability *is equivalent* to statistical distance $D(Q_y, R_y)$ (see [5])
 #+ATTR_REVEAL: :frag (appear)
 $$
 N(Q_{y \mid x}) = -D(Q_y, R_y)
@@ -177,12 +182,6 @@ EN $\to$ DE: I’ve wanted to fly since I was a child.
 
 #+ATTR_REVEAL: :frag (appear)
 Close to the curve, accuracy and naturalness *anti-correlate*
-
-* open questions / challenges
-#+ATTR_REVEAL: :frag (appear)
-- Is there a result encompassing both our results and Blau and Michaeli's?
-- Design better no-reference LLM judges
-- Where else can the tradeoff be applied?
 
 * contributions
 #+REVEAL_HTML: <div class="tick-list">

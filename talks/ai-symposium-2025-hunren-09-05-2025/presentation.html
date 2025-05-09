@@ -21,40 +21,40 @@
 <div class="slides">
 <section id="sec-title-slide"><h2>You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>09/05/2025</h4><h6>gergely-flamich.github.io</h6>
 </section>
-<section id="slide-org0e5f538">
-<h2 id="org0e5f538">In Collaboration With</h2>
+<section id="slide-org5c28ac1">
+<h2 id="org5c28ac1">In Collaboration With</h2>
 <img src="./img/collaborators/david_vilar_square.png" width=23% >
 <img src="./img/collaborators/jan_thorsten_peter_square.jpg" width=23% >
 <img src="./img/collaborators/markus_freitag.jpg" width=23% >
 </section>
-<section id="slide-org5e91dc8">
-<h2 id="org5e91dc8">the goals of translation</h2>
-<div class="outline-text-2" id="text-org5e91dc8">
+<section id="slide-orgde4fe0e">
+<h2 id="orgde4fe0e">the goals of translation</h2>
+<div class="outline-text-2" id="text-orgde4fe0e">
 </div>
 </section>
-<section id="slide-orgd61f32b">
-<h3 id="orgd61f32b">Accuracy</h3>
+<section id="slide-org2c7a872">
+<h3 id="org2c7a872">Accuracy</h3>
 <p class="fragment (appear)">
 Translation carries the meaning of the <b>source text</b>
 </p>
 
 <img src="./img/inaccurate_translation.png" class="fragment (appear)">
 </section>
-<section id="slide-org2c3ea75">
-<h3 id="org2c3ea75">Naturalness</h3>
+<section id="slide-org2219a77">
+<h3 id="org2219a77">Naturalness</h3>
 <p class="fragment (appear)">
 Translation sounds good in <b>target language</b>
 </p>
 
 <img src="./img/unnatural_translation.jpg" width=50% class="fragment (appear)">
 </section>
-<section id="slide-org48a9f3a">
-<h2 id="org48a9f3a">measuring translation quality</h2>
-<div class="outline-text-2" id="text-org48a9f3a">
+<section id="slide-orgead20d0">
+<h2 id="orgead20d0">measuring translation quality</h2>
+<div class="outline-text-2" id="text-orgead20d0">
 </div>
 </section>
-<section id="slide-orgab78fd1">
-<h3 id="orgab78fd1">Ingredients</h3>
+<section id="slide-org29dab1c">
+<h3 id="org29dab1c">Ingredients</h3>
 <ul>
 <li class="fragment appear">Have dataset of <b>source text</b></li>
 <li class="fragment appear">Have dataset of <b>human reference translations</b></li>
@@ -62,26 +62,33 @@ Translation sounds good in <b>target language</b>
 
 </ul>
 </section>
-<section id="slide-org1ee0b92">
-<h3 id="org1ee0b92">Human Evaluations</h3>
+<section id="slide-orgaa40f3e">
+<h3 id="orgaa40f3e">Human Evaluations</h3>
 <p class="fragment (appear)">
 Multidimensional Quality Metrics (MQM) [2]
 </p>
 
 <img src="./img/mqm_table.png" width="80%" class="fragment (appear)">
 </section>
-<section id="slide-orgbccf2e0">
-<h3 id="orgbccf2e0">Classic Automated Metrics</h3>
+<section id="slide-org19be99c">
+<h3 id="org19be99c">Classic Automated Metrics</h3>
 <p class="fragment (appear)">
 <b>Examples:</b> BLEU, chrF
 </p>
 
 <p class="fragment (appear)">
-<b>Purely syntactic:</b> compare to human reference translation
+<b>Purely semiotic:</b> compare to human reference translation
+</p>
+
+<p class="fragment (appear)">
+✅ simple
+</p>
+<p class="fragment (appear)">
+❌ limited by the human reference
 </p>
 </section>
-<section id="slide-orgf4dda9b">
-<h3 id="orgf4dda9b">Neural Metrics</h3>
+<section id="slide-org834aea1">
+<h3 id="org834aea1">Neural Metrics</h3>
 <p class="fragment (appear)">
 <b>Examples:</b> MetricX, Comet
 </p>
@@ -93,17 +100,17 @@ Multidimensional Quality Metrics (MQM) [2]
 <img src="./img/mqm_weights.png" width="50%" class="fragment (appear)">
 
 <p class="fragment (appear)">
-Take <b>source</b> and <b>hypothesis</b> and possibly a <b>reference</b>
+✅ Jointly assess accuracy and naturalness
 </p>
 </section>
-<section id="slide-org401afae">
-<h2 id="org401afae">Two birds with one score</h2>
+<section id="slide-orgfd4e429">
+<h2 id="orgfd4e429">Feeding Two birds with one score</h2>
 <img src="./img/scone.JPG" width=50% >
 </section>
-<section id="slide-org3aa0efa">
-<h2 id="org3aa0efa">Two birds with one score</h2>
+<section id="slide-orgcfcb474">
+<h2 id="orgcfcb474">Feeding Two birds with one score</h2>
 <p>
-Is it enough to assess quality using a single metric?
+Should we assess accuracy <b>and</b> naturalness jointly?
 </p>
 
 <div class="r-stack">
@@ -115,8 +122,8 @@ Is it enough to assess quality using a single metric?
 Table from WMT24 findings paper [1].
 </p>
 </section>
-<section id="slide-orgf4ef6d3">
-<h2 id="orgf4ef6d3">where we are</h2>
+<section id="slide-org3320a51">
+<h2 id="org3320a51">where we are</h2>
 <div class="cross-list">
 <ul>
 <li class="fragment appear">No formal notion of accuracy or naturalness</li>
@@ -127,8 +134,8 @@ Table from WMT24 findings paper [1].
 </ul>
 </div>
 </section>
-<section id="slide-orge4f9d4f">
-<h2 id="orge4f9d4f">Information theory to the rescue</h2>
+<section id="slide-org1e075c7">
+<h2 id="org1e075c7">Information theory to the rescue</h2>
 <p class="fragment (appear)">
 💡 Blau and Michaeli [3] already solved a similar issue!
 </p>
@@ -141,8 +148,8 @@ Accuracy \(\leftrightarrow\) Distortion
 Naturalness \(\leftrightarrow\) Realism/Distinguishability
 </p>
 </section>
-<section id="slide-org964d5c7">
-<h3 id="org964d5c7">Ingredients</h3>
+<section id="slide-orgb844596">
+<h3 id="orgb844596">Ingredients</h3>
 <ul>
 <li class="fragment appear">Source sentence \(x\)</li>
 <li class="fragment appear">Translation system \(Q_{y \mid x}\)</li>
@@ -151,17 +158,17 @@ Naturalness \(\leftrightarrow\) Realism/Distinguishability
 
 </ul>
 </section>
-<section id="slide-org7d62204">
-<h3 id="org7d62204">Accuracy</h3>
+<section id="slide-org1b48247">
+<h3 id="org1b48247">Accuracy</h3>
 <ul>
-<li class="fragment appear">Distortion metric: \(\Delta\)</li>
+<li class="fragment appear">Distortion metric: \(\Delta(x, y^r, y^c) \geq 0\)</li>
 <li class="fragment appear">Accuracy: average negative distortion</li>
 
 </ul>
 <img src="./img/accuracy_def.png" width=80% class="fragment (appear)">
 </section>
-<section id="slide-org0c0d181">
-<h3 id="org0c0d181">Naturalness: Intuition</h3>
+<section id="slide-org5b72aaf">
+<h3 id="org5b72aaf">Naturalness: Intuition</h3>
 <div class="r-stack">
 <div class="fragment">
 <img src="./img/experiment/real_pic2.png" width=49%>
@@ -173,8 +180,8 @@ Naturalness \(\leftrightarrow\) Realism/Distinguishability
 </div>
 </div>
 </section>
-<section id="slide-orgd8733ed">
-<h3 id="orgd8733ed">Naturalness: Definition I</h3>
+<section id="slide-org765ebe9">
+<h3 id="org765ebe9">Naturalness: Definition I</h3>
 <ul>
 <li class="fragment appear">Identify naturalness with distinguishability</li>
 <li class="fragment appear">We pick a <b>reference distribution</b> \(R_y\)</li>
@@ -182,11 +189,11 @@ Naturalness \(\leftrightarrow\) Realism/Distinguishability
 </ul>
 <img src="./img/naturalness_experiment.png" width=80% class="fragment (appear)">
 </section>
-<section id="slide-org1ae773c">
-<h3 id="org1ae773c">Naturalness: Definition II</h3>
+<section id="slide-orgf537d8d">
+<h3 id="orgf537d8d">Naturalness: Definition II</h3>
 <ul>
 <li class="fragment appear">Translation marginal \(Q_y\)</li>
-<li class="fragment appear">Distinguishability <b>is equivalent</b> to statistical distance \(D(Q_y, R_y)\) (see our paper [5])</li>
+<li class="fragment appear">Distinguishability <b>is equivalent</b> to statistical distance \(D(Q_y, R_y)\) (see [5])</li>
 
 </ul>
 <p class="fragment (appear)">
@@ -195,8 +202,8 @@ N(Q_{y \mid x}) = -D(Q_y, R_y)
 \]
 </p>
 </section>
-<section id="slide-org56cec94">
-<h2 id="org56cec94">Are perfect accuracy and naturalness the same?</h2>
+<section id="slide-org2695b32">
+<h2 id="org2695b32">Are perfect accuracy and naturalness the same?</h2>
 <p class="fragment (appear)">
 <b>Perfect naturalness</b> \(\Rightarrow\) <b>perfect accuracy</b>?
 </p>
@@ -211,8 +218,8 @@ N(Q_{y \mid x}) = -D(Q_y, R_y)
 
 </ul>
 </section>
-<section id="slide-orgd7a317f">
-<h2 id="orgd7a317f">what is the tradeoff like?</h2>
+<section id="slide-orgdc828e9">
+<h2 id="orgdc828e9">what is the tradeoff like?</h2>
 <p class="fragment (appear)">
 Accuracy-naturalness function:
 </p>
@@ -224,8 +231,8 @@ Accuracy-naturalness function:
 
 </ul>
 </section>
-<section id="slide-org2d03701">
-<h2 id="org2d03701">Approximating the curve</h2>
+<section id="slide-orgd4f9baa">
+<h2 id="orgd4f9baa">Approximating the curve</h2>
 <p class="fragment (appear)">
 💡 Use LLM scores to judge the translations!
 </p>
@@ -238,25 +245,16 @@ EN \(\to\) DE: I’ve wanted to fly since I was a child.
 </p>
 <img src="./img/llm_oracle_experiment.png" width="90%" class="fragment (appear)">
 </section>
-<section id="slide-org95eb492">
-<h2 id="org95eb492">where is the SOTA?</h2>
+<section id="slide-orgc56c3bb">
+<h2 id="orgc56c3bb">where is the SOTA?</h2>
 <img src="./img/ende_system_scores.png" width="100%" class="fragment (appear)">
 
 <p class="fragment (appear)">
 Close to the curve, accuracy and naturalness <b>anti-correlate</b>
 </p>
 </section>
-<section id="slide-orgfb4edfc">
-<h2 id="orgfb4edfc">open questions / challenges</h2>
-<ul>
-<li class="fragment appear">Is there a result encompassing both our results and Blau and Michaeli's?</li>
-<li class="fragment appear">Design better no-reference LLM judges</li>
-<li class="fragment appear">Where else can the tradeoff be applied?</li>
-
-</ul>
-</section>
-<section id="slide-org4ca3bc6">
-<h2 id="org4ca3bc6">contributions</h2>
+<section id="slide-orgcc495bf">
+<h2 id="orgcc495bf">contributions</h2>
 <div class="tick-list">
 <ul>
 <li class="fragment appear">Proposed a formal definition of accuracy and naturalness</li>
@@ -268,24 +266,24 @@ Close to the curve, accuracy and naturalness <b>anti-correlate</b>
 </ul>
 </div>
 </section>
-<section id="slide-orgf706b00">
-<h2 id="orgf706b00">References I</h2>
+<section id="slide-org6c55c22">
+<h2 id="org6c55c22">References I</h2>
 <ul>
 <li>[1] Kocmi et al. (2024). Findings of the WMT24 general machine translation shared task: the LLM era is here but mt is not solved yet. In Proceedings of the Ninth Conference on Machine Translation (pp. 1-46).</li>
 <li>[2] Freitag et al. (2021). Experts, errors, and context: A large-scale study of human evaluation for machine translation. Transactions of the Association for Computational Linguistics, 9, 1460-1474.</li>
 
 </ul>
 </section>
-<section id="slide-orgb21042a">
-<h2 id="orgb21042a">References II</h2>
+<section id="slide-org4409d7f">
+<h2 id="org4409d7f">References II</h2>
 <ul>
 <li>[3] Yochai Blau and Tomer Michaeli. The perception-distortion tradeoff. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 6228–6237, 2018.</li>
 <li>[4] F et al. (2025). You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation. arXiv preprint arXiv:2503.24013.</li>
 
 </ul>
 </section>
-<section id="slide-org3ee9131">
-<h2 id="org3ee9131">References III</h2>
+<section id="slide-org5ef84e8">
+<h2 id="org5ef84e8">References III</h2>
 <ul>
 <li>[5] Sriperumbudur et al. (2009). On integral probability metrics,&phi;-divergences and binary classification. arXiv preprint arXiv:0901.2698.</li>
 
