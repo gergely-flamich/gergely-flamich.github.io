@@ -1,5 +1,11 @@
 - year: 2025
   talks:
+    - title: "The Redundancy of Non-Singular Channel Simulation"
+      month: June
+      day: 24
+      occasion: Presentation at 2025 IEEE International Symposium on Information Theory
+      slides: isit-2025-24-june-2025/ISIT_2025_Presentation_The_Redundancy_of_Non-Singular_Channel_Simulation.pdf
+      recording:
 
     - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
       month: May
