@@ -1,5 +1,12 @@
 - year: 2025
   talks:
+    - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
+      month: July
+      day: 11
+      occasion: Lab meeting presentation at Imperial
+      slides: imperial-lab-meeting-11-07-2025/presentation.html
+      recording:
+
     - title: "The Redundancy of Non-Singular Channel Simulation"
       month: June
       day: 24
