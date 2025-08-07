@@ -1,6 +1,13 @@
 - year: 2025
   talks:
     - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
+      month: Aug
+      day: 07
+      occasion: Invited talk at the Isaac Newton Institute in Cambridge
+      slides: cambridge-isaac-newton-07-08-2025/presentation.html
+      recording:
+
+    - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
       month: July
       day: 11
       occasion: Lab meeting presentation at Imperial
