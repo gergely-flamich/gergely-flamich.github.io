@@ -1,0 +1,280 @@
+#+TITLE: You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation
+#+author: Gergely Flamich
+#+date: 07/08/2025
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6>gergely-flamich.github.io</h6>"
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* In Collaboration With
+
+#+REVEAL_HTML: <img src="./img/collaborators/david_vilar_square.png" width=23% >
+#+REVEAL_HTML: <img src="./img/collaborators/jan_thorsten_peter_square.jpg" width=23% >
+#+REVEAL_HTML: <img src="./img/collaborators/markus_freitag.jpg" width=23% >
+
+* the goals of translation
+
+** Accuracy
+#+ATTR_REVEAL: :frag (appear)
+Translation carries the meaning of the *source text*
+
+#+REVEAL_HTML: <img src="./img/inaccurate_translation.png" class="fragment (appear)">
+
+** Naturalness
+#+ATTR_REVEAL: :frag (appear)
+Translation sounds good in *target language*
+
+#+REVEAL_HTML: <img src="./img/unnatural_translation.jpg" width=50% class="fragment (appear)">
+
+* measuring translation quality
+
+** Ingredients
+#+ATTR_REVEAL: :frag (appear)
+- Have dataset of *source text*
+- Have dataset of *human reference translations*
+- *Translation system* $Q_{y \mid x}$ to translate source text
+
+** Human Evaluations
+#+ATTR_REVEAL: :frag (appear)
+Multidimensional Quality Metrics (MQM) [2]
+
+#+REVEAL_HTML: <img src="./img/mqm_table.png" width="80%" class="fragment (appear)">
+
+** Classic Automated Metrics
+
+#+ATTR_REVEAL: :frag (appear)
+*Examples:* BLEU, chrF
+
+#+ATTR_REVEAL: :frag (appear)
+*Purely symbolic:* compare to human reference translation
+
+#+ATTR_REVEAL: :frag (appear)
+✅ simple
+#+ATTR_REVEAL: :frag (appear)
+❌ limited by the human reference
+
+** Neural Metrics
+#+ATTR_REVEAL: :frag (appear)
+*Examples:* MetricX, Comet
+
+#+ATTR_REVEAL: :frag (appear)
+*Large language model-based:* predict MQM scores
+# use LLM backbone to
+#+REVEAL_HTML: <img src="./img/mqm_weights.png" width="50%" class="fragment (appear)">
+
+#+ATTR_REVEAL: :frag (appear)
+✅ Jointly assess accuracy and naturalness
+
+* Feeding Two birds with one score
+#+REVEAL_HTML: <img src="./img/scone.JPG" width=50% >
+
+* Feeding Two birds with one score
+Should we assess accuracy *and* naturalness jointly?
+
+#+REVEAL_HTML: <div class="r-stack">
+#+REVEAL_HTML: <img src="./img/wmt24_results.png" width=50% class="fragment">
+#+REVEAL_HTML: <img src="./img/wmt24_results_highlighted.png" width=50%  class="fragment">
+#+REVEAL_HTML: </div>
+
+#+ATTR_REVEAL: :frag (appear)
+Table from WMT24 findings paper [1].
+
+* where we are
+
+#+REVEAL_HTML: <div class="cross-list">
+#+ATTR_REVEAL: :frag (appear)
+- No formal notion of accuracy or naturalness
+- Their interaction not well understood
+- Community uses single-score assessments
+- Results don't seem to align with human evals
+#+REVEAL_HTML: </div>
+
+* Information theory to the rescue
+#+ATTR_REVEAL: :frag (appear)
+💡 Blau and Michaeli [3] already solved a similar issue!
+
+#+ATTR_REVEAL: :frag (appear)
+Accuracy $\leftrightarrow$ Distortion
+
+#+ATTR_REVEAL: :frag (appear)
+Naturalness $\leftrightarrow$ Realism/Distinguishability
+
+** Ingredients
+#+ATTR_REVEAL: :frag (appear)
+- Source sentence $x$
+- Translation system $Q_{y \mid x}$
+- Reference translation $y^r \sim Q_{y \mid x}^{\mathrm{human}}$
+- Hypothesis/candidate $y^c \sim Q_{y \mid x}$
+
+** Accuracy
+#+ATTR_REVEAL: :frag (appear)
+- Distortion metric: $\Delta(x, y^r, y^c) \geq 0$
+- Accuracy: average negative distortion
+#+REVEAL_HTML: <img src="./img/accuracy_def.png" width=80% class="fragment (appear)">
+
+** Naturalness: Intuition
+#+REVEAL_HTML: <div class="r-stack">
+#+REVEAL_HTML: <div class="fragment">
+#+REVEAL_HTML: <img src="./img/experiment/real_pic2.png" width=49%>
+#+REVEAL_HTML: <img src="./img/experiment/degraded_photo.png" width=49%>
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="fragment">
+#+REVEAL_HTML: <img src="./img/experiment/real_pic3.png" width=49%>
+#+REVEAL_HTML: <img src="./img/experiment/fake_image2.jpg" width=49%>
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: </div>
+
+** Naturalness: Definition I
+#+ATTR_REVEAL: :frag (appear)
+- Identify naturalness with distinguishability
+- We pick a *reference distribution* $R_y$
+#+REVEAL_HTML: <img src="./img/naturalness_experiment.png" width=80% class="fragment (appear)">
+
+** Naturalness: Definition II
+#+ATTR_REVEAL: :frag (appear)
+- Translation marginal $Q_y$
+- Distinguishability *is equivalent* to statistical distance $D(Q_y, R_y)$ 
+#+ATTR_REVEAL: :frag (appear)
+$$
+N(Q_{y \mid x}) = -D(Q_y, R_y)
+$$
+
+** the divergence
+#+ATTR_REVEAL: :frag (appear)
+Let $P(f) = \mathbb{E}_{X \sim P}[f(X)]$
+
+#+ATTR_REVEAL: :frag (appear)
+Integral probability metric (IPM):
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+\mathrm{IPM}_{\mathcal{F}}[Q \Vert P] = \sup_{f \in \mathcal{F}}\lvert Q(f) - P(f) \rvert
+$$
+
+
+#+ATTR_REVEAL: :frag (appear)
+Optimal critic $f^\star$
+#+ATTR_REVEAL: :frag (appear)
+$$
+f^\star = \mathrm{argmax}_{f \in \mathcal{F}}\lvert Q(f) - P(f) \rvert
+$$
+
+
+** The Equivalence
+#+ATTR_REVEAL: :frag (appear)
+Set $\epsilon = \mathbb{P}[b = 1]$. Then:
+#+ATTR_REVEAL: :frag (appear)
+\begin{gather*}
+L(b, \alpha) =
+\begin{cases}
+-\alpha / \epsilon & \text{if } b = 1 \\
+\alpha / (1 - \epsilon) & \text{if } b = -1
+\end{cases}
+\end{gather*}
+#+ATTR_REVEAL: :frag (appear)
+Then:
+#+ATTR_REVEAL: :frag (appear)
+\begin{gather*}
+R_{\mathcal{F}}^L = \inf_{f \in \mathcal{F}}\mathbb{E}[L(\mathbf{b}, f(\mathbf{y}_{\mathbf{b}}))] = -\mathrm{IPM}_{\mathcal{F}}[Q \Vert P]
+\end{gather*}
+
+
+* Are perfect accuracy and naturalness the same?
+#+ATTR_REVEAL: :frag (appear)
+*Perfect naturalness* $\Rightarrow$ *perfect accuracy*?
+
+#+ATTR_REVEAL: :frag (appear)
+*Perfect accuracy* $\Rightarrow$ *perfect naturalness*?
+
+#+ATTR_REVEAL: :frag (appear)
+- No, according to Blau and Michaeli's setup [3]
+- No, according to our setup [4]
+
+* what is the tradeoff like?
+#+ATTR_REVEAL: :frag (appear)
+Accuracy-naturalness function:
+#+REVEAL_HTML: <img src="./img/accuracy_naturalness_fn.png" width=80% class="fragment (appear)">
+
+#+ATTR_REVEAL: :frag (appear)
+- $A(N)$ is non-increasing
+- If $D$ convex in first slot, then $A(N)$ concave
+
+* Approximating the curve
+#+ATTR_REVEAL: :frag (appear)
+💡 Use LLM scores to judge the translations!
+#+ATTR_REVEAL: :frag (appear)
+🤔 Does this correspond to some $D(Q, P)$?
+
+#+ATTR_REVEAL: :frag (appear)
+EN $\to$ DE: I’ve wanted to fly since I was a child.
+#+REVEAL_HTML: <img src="./img/llm_oracle_experiment.png" width="90%" class="fragment (appear)">
+
+
+* where is the SOTA?
+#+REVEAL_HTML: <img src="./img/ende_system_scores.png" class="fragment (appear)" style="width:100%">
+
+#+ATTR_REVEAL: :frag (appear)
+Close to the curve, accuracy and naturalness *anti-correlate*
+
+* where is the SOTA?
+#+REVEAL_HTML: <img src="./img/mqm_comparison.png" class="fragment (appear)" style="width:100%">
+
+* the issue and the fix
+$\mathrm{IPM}_{\mathcal{F}}[Q \Vert P] = \sup_{f \in \mathcal{F}}\lvert Q(f) - P(f) \rvert$
+#+ATTR_REVEAL: :frag (appear)
+❌ $f^\star$ depends on $Q$!
+#+ATTR_REVEAL: :frag (appear)
+✅ *Fix:* average instead of maximising
+#+ATTR_REVEAL: :frag (appear)
+Let $f \sim \mathcal{P}$
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+D_p(Q, P \mid \mathcal{P}) &= \mathcal{P}(\vert Q - P \vert^p)^{1/p} \\
+&= \mathbb{E}_{f \sim \mathcal{P}}[\vert Q(f) - P(f) \vert^p]^{1/p}
+\end{align*}
+
+* Some interesting properties
+#+ATTR_REVEAL: :frag (appear)
+✅ $D_p$ a metric under some sensible conditions
+
+#+ATTR_REVEAL: :frag (appear)
+✅ Can estimate without knowing $Q$:
+$$
+D_1(Q, P \mid \mathcal{P}) \approx \frac{1}{N} \sum_{n = 1}^N \left(\sum_{m = 1}^{M_Q}\frac{f_n(X_m)}{M_Q} - \sum_{m = 1}^{M_P}\frac{f_n(Y_m)}{M_P}\right)
+$$
+#+ATTR_REVEAL: :frag (appear)
+✅ When $\mathcal{P}$ is a GP, $D_2$ corresponds to MMD
+
+
+
+
+
+* contributions
+#+REVEAL_HTML: <div class="tick-list">
+#+ATTR_REVEAL: :frag (appear)
+- Proposed a formal definition of accuracy and naturalness
+- Extended the theory of Blau and Michaeli
+- Showed that tradeoff *must* exist in practice
+- Assessed the performance of the current state-of-the-art
+- Showed connection between no-reference metrics and statistical distances
+#+REVEAL_HTML: </div>
+
+* References I
+
+- [1] Kocmi et al. (2024). Findings of the WMT24 general machine translation shared task: the LLM era is here but mt is not solved yet. In Proceedings of the Ninth Conference on Machine Translation (pp. 1-46).
+- [2] Freitag et al. (2021). Experts, errors, and context: A large-scale study of human evaluation for machine translation. Transactions of the Association for Computational Linguistics, 9, 1460-1474.
+
+* References II
+- [3] Yochai Blau and Tomer Michaeli. The perception-distortion tradeoff. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 6228–6237, 2018.
+- [4] F et al. (2025). You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation. arXiv preprint arXiv:2503.24013.
+
+* References III
+- [5] Sriperumbudur et al. (2009). On integral probability metrics,\phi-divergences and binary classification. arXiv preprint arXiv:0901.2698.
