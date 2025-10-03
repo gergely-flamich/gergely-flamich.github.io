@@ -1,6 +1,6 @@
 #+TITLE: You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation
 #+author: Gergely Flamich
-#+date: 03/09/2025
+#+date: 03/10/2025
 
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 # This is needed to make the speaker notes work
