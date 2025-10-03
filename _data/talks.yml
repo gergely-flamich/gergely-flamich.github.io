@@ -1,6 +1,13 @@
 - year: 2025
   talks:
     - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
+      month: Oct
+      day: 03
+      occasion: Talk in Chris Maddison's and Ashish Khisti's groups at the University of Toronto
+      slides: u-of-t-talks-03-10-2025/presentation.html
+      recording:
+
+    - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
       month: Aug
       day: 13
       occasion: Invited talk at the Hungarian Machine Learning Meetup

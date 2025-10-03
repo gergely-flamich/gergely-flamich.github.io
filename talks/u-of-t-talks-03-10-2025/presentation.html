@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation</title>
+<meta name="author" content="Gergely Flamich"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="./presentation_styles.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>03/09/2025</h4><h6>gergely-flamich.github.io</h6>
+</section>
+<section id="slide-org725f156">
+<h2 id="org725f156">In Collaboration With</h2>
+<img src="./img/collaborators/david_vilar_square.png" width=23% >
+<img src="./img/collaborators/jan_thorsten_peter_square.jpg" width=23% >
+<img src="./img/collaborators/markus_freitag.jpg" width=23% >
+</section>
+<section id="slide-org6883f1e">
+<h2 id="org6883f1e">the goals of translation</h2>
+<div class="outline-text-2" id="text-org6883f1e">
+</div>
+</section>
+<section id="slide-org2048b7b">
+<h3 id="org2048b7b">Accuracy</h3>
+<p class="fragment (appear)">
+Translation carries the meaning of the <b>source text</b>
+</p>
+
+<img src="./img/inaccurate_translation.png" class="fragment (appear)">
+</section>
+<section id="slide-org7559138">
+<h3 id="org7559138">Naturalness</h3>
+<p class="fragment (appear)">
+Translation sounds good in <b>target language</b>
+</p>
+
+<img src="./img/unnatural_translation.jpg" width=50% class="fragment (appear)">
+</section>
+<section id="slide-org33480ed">
+<h2 id="org33480ed">measuring translation quality</h2>
+<div class="outline-text-2" id="text-org33480ed">
+</div>
+</section>
+<section id="slide-orgd45d833">
+<h3 id="orgd45d833">Ingredients</h3>
+<ul>
+<li class="fragment appear">Have dataset of <b>source text</b></li>
+<li class="fragment appear">Have dataset of <b>human reference translations</b></li>
+<li class="fragment appear"><b>Translation system</b> \(Q_{y \mid x}\) to translate source text</li>
+
+</ul>
+</section>
+<section id="slide-org6caa07f">
+<h3 id="org6caa07f">Human Evaluations</h3>
+<p class="fragment (appear)">
+Multidimensional Quality Metrics (MQM) [2]
+</p>
+
+<img src="./img/mqm_table.png" width="80%" class="fragment (appear)">
+</section>
+<section id="slide-org9b7f0c9">
+<h3 id="org9b7f0c9">Classic Automated Metrics</h3>
+<p class="fragment (appear)">
+<b>Examples:</b> BLEU, chrF
+</p>
+
+<p class="fragment (appear)">
+<b>Purely symbolic:</b> compare to human reference translation
+</p>
+
+<p class="fragment (appear)">
+✅ simple
+</p>
+<p class="fragment (appear)">
+❌ limited by the human reference
+</p>
+</section>
+<section id="slide-org54affbf">
+<h3 id="org54affbf">Neural Metrics</h3>
+<p class="fragment (appear)">
+<b>Examples:</b> MetricX, Comet
+</p>
+
+<p class="fragment (appear)">
+<b>Large language model-based:</b> predict MQM scores
+</p>
+
+<img src="./img/mqm_weights.png" width="50%" class="fragment (appear)">
+
+<p class="fragment (appear)">
+✅ Jointly assess accuracy and naturalness
+</p>
+</section>
+<section id="slide-orga3d59a2">
+<h2 id="orga3d59a2">Feeding Two birds with one score</h2>
+<img src="./img/scone.JPG" width=50% >
+</section>
+<section id="slide-org5a7fc85">
+<h2 id="org5a7fc85">Feeding Two birds with one score</h2>
+<p>
+Should we assess accuracy <b>and</b> naturalness jointly?
+</p>
+
+<div class="r-stack">
+<img src="./img/wmt24_results.png" width=50% class="fragment">
+<img src="./img/wmt24_results_highlighted.png" width=50%  class="fragment">
+</div>
+
+<p class="fragment (appear)">
+Table from WMT24 findings paper [1].
+</p>
+</section>
+<section id="slide-org85d8f2d">
+<h2 id="org85d8f2d">where we are</h2>
+<div class="cross-list">
+<ul>
+<li class="fragment appear">No formal notion of accuracy or naturalness</li>
+<li class="fragment appear">Their interaction not well understood</li>
+<li class="fragment appear">Community uses single-score assessments</li>
+<li class="fragment appear">Results don't seem to align with human evals</li>
+
+</ul>
+</div>
+</section>
+<section id="slide-orgf6a0d7e">
+<h2 id="orgf6a0d7e">Information theory to the rescue</h2>
+<p class="fragment (appear)">
+💡 Blau and Michaeli [3] already solved a similar issue!
+</p>
+
+<p class="fragment (appear)">
+Accuracy \(\leftrightarrow\) Distortion
+</p>
+
+<p class="fragment (appear)">
+Naturalness \(\leftrightarrow\) Realism/Distinguishability
+</p>
+</section>
+<section id="slide-orgedf284e">
+<h3 id="orgedf284e">Ingredients</h3>
+<ul>
+<li class="fragment appear">Source sentence \(x\)</li>
+<li class="fragment appear">Translation system \(Q_{y \mid x}\)</li>
+<li class="fragment appear">Reference translation \(y^r \sim Q_{y \mid x}^{\mathrm{human}}\)</li>
+<li class="fragment appear">Hypothesis/candidate \(y^c \sim Q_{y \mid x}\)</li>
+
+</ul>
+</section>
+<section id="slide-orgc4524a5">
+<h3 id="orgc4524a5">Accuracy</h3>
+<ul>
+<li class="fragment appear">Distortion metric: \(\Delta(x, y^r, y^c) \geq 0\)</li>
+<li class="fragment appear">Accuracy: average negative distortion</li>
+
+</ul>
+<img src="./img/accuracy_def.png" width=80% class="fragment (appear)">
+</section>
+<section id="slide-org2c6f5f7">
+<h3 id="org2c6f5f7">Naturalness: Intuition</h3>
+<div class="r-stack">
+<div class="fragment">
+<img src="./img/experiment/real_pic2.png" width=49%>
+<img src="./img/experiment/degraded_photo.png" width=49%>
+</div>
+<div class="fragment">
+<img src="./img/experiment/real_pic3.png" width=49%>
+<img src="./img/experiment/fake_image2.jpg" width=49%>
+</div>
+</div>
+</section>
+<section id="slide-orgbcf3574">
+<h3 id="orgbcf3574">Naturalness: Definition I</h3>
+<ul>
+<li class="fragment appear">Identify naturalness with distinguishability</li>
+<li class="fragment appear">We pick a <b>reference distribution</b> \(R_y\)</li>
+
+</ul>
+<img src="./img/naturalness_experiment.png" width=80% class="fragment (appear)">
+</section>
+<section id="slide-org9ce2251">
+<h3 id="org9ce2251">Naturalness: Definition II</h3>
+<ul>
+<li class="fragment appear">Translation marginal \(Q_y = \mathbb{E}_{x \sim P_x}[Q_{y \mid x}]\)</li>
+<li class="fragment appear">Distinguishability <b>is equivalent</b> to statistical distance \(D(Q_y, R_y)\)</li>
+
+</ul>
+<p class="fragment (appear)">
+\[
+N(Q_{y \mid x}) = -D(Q_y, R_y)
+\]
+</p>
+</section>
+<section id="slide-org9c79431">
+<h3 id="org9c79431">the divergence</h3>
+<p class="fragment (appear)">
+Let \(P(f) = \mathbb{E}_{X \sim P}[f(X)]\)
+</p>
+
+<p class="fragment (appear)">
+Integral probability metric (IPM):
+</p>
+
+<p class="fragment (appear)">
+\[
+\mathrm{IPM}_{\mathcal{F}}[Q \Vert P] = \sup_{f \in \mathcal{F}}\lvert Q(f) - P(f) \rvert
+\]
+</p>
+
+
+<p class="fragment (appear)">
+Optimal critic \(f^\star\)
+</p>
+<p class="fragment (appear)">
+\[
+f^\star = \mathrm{argmax}_{f \in \mathcal{F}}\lvert Q(f) - P(f) \rvert
+\]
+</p>
+</section>
+<section id="slide-org681c753">
+<h3 id="org681c753">The Equivalence</h3>
+<p class="fragment (appear)">
+Set \(\epsilon = \mathbb{P}[b = 1]\). Then:
+</p>
+<div class="fragment (appear)">
+\begin{gather*}
+L(b, \alpha) =
+\begin{cases}
+-\alpha / \epsilon & \text{if } b = 1 \\
+\alpha / (1 - \epsilon) & \text{if } b = -1
+\end{cases}
+\end{gather*}
+
+</div>
+<p class="fragment (appear)">
+Then:
+</p>
+<div class="fragment (appear)">
+\begin{gather*}
+R_{\mathcal{F}}^L = \inf_{f \in \mathcal{F}}\mathbb{E}[L(\mathbf{b}, f(\mathbf{y}_{\mathbf{b}}))] = -\mathrm{IPM}_{\mathcal{F}}[Q \Vert P]
+\end{gather*}
+
+</div>
+</section>
+<section id="slide-orgb6b7c5a">
+<h2 id="orgb6b7c5a">Are perfect accuracy and naturalness the same?</h2>
+<p class="fragment (appear)">
+<b>Perfect naturalness</b> \(\Rightarrow\) <b>perfect accuracy</b>?
+</p>
+
+<p class="fragment (appear)">
+<b>Perfect accuracy</b> \(\Rightarrow\) <b>perfect naturalness</b>?
+</p>
+
+<ul>
+<li class="fragment appear">No, according to Blau and Michaeli's setup [3]</li>
+<li class="fragment appear">No, according to our setup [4]</li>
+
+</ul>
+</section>
+<section id="slide-orgfca75ac">
+<h2 id="orgfca75ac">what is the tradeoff like?</h2>
+<p class="fragment (appear)">
+Accuracy-naturalness function:
+</p>
+<img src="./img/accuracy_naturalness_fn.png" width=80% class="fragment (appear)">
+
+<ul>
+<li class="fragment appear">\(A(N)\) is non-increasing</li>
+<li class="fragment appear">If \(D\) convex in first slot, then \(A(N)\) concave</li>
+
+</ul>
+</section>
+<section id="slide-org3bdb321">
+<h2 id="org3bdb321">Approximating the curve</h2>
+<p class="fragment (appear)">
+💡 Use LLM scores to judge the translations!
+</p>
+<p class="fragment (appear)">
+🤔 Does this correspond to some \(D(Q, P)\)?
+</p>
+
+<p class="fragment (appear)">
+EN \(\to\) DE: I’ve wanted to fly since I was a child.
+</p>
+<img src="./img/llm_oracle_experiment.png" width="90%" class="fragment (appear)">
+</section>
+<section id="slide-org657a6f9">
+<h2 id="org657a6f9">where is the SOTA?</h2>
+<img src="./img/ende_system_scores.png" class="fragment (appear)" style="width:100%">
+
+<p class="fragment (appear)">
+Close to the curve, accuracy and naturalness <b>anti-correlate</b>
+</p>
+</section>
+<section id="slide-orgc120740">
+<h2 id="orgc120740">where is the SOTA?</h2>
+<img src="./img/mqm_comparison.png" class="fragment (appear)" style="width:100%">
+</section>
+<section id="slide-org236a004">
+<h2 id="org236a004">the issue and the fix</h2>
+<p>
+\(\mathrm{IPM}_{\mathcal{F}}[Q \Vert P] = \sup_{f \in \mathcal{F}}\lvert Q(f) - P(f) \rvert\)
+</p>
+<p class="fragment (appear)">
+❌ \(f^\star\) depends on \(Q\)!
+</p>
+<p class="fragment (appear)">
+✅ <b>Fix:</b> average instead of maximising
+</p>
+<p class="fragment (appear)">
+Let \(f \sim \mathcal{P}\)
+</p>
+<div class="fragment (appear)">
+\begin{align*}
+D_p(Q, P \mid \mathcal{P}) &= \mathcal{P}(\vert Q - P \vert^p)^{1/p} \\
+&= \mathbb{E}_{f \sim \mathcal{P}}[\vert Q(f) - P(f) \vert^p]^{1/p}
+\end{align*}
+
+</div>
+</section>
+<section id="slide-org7671f9e">
+<h2 id="org7671f9e">Some interesting properties</h2>
+<p class="fragment (appear)">
+✅ \(D_p\) a metric under some sensible conditions
+</p>
+
+<p class="fragment (appear)">
+✅ Can estimate without knowing \(Q\):
+\[
+D_1(Q, P \mid \mathcal{P}) \approx \frac{1}{N} \sum_{n = 1}^N \left(\sum_{m = 1}^{M_Q}\frac{f_n(X_m)}{M_Q} - \sum_{m = 1}^{M_P}\frac{f_n(Y_m)}{M_P}\right)
+\]
+</p>
+<p class="fragment (appear)">
+✅ When \(\mathcal{P}\) is a GP, \(D_2\) corresponds to MMD
+</p>
+</section>
+<section id="slide-org08bebb4">
+<h2 id="org08bebb4">contributions</h2>
+<div class="tick-list">
+<ul>
+<li class="fragment appear">Proposed a formal definition of accuracy and naturalness</li>
+<li class="fragment appear">Extended the theory of Blau and Michaeli</li>
+<li class="fragment appear">Showed that tradeoff <b>must</b> exist in practice</li>
+<li class="fragment appear">Assessed the performance of the current state-of-the-art</li>
+<li class="fragment appear">Showed connection between no-reference metrics and statistical distances</li>
+
+</ul>
+</div>
+</section>
+<section id="slide-org91573f8">
+<h2 id="org91573f8">open questions / future research</h2>
+<ul>
+<li class="fragment appear">Disentangling single-score metrics?</li>
+<li class="fragment appear">Better naturalness metrics</li>
+<li class="fragment appear">Extend to RDP settings (e.g., text summarisation)</li>
+<li class="fragment appear">Probabilistic equivalence for TV or Wasserstein?</li>
+<li class="fragment appear">Other uses of \(D\)?</li>
+
+</ul>
+</section>
+<section id="slide-org5ba2cc9">
+<h2 id="org5ba2cc9">References I</h2>
+<ul>
+<li>[1] Kocmi et al. (2024). Findings of the WMT24 general machine translation shared task: the LLM era is here but mt is not solved yet. In Proceedings of the Ninth Conference on Machine Translation (pp. 1-46).</li>
+<li>[2] Freitag et al. (2021). Experts, errors, and context: A large-scale study of human evaluation for machine translation. Transactions of the Association for Computational Linguistics, 9, 1460-1474.</li>
+
+</ul>
+</section>
+<section id="slide-orgb3e6211">
+<h2 id="orgb3e6211">References II</h2>
+<ul>
+<li>[3] Yochai Blau and Tomer Michaeli. The perception-distortion tradeoff. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 6228–6237, 2018.</li>
+<li>[4] F et al. (2025). You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation. arXiv preprint arXiv:2503.24013.</li>
+
+</ul>
+</section>
+<section id="slide-orgd7c4ea1">
+<h2 id="orgd7c4ea1">References III</h2>
+<ul>
+<li>[5] Sriperumbudur et al. (2009). On integral probability metrics,&phi;-divergences and binary classification. arXiv preprint arXiv:0901.2698.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+slideNumber:'c/t', transition:'none'
+});
+
+</script>
+</body>
+</html>
