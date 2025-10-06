@@ -2,6 +2,13 @@
   talks:
     - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
       month: Oct
+      day: 06
+      occasion: Seminar at the University of Toronto and Queen's University in Kingston
+      slides: u-of-t-and-queens-talks-06-10-2025/presentation.html
+      recording:
+
+    - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
+      month: Oct
       day: 03
       occasion: Talk in Chris Maddison's and Ashish Khisti's groups at the University of Toronto
       slides: u-of-t-talks-03-10-2025/presentation.html
