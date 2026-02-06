@@ -1,3 +1,12 @@
+- year: 2026
+  talks:
+    - title: "Data Compression with Stochastic Codes"
+      month: Feb
+      day: 06
+      occasion: Seminar at the University of Bristol
+      slides: bristol-seminar-06-02-2026/presentation.html
+      recording:
+
 - year: 2025
   talks:
     - title: "Data Compression with Relative Entropy Coding"
