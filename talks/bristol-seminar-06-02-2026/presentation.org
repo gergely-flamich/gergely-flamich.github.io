@@ -167,53 +167,51 @@ Privacy mechanism $Y \mid X = x$
 [[./img/pp/pp_sim.png]]
 
 
-** Rejection Sampling
-#+ATTR_REVEAL: :frag (appear)
-- Sampling algorithm for target distribution $Q$.
-- Using proposal $P$
-- Bounded density ratio $dQ/dP$
+# ** Rejection Sampling
+# #+ATTR_REVEAL: :frag (appear)
+# - Sampling algorithm for target distribution $Q$.
+# - Using proposal $P$
+# - Bounded density ratio $dQ/dP$
 
-** Rejection Sampling
-#+ATTR_REVEAL: :frag (appear)
-#+REVEAL_HTML: <img src="./img/rs_alg.png" class="r-stretch">
+# ** Rejection Sampling
+# #+ATTR_REVEAL: :frag (appear)
+# #+REVEAL_HTML: <img src="./img/rs_alg.png" class="r-stretch">
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_0.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_0.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_1.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_1.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_2.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_2.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_3.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_3.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_4.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_4.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_5.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_5.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_6.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_6.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_7.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_7.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_8.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_8.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_9.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_9.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_10.png]]
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_10.png]]
 
-** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
-[[./img/rs/rs_accept.png]]
-
-
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_accept.png]]
 
 ** Greedy Poisson Rejection Sampling
 
@@ -383,7 +381,7 @@ Image from Blundell et al. [7]
 
 * Open questions
 #+ATTR_REVEAL: :frag (appear)
- - Fast Gaussian REC
+ - Fast multivariate REC?
  - "Achievability" theorem for channel simulation divergence
  - Practical implementation of common randomness
 
