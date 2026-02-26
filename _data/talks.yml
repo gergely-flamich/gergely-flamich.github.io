@@ -1,5 +1,12 @@
 - year: 2026
   talks:
+    - title: "Sampling as search"
+      month: Feb
+      day: 25
+      occasion: Talk in the IPC Group at Imperial
+      slides: imperial-lab-meeting-25-02-2026/presentation.html
+      recording:
+
     - title: "Data Compression with Stochastic Codes"
       month: Feb
       day: 06
