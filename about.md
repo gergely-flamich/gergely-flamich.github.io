@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 subtitle: >
-  <a href='https://www.cbl-cambridge.org/people/gf332'>Imperial College Research Fellow</a>, Imperial College London.
+  <a href='https://profiles.imperial.ac.uk/g.flamich'>Imperial College Research Fellow</a>, Imperial College London.
 cv_pdf: 'MLcvMinimal/CV_Gergely_Flamich.pdf'
 
 profile:
