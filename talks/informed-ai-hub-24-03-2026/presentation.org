@@ -1,6 +1,6 @@
 #+TITLE: Data Compression with Stochastic Codes
 #+author: Gergely Flamich
-#+date: 06/02/2026
+#+date: 24/03/2026
 
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 # This is needed to make the speaker notes work
