@@ -136,4 +136,3 @@ Best restriction: $X_{i + 1} \in S_r(T_i / \tau_i)$
 
 #+ATTR_REVEAL: :frag (appear)
 Might be easier to use some *bounding sets* $B_{i + 1} \supseteq S_r(T_i / \tau_i)$
-
