@@ -1,5 +1,12 @@
 - year: 2026
   talks:
+    - title: "Data Compression with Stochastic Codes"
+      month: March
+      day: 24
+      occasion: Talk as part of the Informed AI Hub talk series
+      slides: informed-ai-hub-24-03-2026/presentation.html
+      recording:
+
     - title: "Sampling as search"
       month: Feb
       day: 25
