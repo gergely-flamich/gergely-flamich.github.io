@@ -21,8 +21,8 @@
 <div class="slides">
 <section id="sec-title-slide"><h2>Sampling as search</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>25/02/2026</h4><h6>gergely-flamich.github.io</h6>
 </section>
-<section id="slide-org9e70b92">
-<h2 id="org9e70b92">random variate simulation</h2>
+<section id="slide-orgdc1457a">
+<h2 id="orgdc1457a">random variate simulation</h2>
 <ul>
 <li class="fragment appear">target distribution \(Q\)</li>
 <li class="fragment appear">want to simulate \(X \sim Q\)</li>
@@ -31,8 +31,8 @@
 
 </ul>
 </section>
-<section id="slide-orgc2bd17f">
-<h2 id="orgc2bd17f">inverse transform sampling</h2>
+<section id="slide-org381d073">
+<h2 id="org381d073">inverse transform sampling</h2>
 <p class="fragment (appear)">
 Let \(X \in \mathbb{R}\) with CDF \(F\).
 Then, \(F(X) \sim ?\)
@@ -49,8 +49,8 @@ Then, \(F(X) \sim ?\)
 <b>Assumption:</b> can simulate from \(\mathrm{Unif}(0, 1)\)
 </p>
 </section>
-<section id="slide-org6f49576">
-<h2 id="org6f49576">rejection sampling</h2>
+<section id="slide-orgd659c8d">
+<h2 id="orgd659c8d">rejection sampling</h2>
 <p class="fragment (appear)">
 Let \(X \in \Omega, Q \ll P\) and \(r = dQ/dP\) with \(r < M\)
 </p>
@@ -73,8 +73,8 @@ Then, \(X_K \sim Q\)
 <b>Assumption:</b> can simulate from \(P\) and \(\mathrm{Unif}(0, 1)\)
 </p>
 </section>
-<section id="slide-org2f2dac4">
-<h2 id="org2f2dac4">how hard is sampling?</h2>
+<section id="slide-orgb930f3f">
+<h2 id="orgb930f3f">how hard is sampling?</h2>
 <p class="fragment (appear)">
 <b>Hard.</b>
 </p>
@@ -93,8 +93,8 @@ Average sample complexity \(\mathbb{E}[K]\) is at least \(\Vert r \Vert_\infty\)
 <b>In what settings can we do better?</b>
 </p>
 </section>
-<section id="slide-org62e5437">
-<h2 id="org62e5437">poisson processes</h2>
+<section id="slide-org89262d4">
+<h2 id="org89262d4">poisson processes</h2>
 <ul>
 <li class="fragment appear">Collection of random points in space</li>
 <li class="fragment appear">Focus on processes over \(\mathbb{R}^D \times \mathbb{R}^+\)</li>
@@ -104,16 +104,16 @@ Average sample complexity \(\mathbb{E}[K]\) is at least \(\Vert r \Vert_\infty\)
 
 </ul>
 </section>
-<section id="slide-org08856c5">
-<h2 id="org08856c5">Example with \(P = \mathcal{N}(0, 1)\)</h2>
+<section id="slide-org9df46e6">
+<h2 id="org9df46e6">Example with \(P = \mathcal{N}(0, 1)\)</h2>
 
-<div id="org45a7e0b" class="figure">
+<div id="org576cb9d" class="figure">
 <p><img src="./img/pp.gif" alt="pp.gif" />
 </p>
 </div>
 </section>
-<section id="slide-orgb64f0ed">
-<h2 id="orgb64f0ed">a* sampling</h2>
+<section id="slide-org97abe13">
+<h2 id="org97abe13">a* sampling</h2>
 <p class="fragment (appear)">
 <b>Idea:</b> Start with a \(P \times \lambda\) process and "turn it" into a \(Q \times \lambda\) process!
 </p>
@@ -130,16 +130,16 @@ Average sample complexity \(\mathbb{E}[K]\) is at least \(\Vert r \Vert_\infty\)
 <b>Mapping theorem:</b> \(g(\Pi)\) is a \(Q \times \lambda\) process.
 </p>
 </section>
-<section id="slide-org149d961">
-<h2 id="org149d961">a* sampling visually</h2>
+<section id="slide-orgbb1a24f">
+<h2 id="orgbb1a24f">a* sampling visually</h2>
 
-<div id="orge56114c" class="figure">
+<div id="orgdcaa970" class="figure">
 <p><img src="./img/mapthm.gif" alt="mapthm.gif" />
 </p>
 </div>
 </section>
-<section id="slide-orga6697c3">
-<h2 id="orga6697c3">basic a* sampling as search</h2>
+<section id="slide-org07a6c32">
+<h2 id="org07a6c32">basic a* sampling as search</h2>
 <p class="fragment (appear)">
 First arrival of the mapped process:
 \[
@@ -151,8 +151,8 @@ K = \mathrm{argmin}_{k \in \mathbb{N}}\left\{\frac{T_k}{r(X_k)}\right\}
 \(X_K \sim Q\)
 </p>
 </section>
-<section id="slide-orgbd15efc">
-<h2 id="orgbd15efc">implementing a* sampling</h2>
+<section id="slide-orga9ab5f2">
+<h2 id="orga9ab5f2">implementing a* sampling</h2>
 <p class="fragment (appear)">
 To find it:
 \[
@@ -166,24 +166,24 @@ For \(r < M\):
 \]
 </p>
 </section>
-<section id="slide-org37c7a5d">
-<h2 id="org37c7a5d">basic a* sampling visually</h2>
+<section id="slide-orgb3eb455">
+<h2 id="orgb3eb455">basic a* sampling visually</h2>
 
-<div id="org7be4fdd" class="figure">
+<div id="orgcdde7ec" class="figure">
 <p><img src="./img/basic_a_star.gif" alt="basic_a_star.gif" />
 </p>
 </div>
 </section>
-<section id="slide-orge44076f">
-<h2 id="orge44076f">advanced sampling as search: idea</h2>
+<section id="slide-org2b8fff7">
+<h2 id="org2b8fff7">advanced sampling as search: idea</h2>
 
-<div id="orgf6839e2" class="figure">
+<div id="org7a8fc68" class="figure">
 <p><img src="./img/basic_a_star_05b.png" alt="basic_a_star_05b.png" />
 </p>
 </div>
 </section>
-<section id="slide-org5f76995">
-<h2 id="org5f76995">advanced sampling as search</h2>
+<section id="slide-org7085007">
+<h2 id="org7085007">advanced sampling as search</h2>
 <p class="fragment (appear)">
 Superlevel set
 \[
