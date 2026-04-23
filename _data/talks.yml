@@ -1,5 +1,12 @@
 - year: 2026
   talks:
+    - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
+      month: Apr
+      day: 23
+      occasion: Invited talk at AUMOVIO
+      slides: aumovio-talk-23-04-2026/presentation.html
+      recording:
+
     - title: "Data Compression with Stochastic Codes"
       month: March
       day: 24
