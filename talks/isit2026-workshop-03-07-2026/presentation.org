@@ -189,6 +189,10 @@ $$
 
 ** putting things together
 #+ATTR_REVEAL: :frag (appear)
+Sample $\Gamma \mid X$
+#+ATTR_REVEAL: :frag (appear)
+$K$ -- rejection code for $Y \mid \Gamma$
+#+ATTR_REVEAL: :frag (appear)
 \begin{align*}
 K &= \min\left\{n \in \mathbb{N} \mid U_n \cdot M_{Y} < \frac{dP_{Y \mid \Gamma}}{dP_Y}(Y_n \mid \Gamma) \right\}
 \end{align*}
@@ -205,15 +209,15 @@ $$
 R(X \to Y) \leq I[X; Y] + \log(\mathbb{H}[\Gamma] + 1) + 2 \Delta + 6
 $$
 #+ATTR_REVEAL: :frag (appear)
-Sriramu and Wagner:
+Sriramu and Wagner: for $X^n \to Y^n$,
 $$
-\frac{1}{n}\log(\mathbb{H}[\Gamma_n] + 1) \to 0 \text{ as } n \to \infty
+\frac{1}{\log n}\log(\mathbb{H}[\Gamma_n] + 1) \to 0 \text{ as } n \to \infty
 $$
 #+ATTR_REVEAL: :frag (appear)
 Hence
 #+ATTR_REVEAL: :frag (appear)
 $$
-\frac{1}{n}R(X^n \to Y^n) \to I[X; Y] \text{ as } n \to \infty
+R^*_2 \to 0 \text{ as } n \to \infty
 $$
 
 ** check out the paper on arXiv!

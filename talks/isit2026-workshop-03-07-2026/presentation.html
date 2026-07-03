@@ -21,17 +21,17 @@
 <div class="slides">
 <section id="sec-title-slide"><h2>Singular Relative Entropy Coding with Bits-Back Rejection Sampling</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>03/06/2026</h4><h6><a href='https://arxiv.org/abs/2604.06055'>paper now available on Arxiv!</a></h6>
 </section>
-<section id="slide-org245371f">
-<h2 id="org245371f">In Collaboration With</h2>
+<section id="slide-org605ca22">
+<h2 id="org605ca22">In Collaboration With</h2>
 <img src="./img/collaborators/spencer_hill.webp" width=40% >
 </section>
-<section id="slide-org3fadf96">
-<h2 id="org3fadf96">background</h2>
-<div class="outline-text-2" id="text-org3fadf96">
+<section id="slide-org28f7ab7">
+<h2 id="org28f7ab7">background</h2>
+<div class="outline-text-2" id="text-org28f7ab7">
 </div>
 </section>
-<section id="slide-org3e8970f">
-<h3 id="org3e8970f">lossless compression</h3>
+<section id="slide-org3976e45">
+<h3 id="org3976e45">lossless compression</h3>
 <ul>
 <li class="fragment appear">Source: \(X \sim P_X\)</li>
 <li class="fragment appear">Code: \(C(x) \in \{0, 1\}^*\)</li>
@@ -42,8 +42,8 @@
 
 </ul>
 </section>
-<section id="slide-orgc90af34">
-<h3 id="orgc90af34">stochastic codes</h3>
+<section id="slide-org170b606">
+<h3 id="org170b606">stochastic codes</h3>
 <ul>
 <li class="fragment appear">Source: \(X \sim P_X\)</li>
 <li class="fragment appear">Perturbation: \(P_{Y \mid X = x}\)</li>
@@ -53,8 +53,8 @@
 
 </ul>
 </section>
-<section id="slide-org1b028c6">
-<h3 id="org1b028c6">the objective</h3>
+<section id="slide-org362b8c6">
+<h3 id="org362b8c6">the objective</h3>
 <p class="fragment (appear)">
 <b>Rate:</b> \(\mathbb{E}[|C(X, Z)|]\)
 </p>
@@ -70,8 +70,8 @@ R^*(X \to Y)
 
 </div>
 </section>
-<section id="slide-orgf81fef9">
-<h3 id="orgf81fef9">the bounds</h3>
+<section id="slide-org4060097">
+<h3 id="org4060097">the bounds</h3>
 <p class="fragment (appear)">
 <b>One-shot (\(X \to Y\)):</b> letting \(I = I[X; Y]\),
 </p>
@@ -89,8 +89,8 @@ I \leq R^*(X \to Y) \leq I + \log (I + 1) + 4
 \]
 </p>
 </section>
-<section id="slide-orgc03302a">
-<h3 id="orgc03302a">second order</h3>
+<section id="slide-orgb17e7e9">
+<h3 id="orgb17e7e9">second order</h3>
 <p class="fragment (appear)">
 <b>Asymptotic (\(X^n \to Y^n\)), second order:</b>
 </p>
@@ -111,8 +111,8 @@ R_2^* = \begin{cases}
 \]
 </p>
 </section>
-<section id="slide-org822edbe">
-<h3 id="org822edbe">singular channel</h3>
+<section id="slide-org6343bcf">
+<h3 id="org6343bcf">singular channel</h3>
 <p>
 For \(P_{X, Y}\), the direction \(X \to Y\) is <b>singular</b> if
 \[
@@ -124,19 +124,19 @@ For \(P_{X, Y}\), the direction \(X \to Y\) is <b>singular</b> if
 E.g. additive uniform channel, typewriter channel.
 </p>
 </section>
-<section id="slide-org66065f5">
-<h3 id="org66065f5">sriramu and wagner's algorithm</h3>
+<section id="slide-orgb1d258d">
+<h3 id="orgb1d258d">sriramu and wagner's algorithm</h3>
 <img src="./img/sharang_alg.png" width=55%>
 </section>
-<section id="slide-org9da0ac3">
-<h2 id="org9da0ac3">ingredients for bits-back rejection sampling</h2>
-<div class="outline-text-2" id="text-org9da0ac3">
+<section id="slide-org713d37b">
+<h2 id="org713d37b">ingredients for bits-back rejection sampling</h2>
+<div class="outline-text-2" id="text-org713d37b">
 </div>
 </section>
-<section id="slide-org8eaf693">
-<h3 id="org8eaf693">a general stochastic code: rejection sampling</h3>
+<section id="slide-orgc19e770">
+<h3 id="orgc19e770">a general stochastic code: rejection sampling</h3>
 
-<div id="orgedf39d0" class="figure">
+<div id="org8ce49ad" class="figure">
 <p><img src="./img/gprs_motivation_illustration.png" alt="gprs_motivation_illustration.png" />
 </p>
 </div>
@@ -145,10 +145,10 @@ E.g. additive uniform channel, typewriter channel.
 Fact: \((x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P\)
 </p>
 </section>
-<section id="slide-orgcced99b">
-<h3 id="orgcced99b">a general stochastic code: rejection sampling</h3>
+<section id="slide-org0e8a12c">
+<h3 id="org0e8a12c">a general stochastic code: rejection sampling</h3>
 
-<div id="org9dc10c8" class="figure">
+<div id="org77f38ef" class="figure">
 <p><img src="./img/stoch_code_sketch.png" alt="stoch_code_sketch.png" class="fragment (appear)" />
 </p>
 </div>
@@ -162,24 +162,24 @@ N(x) = \min\left\{n \in \mathbb{N} \mid U_n \cdot M(x) < \frac{dP_{Y \mid X=x}}{
 
 </div>
 </section>
-<section id="slide-org834e859">
-<h3 id="org834e859">invertible sampling</h3>
+<section id="slide-orgbfd91ed">
+<h3 id="orgbfd91ed">invertible sampling</h3>
 <ul>
 <li class="fragment appear">stream codes \(C_P(m, x) = m'\) for source \(P\)</li>
 <li class="fragment appear">\(C_P^{-1}(\mathcal{BP}(1/2)) = (X, M)\), then \(X \sim P\)</li>
 
 </ul>
 </section>
-<section id="slide-org05c4793">
-<h3 id="org05c4793">bits-back coding</h3>
+<section id="slide-org6088fc2">
+<h3 id="org6088fc2">bits-back coding</h3>
 <p class="fragment (appear)">
 \[
 = \text{ invertible sampling } + \text{ error correction}
 \]
 </p>
 </section>
-<section id="slide-org60f2e79">
-<h3 id="org60f2e79">perfect error correction</h3>
+<section id="slide-org38309b1">
+<h3 id="org38309b1">perfect error correction</h3>
 <p class="fragment (appear)">
 Given \(Y \sim P_{Y \mid X = x}\) have \(g\) such that
 </p>
@@ -189,8 +189,8 @@ g(Y) = x
 \]
 </p>
 </section>
-<section id="slide-orge508ac3">
-<h3 id="orge508ac3">bits-back coding</h3>
+<section id="slide-org7a3be13">
+<h3 id="org7a3be13">bits-back coding</h3>
 <p class="fragment (appear)">
 Source \(P_X\), perfectly correctable \(P_{Y \mid X}\)
 </p>
@@ -214,8 +214,8 @@ Source \(P_X\), perfectly correctable \(P_{Y \mid X}\)
 
 </ul>
 </section>
-<section id="slide-org38c8d6d">
-<h3 id="org38c8d6d">efficiency of bits-back coding</h3>
+<section id="slide-org68f1b55">
+<h3 id="org68f1b55">efficiency of bits-back coding</h3>
 <ul>
 <li class="fragment appear">message \(M\), source \(X\)</li>
 <li class="fragment appear">decode: \(|M| - |M'| \approx -\log P(Y \mid X)\)</li>
@@ -232,13 +232,13 @@ Source \(P_X\), perfectly correctable \(P_{Y \mid X}\)
 
 </div>
 </section>
-<section id="slide-orgf7ee555">
-<h2 id="orgf7ee555">bits-back rejection sampling</h2>
-<div class="outline-text-2" id="text-orgf7ee555">
+<section id="slide-orgea0e784">
+<h2 id="orgea0e784">bits-back rejection sampling</h2>
+<div class="outline-text-2" id="text-orgea0e784">
 </div>
 </section>
-<section id="slide-org11aad39">
-<h3 id="org11aad39">start like Sriramu and Wagner</h3>
+<section id="slide-org350dc76">
+<h3 id="org350dc76">start like Sriramu and Wagner</h3>
 <p class="fragment (appear)">
 \(\Gamma = Q_{\Delta}(\log \frac{dP_{Y \mid X}}{dP_Y}(Y \mid X))\)
 </p>
@@ -251,8 +251,8 @@ Two part code \((\Gamma, Y) \mid X\):
 
 </ul>
 </section>
-<section id="slide-org5362cee">
-<h3 id="org5362cee">the key observation</h3>
+<section id="slide-org3617fc9">
+<h3 id="org3617fc9">the key observation</h3>
 <p class="fragment (appear)">
 if \(X \to Y\) is singular:
 </p>
@@ -271,8 +271,14 @@ if \(X \to Y\) is singular:
 \]
 </p>
 </section>
-<section id="slide-org2f74a21">
-<h3 id="org2f74a21">putting things together</h3>
+<section id="slide-orgee1a552">
+<h3 id="orgee1a552">putting things together</h3>
+<p class="fragment (appear)">
+Sample \(\Gamma \mid X\)
+</p>
+<p class="fragment (appear)">
+\(K\) &#x2013; rejection code for \(Y \mid \Gamma\)
+</p>
 <div class="fragment (appear)">
 \begin{align*}
 K &= \min\left\{n \in \mathbb{N} \mid U_n \cdot M_{Y} < \frac{dP_{Y \mid \Gamma}}{dP_Y}(Y_n \mid \Gamma) \right\}
@@ -289,17 +295,17 @@ recover \(\Gamma\) from \(K\)
 \(N\) &#x2013; rejection code for \(Y \mid \Gamma, X\)
 </p>
 </section>
-<section id="slide-org2aba823">
-<h3 id="org2aba823">analysis</h3>
+<section id="slide-org297569d">
+<h3 id="org297569d">analysis</h3>
 <p class="fragment (appear)">
 \[
 R(X \to Y) \leq I[X; Y] + \log(\mathbb{H}[\Gamma] + 1) + 2 \Delta + 6
 \]
 </p>
 <p class="fragment (appear)">
-Sriramu and Wagner:
+Sriramu and Wagner: for \(X^n \to Y^n\),
 \[
-\frac{1}{n}\log(\mathbb{H}[\Gamma_n] + 1) \to 0 \text{ as } n \to \infty
+\frac{1}{\log n}\log(\mathbb{H}[\Gamma_n] + 1) \to 0 \text{ as } n \to \infty
 \]
 </p>
 <p class="fragment (appear)">
@@ -307,16 +313,16 @@ Hence
 </p>
 <p class="fragment (appear)">
 \[
-\frac{1}{n}R(X^n \to Y^n) \to I[X; Y] \text{ as } n \to \infty
+R^*_2 \to 0 \text{ as } n \to \infty
 \]
 </p>
 </section>
-<section id="slide-orgd75f7eb">
-<h3 id="orgd75f7eb">check out the paper on arXiv!</h3>
+<section id="slide-orgc234a48">
+<h3 id="orgc234a48">check out the paper on arXiv!</h3>
 <img class="r-stretch" src="./img/singular_qr.png">
 </section>
-<section id="slide-org3b865be">
-<h3 id="org3b865be">check out the twin paper too!</h3>
+<section id="slide-orgd29d632">
+<h3 id="orgd29d632">check out the twin paper too!</h3>
 <img class="r-stretch" src="./img/rejection_qr.png">
 </section>
 </section>
