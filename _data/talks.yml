@@ -1,5 +1,19 @@
 - year: 2026
   talks:
+    - title: "Lossy data compression with stochastic codes and their characterisation via the functional information"
+      month: July
+      day: 06
+      occasion: Invited talk at the Chinese University of Hong Kong
+      slides: cuhk-functional-info-06-06-2026/presentation.html
+      recording:
+
+    - title: "Singular Relative Entropy Coding with Bits-Back Rejection Sampling"
+      month: July
+      day: 03
+      occasion: Oral presentation at the Learn to Compress & Compress to Learn workshop at ISIT 2026.
+      slides: isit2026-workshop-03-07-2026/presentation.html
+      recording:
+
     - title: "You Cannot Feed Two Birds with One Score: the Accuracy-Naturalness Tradeoff in Translation"
       month: Apr
       day: 23
