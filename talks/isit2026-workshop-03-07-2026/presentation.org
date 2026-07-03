@@ -1,0 +1,225 @@
+#+TITLE: Singular Relative Entropy Coding with Bits-Back Rejection Sampling
+#+author: Gergely Flamich
+#+date: 03/06/2026
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6><a href='https://arxiv.org/abs/2604.06055'>paper now available on Arxiv!</a></h6>"
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* In Collaboration With
+
+#+REVEAL_HTML: <img src="./img/collaborators/spencer_hill.webp" width=40% >
+
+* background
+
+** lossless compression
+#+ATTR_REVEAL: :frag (appear)
+ - Source: $X \sim P_X$
+ - Code: $C(x) \in \{0, 1\}^*$
+ - Decode: $$ C^{-1}(C(x)) = x $$
+ - Measure of efficiency: $\mathbb{E}[\vert C(X) \vert]$
+ - *Entropy code:*
+   $$\mathbb{E}[\vert C(X) \vert] = \mathbb{H}[P_X] + \mathcal{O}(1)$$
+
+** stochastic codes
+
+#+ATTR_REVEAL: :frag (appear)
+ - Source: $X \sim P_X$
+ - Perturbation: $P_{Y \mid X = x}$
+ - Shared randomness: $Z \sim P_Z$
+ - Code: $C(x, z) \in \{0, 1\}^*$
+ - Decode: $$ D(C(x, Z), Z) \sim P_{Y \mid X = x}$$
+
+** the objective
+#+ATTR_REVEAL: :frag (appear)
+*Rate:* $\mathbb{E}[|C(X, Z)|]$
+#+ATTR_REVEAL: :frag (appear)
+*Optimal rate:*
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+R^*(X \to Y)
+&= \inf_{(Z, C, D)} \mathbb{E}[|C(X, Z)|] \\
+&\quad \text{s.t. } D(C(x, Z), Z) \sim P_{Y \mid X = x}
+\end{align*}
+
+** the bounds
+#+ATTR_REVEAL: :frag (appear)
+*One-shot ($X \to Y$):* letting $I = I[X; Y]$,
+#+ATTR_REVEAL: :frag (appear)
+$$
+I \leq R^*(X \to Y) \leq I + \log (I + 1) + 4
+$$
+#+ATTR_REVEAL: :frag (appear)
+*Asymptotic ($X^n \to Y^n$):*
+#+ATTR_REVEAL: :frag (appear)
+$$
+\frac{1}{n}R^*(X^n \to Y^n) \to I \quad \text{as } n \to \infty
+$$
+
+** second order
+#+ATTR_REVEAL: :frag (appear)
+*Asymptotic ($X^n \to Y^n$), second order:*
+#+ATTR_REVEAL: :frag (appear)
+$$
+R_2^* =\lim_{n \to \infty}\frac{R^*(X^n \to Y^n) - n I[X; Y]}{\log n}
+$$
+#+ATTR_REVEAL: :frag (appear)
+Then:
+#+ATTR_REVEAL: :frag (appear)
+$$
+R_2^* = \begin{cases}
+0 & {\color{red}X \to Y\text{ singular}}\\
+\frac{1}{2} & \text{otherwise}
+\end{cases}
+$$
+
+** singular channel
+
+For $P_{X, Y}$, the direction $X \to Y$ is *singular* if
+$$
+\frac{dP_{Y \mid X}}{dP_Y}(y \mid x) = g(y) \quad P_{X, Y}-\text{a.s.}
+$$
+
+E.g. additive uniform channel, typewriter channel.
+
+** sriramu and wagner's algorithm
+#+REVEAL_HTML: <img src="./img/sharang_alg.png" width=55%>
+
+* ingredients for bits-back rejection sampling
+
+** a general stochastic code: rejection sampling
+[[./img/gprs_motivation_illustration.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+Fact: $(x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P$
+
+** a general stochastic code: rejection sampling
+#+ATTR_REVEAL: :frag (appear)
+[[./img/stoch_code_sketch.png]]
+
+
+#+ATTR_REVEAL: :frag (appear)
+\begin{gather*}
+Y_n \sim P_Y, \quad U_n \sim \mathrm{Unif}(0, 1) \\
+N(x) = \min\left\{n \in \mathbb{N} \mid U_n \cdot M(x) < \frac{dP_{Y \mid X=x}}{dP_Y}(Y_n) \right\}
+\end{gather*}
+** invertible sampling
+#+ATTR_REVEAL: :frag (appear)
+- stream codes $C_P(m, x) = m'$ for source $P$
+- $C_P^{-1}(\mathcal{BP}(1/2)) = (X, M)$, then $X \sim P$
+
+** bits-back coding
+#+ATTR_REVEAL: :frag (appear)
+$$
+= \text{ invertible sampling } + \text{ error correction}
+$$
+
+** perfect error correction
+#+ATTR_REVEAL: :frag (appear)
+Given $Y \sim P_{Y \mid X = x}$ have $g$ such that
+#+ATTR_REVEAL: :frag (appear)
+$$
+g(Y) = x
+$$
+
+** bits-back coding
+#+ATTR_REVEAL: :frag (appear)
+Source $P_X$, perfectly correctable $P_{Y \mid X}$
+
+#+ATTR_REVEAL: :frag (appear)
+*encoder:* given $M, X$,
+#+ATTR_REVEAL: :frag (appear)
+- decode $(M', Y) = C_{P_{Y \mid X}}^{-1}(M)$
+- encode $M'' = C_{P_Y}(M', Y)$
+
+#+ATTR_REVEAL: :frag (appear)
+*decoder:* given $M''$,
+#+ATTR_REVEAL: :frag (appear)
+- decode $(M', Y) = C_{P_Y}^{-1}(M'')$
+- recover $X = g(Y)$
+- encode $M = C_{P_{Y \mid X}}(M', Y)$
+
+** efficiency of bits-back coding
+#+ATTR_REVEAL: :frag (appear)
+- message $M$, source $X$
+- decode: $|M| - |M'| \approx -\log P(Y \mid X)$
+- encode: $|M''| - |M'| \approx -\log P(Y)$
+
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+|M''| - |M| &\approx -\log \frac{P(Y)}{P(Y | X)} \\
+&= -\log \frac{P(X)}{P(X | Y)} \\
+&= -\log P(X)
+\end{align*}
+
+
+* bits-back rejection sampling
+
+** start like Sriramu and Wagner
+#+ATTR_REVEAL: :frag (appear)
+$\Gamma = Q_{\Delta}(\log \frac{dP_{Y \mid X}}{dP_Y}(Y \mid X))$
+#+ATTR_REVEAL: :frag (appear)
+Two part code $(\Gamma, Y) \mid X$:
+#+ATTR_REVEAL: :frag (appear)
+- rejection code $\Gamma \mid X$
+- rejection code $Y \mid \Gamma, X$
+
+** the key observation
+#+ATTR_REVEAL: :frag (appear)
+if $X \to Y$ is singular:
+#+ATTR_REVEAL: :frag (appear)
+$$
+\frac{dP_{Y \mid X}}{dP_Y}(y \mid x) = g(y) \quad P_{X, Y}-\text{a.s.}
+$$
+#+ATTR_REVEAL: :frag (appear)
+$P_{Y \mid \Gamma}$ can be perfectly error-corrected:
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+\Gamma = Q_{\Delta}(\log g(Y))
+$$
+
+** putting things together
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+K &= \min\left\{n \in \mathbb{N} \mid U_n \cdot M_{Y} < \frac{dP_{Y \mid \Gamma}}{dP_Y}(Y_n \mid \Gamma) \right\}
+\end{align*}
+#+ATTR_REVEAL: :frag (appear)
+decode rejections from stream $M$
+#+ATTR_REVEAL: :frag (appear)
+recover $\Gamma$ from $K$
+#+ATTR_REVEAL: :frag (appear)
+$N$ -- rejection code for $Y \mid \Gamma, X$
+
+** analysis
+#+ATTR_REVEAL: :frag (appear)
+$$
+R(X \to Y) \leq I[X; Y] + \log(\mathbb{H}[\Gamma] + 1) + 2 \Delta + 6
+$$
+#+ATTR_REVEAL: :frag (appear)
+Sriramu and Wagner:
+$$
+\frac{1}{n}\log(\mathbb{H}[\Gamma_n] + 1) \to 0 \text{ as } n \to \infty
+$$
+#+ATTR_REVEAL: :frag (appear)
+Hence
+#+ATTR_REVEAL: :frag (appear)
+$$
+\frac{1}{n}R(X^n \to Y^n) \to I[X; Y] \text{ as } n \to \infty
+$$
+
+** check out the paper on arXiv!
+
+#+REVEAL_HTML: <img class="r-stretch" src="./img/singular_qr.png">
+
+** check out the twin paper too!
+#+REVEAL_HTML: <img class="r-stretch" src="./img/rejection_qr.png">
+
