@@ -1,0 +1,231 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Rishi Shah 
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TODO: Update Mphil supervision
+% TODO: add Schmidt IX interview thing
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+
+\usepackage[left=0.75in,top=0.4in,right=0.75in,bottom=0.4in]{geometry} % Document margins
+\usepackage{ragged2e}
+\usepackage[
+colorlinks=true,
+linkcolor={green},
+urlcolor=blue,
+]{hyperref}
+\usepackage{makecell}
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\name{Gergely Flamich} % Your name
+\address{Imperial College London, London, UK} % Your address
+%\address{123 Pleasant Lane \\ City, State 12345} % Your secondary addess (optional)
+\address{+44\,74\,62\,957\,131\, \\ \,g.flamich@imperial.ac.uk\, \\ \,\url{https://gergely-flamich.github.io}} % Your phone number and email
+
+\begin{document}
+
+% ----------------------------------------------------------------------------------------
+%	PERSONAL STATEMENT
+% ----------------------------------------------------------------------------------------
+
+ \begin{rSection}{Personal Statement}
+ Since August 2025, I have been an
+ \href{https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/irf/}{Imperial
+   College Research Fellow} at Imperial College London.
+ I have deep expertise in machine learning with strong practical and
+ theoretical research and coding skills.
+ My current work focuses on \textbf{neural data compression} using generative
+ models such as diffusion models and variational autoencoders, and related
+ \textbf{information theory}, mainly \textbf{relative entropy coding}.
+
+\end{rSection}
+%----------------------------------------------------------------------------------------
+%	PROFESSIONAL EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Professional Experience}
+\begin{rSubsection}{Imperial College Research Fellow (Research Associate until
+    July 2025)}{March 2025 - Now}{Host: Dr Deniz G{\"u}nd{\"u}z}{\textit{Imperial College London}}
+\item Characterised the absolute best theoretically achievable data compression using a new fundamental measure of information called the
+  \textit{functional information} (a generalisation of entropy). Paper in
+  preparation for IEEE Transactions on Information Theory.
+\item Developed the first data compression algorithm that has \textbf{provably
+    optimal compression performance}. Implementation and analysis mainly in \texttt{Jax}. Paper to appear at IEEE ITW 2026.
+\item Implemented scalable, privacy-preserving image compression algorithm using diffusion
+  models that compresses data \textbf{$\times$20-40 more} than competing approaches.
+  Implementation mostly in \texttt{PyTorch}.
+  Workshop paper to appear at ICML 2026, full paper in preparation for ICLR 2027.
+\item Co-organised the \href{https://learn-to-compress-workshop-isit.github.io}{Learn to Compress \& Compress to Learn
+Workshop} at the International Symposium on Information Theory (ISIT) 2025;
+currently assisting in organisation of the 2026 rendition.
+\item Was elected as \href{https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/irf/our-cohorts/}{one of 16 new research fellows at Imperial College} in August 2025, based
+  on an independently written research proposal.
+  As the \href{https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/irf/}{University's website states}, the fellowship `is designed for exceptional early career researchers who are prepared to step into independence.'
+  The fellowship covers salary as well as £30,000 for equipment and travel expenses.
+\item Since start of postdoc, 3 papers to appear at information theory and ML
+  venues, of which one received spotlight award; 3
+  submitted for peer review.
+  \href{https://www.imperial.ac.uk/early-career-researcher-institute/learning-and-development/cornerstone/supervisors-guidebook/cpd/assistant-supervisors/}{Assistant supervisor} to first-year PhD student ({\"O}. G{\"u}ner) and
+  supervising an MPhil research project at Cambridge on video
+  compression with diffusion models.
+\end{rSubsection}
+
+\begin{rSubsection}{Student Researcher: Neural Machine Translation}{Dec
+      2024 - Feb 2025}{Hosts: Dr David Vilar, Dr Jan-Thorsten
+    Peter and Dr Markus Freitag}{\textit{Google Berlin}}
+\item Implemented discrete diffusion models in \texttt{Jax} and \texttt{T5X} to speed up neural machine translation.
+\item Developed theory of the accuracy-naturalness tradeoff in translation and
+ demonstrated that current methodology for automatic evaluation of
+  translation systems is inadequate and needs to be updated.
+\item Work resulted in a paper published and presented at
+  the \href{https://openreview.net/forum?id=d9EkgbZZH9}{Conference on Language Modeling 2025}.
+\end{rSubsection}
+
+\begin{rSubsection}{Student Researcher: Relative Entropy Coding for Practical Data Compression}{July
+      2022 - Dec 2022}{Host: Dr Lucas Theis}{\textit{Google Brain, London}}
+\item Developed data compression algorithm that is significantly
+  faster than previous comparable methods. Implementation in \texttt{TensorFlow}.
+\item Published and presented work at
+  \href{https://ieeexplore.ieee.org/document/10206725}{IEEE International
+    Symposium on Information Theory 2023}.
+\item Contributed the noncentral $\chi^2$ distribution to
+  the open-source \href{https://www.tensorflow.org/probability}{TensorFlow Probability} package.
+\end{rSubsection}
+
+\begin{rSubsection}{PhD in Advanced Machine Learning}{Oct 2020 - July 2025}{Supervisor: Dr Jos\'e Miguel Hern\'andez-Lobato}{\textit{University of Cambridge}}
+\item Developed new theoretical foundations for lossy data compression using
+  randomised codes.
+\item Applied the theoretical findings to develop lossy data compression
+  algorithms using generative models, such as variational autoencoders and
+  Bayesian implicit neural representations.
+\item Published 14 papers (first author on 8) with 11 coauthors at top AI/ML and information theory
+  conferences, such as NeurIPS, ICLR, ICML, COLM and ISIT.
+  Received \textbf{spotlight award (top 10\% accepted papers)} at NeurIPS for work on
+  efficient data compression with Bayesian INRs.
+  Proposed and supervised three MPhil research projects and two undergraduate
+  research projects.
+\end{rSubsection}
+
+%\vspace{-0.7cm}
+\begin{rSubsection}{Research Assistant}{Oct 2019 - July 2020}{Supervisor: Dr Jos\'e Miguel Hern\'andez-Lobato}{University of Cambridge}
+\item Implemented and optimized black-box optimization pipeline to find optimal
+  hardware designs in collaboration with researchers at Harvard and Intel.
+  Implementation in \texttt{TensorFlow} and \texttt{GPFlow}.
+\item Our method consistently found better configurations faster than standard
+  methods used in industry.
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+\rSubsectionNoContent{PhD in Advanced Machine Learning}{Oct 2020 - July
+    2025}{\textbf{Supervisor:} Dr Jos\'e Miguel Hern\'andez-Lobato}{University
+    of Cambridge}
+
+\rSubsectionNoContent{\bf MPhil in Machine Learning and Machine Intelligence}{Oct
+    2018 - Oct 2019}{Graduated with \textbf{Commendation} (roughly top 20\% of class)}{University
+    of Cambridge}
+
+\rSubsectionNoContent{\bf BSc Joint Honours in Mathematics and Computer Science}{Oct
+    2014 - Jun 2018}{\textit{Graduated as \textbf{Valedictorian} in Computer Science, with First Class Honours}}{University
+    of St Andrews}
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Academic Achievements
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Academic Achievements}
+  \begin{tabular}{rll}
+    2026     & Spotlight Paper Award & \href{https://learn-to-compress-workshop-isit.github.io/2026/schedule/}{Learn to Compress Workshop @ ISIT 2026} \\[1ex]
+    2025     & \makecell[l]{\href{https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/irf/}{Imperial College} \\
+    \href{https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/irf/}{Research Fellowship}} & \makecell[l]{Equivalent to Leverhulme Trust \& Wellcome Trust Early Career \\ Fellowships. Success rate: 17.98\% of applicants (2025).} \\[2ex]
+%    2025     & Expert Reviewer & \href{https://jmlr.org/tmlr/expert-reviewers.html}{Transactions on Machine Learning Research} \\
+    2025     & \makecell[l]{Runner-up for the Jack Keil Wolf \\ student paper award} & ISIT 2025 \\[2ex]
+%    2024     & Expert Reviewer & \href{https://jmlr.org/tmlr/expert-reviewers.html}{Transactions on Machine Learning Research} \\
+    2024     & Spotlight Paper Award & \href{https://learn-to-compress-workshop-isit.github.io/2024/schedule/}{Learn to Compress Workshop @ ISIT 2024} \\[1ex]
+    2023     & Spotlight Paper Award & \href{https://openreview.net/forum?id=5otj6QKUMI&noteId=tVmGxIMDWn}{NeurIPS 2023}, a top venue for machine learning research. \\[1ex]
+    2021     & Finalist & \href{https://www.qualcomm.com/research/university-relations/innovation-fellowship/finalists}{Qualcomm Innovation Fellowship}
+  \end{tabular}
+\end{rSection}
+
+\begin{rSection}{Technical Skills}
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Programming Languages \ & Python, Javascript, Java, Haskell, Matlab, C, C++, \LaTeX \\
+ML Frameworks \& APIs & Jax AI Stack, TensorFlow, TensorFlow Probability, SciPy \\
+\end{tabular}
+
+\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+% Publications
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Selected Publications}\setlength\itemsep{-0.5em} \itemsep -6pt
+% \item \textbullet\,\, \textbf{G. Flamich}, {\"O}. G{\"u}ner, Y. Liu and D.
+%   G{\"u}nd{\"u}z (2026). Scalable Differentially Private Data Compression via
+% Diffusion and Stochastic Codes. To appear at \textit{ICML 2026 Workshop on
+% Structured Probabilistic Inference \& Generative Modeling}.
+\item \textbullet\,\,\textbf{G. Flamich} and S. Hill (2026).
+  Singular relative entropy coding with bits-back rejection sampling. To appear
+  in \textit{Learn to Compress \& Compress to Learn Workshop @ ISIT 2026}.
+  Received \textbf{Spotlight award}.
+% \item \textbullet\,\,\textbf{G. Flamich} and D. G{\"u}nd{\"u}z (2026).
+%   Data Compression with Stochastic Codes. To appear in the \textit{IEEE BITS Magazine (2026)}.
+\item \textbullet\,\,\textbf{G. Flamich}, S. M. Sriramu and A. B. Wagner (2025). The
+  Redundancy of Non-Singular Channel Simulation. In \textit{ISIT 2025}.
+  Runner-up to the Jack Keil Wolf student paper award (\textbf{top 6 student paper})
+% \item \textbullet\,\,\textbf{G. Flamich} and L. Wells. Some Notes on the Sample
+%   Complexity of Approximate Channel Simulation. In \textit{First
+%     ’Learn to Compress’ Workshop@ ISIT 2024}. Received \textbf{Spotlight award}
+%   (top 4 of 16 accepted works).
+\item \textbullet\,\,J. He$^\dagger$, \textbf{G. Flamich}$^\dagger$, Z. Guo, J. M. Hern\'andez-Lobato.
+    RECOMBINER: Robust and Enhanced Compression with Bayesian Implicit Neural
+    Representations. In \textit{ICLR 2024}.
+\item \textbullet\,\,\textbf{G. Flamich}.
+    Greedy Poisson Rejection Sampling. In \textit{NeurIPS 2023}.
+  \item \textbullet\,\,\textbf{G. Flamich}$^\dagger$, Z. Guo$^\dagger$, J. He, Z. Chen, J. M. Hern\'andez-Lobato.
+  Compression with Bayesian Implicit Neural Representations. In \textit{NeurIPS
+    2023}. Received \textbf{Spotlight award} (top 10\% of accepted papers).
+\item \textbullet\,\,\textbf{G. Flamich}$^\dagger$, S. Markou$^\dagger$, J. M. Hern\'andez-Lobato.
+    Fast Relative Entropy Coding with A* coding. In \textit{ICML 2022}.
+  \item \textbullet\,\,\textbf{G. Flamich}$^\dagger$, M. Havasi$^\dagger$, J. M. Hern\'andez-Lobato.
+    Compressing Images by Encoding Their Latent Representations with Relative
+    Entropy Coding. In \textit{NeurIPS 2020}.
+    \\
+    $^\dagger$ equal contribution.
+\end{rSection}
+
+
+\end{document}
