@@ -1,0 +1,401 @@
+#+TITLE: Data Compression with Stochastic Codes
+#+author: Gergely Flamich
+#+date: 24/03/2026
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+# This is needed to make the speaker notes work
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h2>%s</h2></br><h4>%a</h4><h4>%d</h4><h6><a href='https://arxiv.org/abs/2602.07635'>paper now available on Arxiv!</a></h6>"
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+REVEAL_THEME: white
+#+REVEAL_INIT_OPTIONS: slideNumber:'c/t', transition:'none'
+#+REVEAL_HLEVEL:0
+#+REVEAL_MATHJAX_URL: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#+REVEAL_EXTRA_CSS: ./presentation_styles.css
+
+* In Collaboration With
+
+#+REVEAL_HTML: <img src="./img/collaborators/jiajun_he.jpg" width=23% >
+#+REVEAL_HTML: <img src="./img/collaborators/zongyu_guo.jpg" width=23%>
+#+REVEAL_HTML: <img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
+
+* what is data compression?
+** lossless compression
+#+ATTR_REVEAL: :frag (appear)
+ - Source: $X \sim P_X$
+ - Code: $C_{P_X}(x) \in \{0, 1\}^*$
+ - Decode: $$ C_{P_X}^{-1}(C_{P_X}(x)) = x $$
+ - Measure of efficiency: $\mathbb{E}[\vert C_{P_X}(X) \vert]$
+ - *Entropy code:*
+   $$\mathbb{E}[\vert C_{P_X}(X) \vert] = \mathbb{H}[P_X] + \mathcal{O}(1)$$
+
+** lossy compression
+#+ATTR_REVEAL: :frag (appear)
+ - Encode: $C_{P_X}(x) \in \{0, 1\}^*$
+ - Decode: $$D_{P_X}(C_{P_X}(x)) = \hat{x} \approx x$$
+ - Measures of efficiency:
+   #+ATTR_REVEAL: :frag (appear)
+   - *Rate:* $\mathbb{E}[\vert C_{P_X}(X) \vert]$
+   - *Distortion:* $\mathbb{E}[\Delta(X, \hat{X})]$
+
+** the usual implementation
+#+ATTR_REVEAL: :frag (appear)
+ 1. Source (possibly cts.): $X \sim P_X$
+ 2. Quantizer $\mathcal{Q}$
+ 3. *Lossless* code $K = K_{P_{\mathcal{Q}(X)}}$
+
+#+ATTR_REVEAL: :frag (appear)
+Scheme:
+#+ATTR_REVEAL: :frag (appear)
+ $$ C_{P_X}(X) = K (\mathcal{Q}(X)) $$
+#+ATTR_REVEAL: :frag (appear)
+ $$ D_{P_X}(m) = K^{-1}(m) $$
+
+
+** transform coding
+#+ATTR_REVEAL: :frag (appear)
+[[./img/transform_coding.png]]
+
+* what is a stochastic code?
+** stochastic codes
+
+#+ATTR_REVEAL: :frag (appear)
+ - Source: $X \sim P_X$
+ - Perturbation: $P_{Y \mid X = x}$
+ - Mechanism output: $P_Y$
+ - Shared randomness: $Z \sim P_Z$
+ - Code: $C_{P_Y}(x, z) \in \{0, 1\}^*$
+ - Decode: $$ D_{P_Y}(C_{P_Y}(x, Z), Z) \sim P_{Y \mid X = x}$$
+
+** common randomness in practice
+#+ATTR_REVEAL: :frag (appear)
+[[./img/common_randomness_meme.jpg]]
+
+** a general stochastic code: rejection sampling
+[[./img/theory/gprs_motivation_illustration.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+Fact: $(x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P$
+
+** a general stochastic code: rejection sampling
+#+ATTR_REVEAL: :frag (appear)
+\begin{gather*}
+Y_n \sim P_Y, \quad U_n \sim \mathrm{Unif}(0, 1) \\
+N(x) = \min\left\{n \in \mathbb{N} \mid U_n \cdot M(x) < \frac{dP_{Y \mid X=x}}{dP_Y}(Y_n) \right\}
+\end{gather*}
+#+ATTR_REVEAL: :frag (appear)
+[[./img/stoch_code_sketch.png]]
+
+** a special stochastic code
+#+ATTR_REVEAL: :frag (appear)
+Dithering identity
+
+#+ATTR_REVEAL: :frag (appear)
+$c \in \mathbb{R}, U, U' \sim \mathrm{Unif}(-1/2, 1/2)$:
+#+ATTR_REVEAL: :frag (appear)
+$$
+\lfloor c + U \rceil - U \sim c + U'
+$$
+#+ATTR_REVEAL: :frag (appear)
+Common randomness: $Z = U$
+
+#+ATTR_REVEAL: :frag (appear)
+Encode $K = \lfloor c + U \rceil$
+
+** Communication Complexity
+Li and El Gamal:
+#+ATTR_REVEAL: :frag (appear)
+$$
+I[X; Y] \leq \mathbb{E}[|C(X, Z)|]
+$$
+
+#+ATTR_REVEAL: :frag (appear)
+- *Relative entropy code:*
+  $$ \mathbb{E}[|C(X, Z)|] = I[X; Y] + \mathcal{O}(\log I[X; Y]) $$
+- 🤷 rejection code: $\mathbb{H}[N \mid Z] \approx \mathbb{E}[\log M(X)]$
+- ✅ dithered quantiser: $\mathbb{H}[K \mid Z] = I[X; Y]$
+
+* why care?
+** learned transform coding
+#+ATTR_REVEAL: :frag (appear)
+[[./img/transform_coding.png]]
+#+ATTR_REVEAL: :frag (appear)
+Pick $f(x) + \epsilon$: reparameterisation trick!
+
+** realistic lossy compression
+#+REVEAL_HTML: <img src="./img/classic_vs_gen_compression.png" width=80% >
+
+Right-hand image from Careil et al. [1]
+
+** compressing differentially privacy mechanisms
+#+ATTR_REVEAL: :frag (appear)
+Privacy mechanism $Y \mid X = x$
+#+ATTR_REVEAL: :frag (appear)
+#+REVEAL_HTML: <img class="fragment (appear)" src="./img/federated_learning_sketch.png" width=80% >
+
+
+* Relative entropy coding using Poisson processes
+** Poisson Processes
+#+ATTR_REVEAL: :frag (appear)
+ - Collection of random points in space
+ - Focus on processes over $\mathbb{R}^D \times \mathbb{R}^+$
+ - Exponential inter-arrival times
+ - Spatial distribution $P_{X \mid T}$
+ - *Idea:* use process as common randomness in REC
+
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/empty_pp.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t1_x1.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_x2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_t2_x2.png]]
+
+** Example with $P_{X \mid T} = \mathcal{N}(0, 1)$
+[[./img/pp/pp_sim.png]]
+
+
+# ** Rejection Sampling
+# #+ATTR_REVEAL: :frag (appear)
+# - Sampling algorithm for target distribution $Q$.
+# - Using proposal $P$
+# - Bounded density ratio $dQ/dP$
+
+# ** Rejection Sampling
+# #+ATTR_REVEAL: :frag (appear)
+# #+REVEAL_HTML: <img src="./img/rs_alg.png" class="r-stretch">
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_0.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_1.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_2.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_3.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_4.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_5.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_6.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_7.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_8.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_9.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_10.png]]
+
+# ** RS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+# [[./img/rs/rs_accept.png]]
+
+** Greedy Poisson Rejection Sampling
+
+** Recall: Motivation
+[[./img/theory/gprs_motivation_illustration.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+Fact: $(x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P$
+** Can we do the same with Poisson processes?
+#+ATTR_REVEAL: :frag (appear)
+💡 *Idea:* scale $dQ/dP$ non-uniformly
+
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+\varphi &= \sigma \circ \frac{dQ}{dP} \\
+\sigma(h) &= \int_0^h \frac{1}{\mathbb{P}[H \geq h]} \, dh
+\end{align*}
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_0.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_1.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_2.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_3.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_4.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_5.png]]
+
+** GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/gprs/gprs_accept.png]]
+
+** Codelength of GPRS
+#+ATTR_REVEAL: :frag (appear)
+[[./img/stoch_code_sketch.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+Selected index $N$
+#+ATTR_REVEAL: :frag (appear)
+$$
+\mathbb{H}[N \mid Z] \leq I[X; Y] + \log (I[X; Y] + 1) + 3
+$$
+
+** Runtime of GPRS
+For any $Q, P$, let $r = dQ/dP$.
+
+#+ATTR_REVEAL: :frag (appear)
+$\mathbb{E}[N] = \sup r = \Vert r \Vert_\infty$
+
+#+ATTR_REVEAL: :frag (appear)
+Problem: $\Vert r \Vert_\infty \geq 2^{D_{KL}[Q \,\Vert\,P]}$
+
+
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_0.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_1.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_2.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_3.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_4.png]]
+** Fast GPRS with $P = \mathcal{N}(0, 1), Q = \mathcal{N}(1, 1/16)$
+[[./img/fast_gprs/fast_gprs_5.png]]
+
+
+** Codelength of fast GPRS
+#+ATTR_REVEAL: :frag (appear)
+- Now, encode search path $\nu$.
+- Assume density ratio always unimodal.
+
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+\mathbb{H}[\nu \mid Z] &= I[X; Y] + \log (I[X; Y] + 1) \\
+&\quad\quad+ \mathcal{O}(\log \log I[X; Y]))
+\end{align*}
+
+** Runtime of fast GPRS
+For any $Q, P$ over $\mathbb{R}$, let $r = dQ/dP$ be unimodal.
+
+#+ATTR_REVEAL: :frag (appear)
+$$
+\mathbb{E}[\nu] < 2.26 \cdot D_{KL}[Q \,\Vert\,P] + 10
+$$
+
+
+* Fundamental Limits
+** The width function
+$Q \gets P_{y \mid x}, P \gets P_y$
+#+ATTR_REVEAL: :frag (appear)
+[[./img/theory/width_fn.png]]
+
+#+ATTR_REVEAL: :frag (appear)
+$w_P$ is a probability density!
+
+** representing divergences
+#+ATTR_REVEAL: :frag (appear)
+KL divergence:
+#+ATTR_REVEAL: :frag (appear)
+\begin{align*}
+D_{KL}[Q || P]
+&= \log e + \mathbb{E}_{H \sim w_P}[\log H]
+\end{align*}
+#+ATTR_REVEAL: :frag (appear)
+Channel simulation divergence:
+#+ATTR_REVEAL: :frag (appear)
+$$ D_{CS}[Q || P] =  h[H] $$
+#+ATTR_REVEAL: :frag (appear)
+$$ D_{KL}[Q || P] \leq D_{CS}[Q || P] $$
+
+** tight lower bound
+[[./img/theory/one_shot_bound.png]]
+
+** behaviour of the lower bound
+[[./img/theory/csd_behaviour.png]]
+#+ATTR_REVEAL: :frag (appear)
+- *A:* $P = \mathcal{L}(0, 1)$, $Q = \mathcal{L}(0, b)$
+- *B:* $P = \mathcal{N}(0, 1)^{\otimes d}$, $Q = \mathcal{N}(1, 1/4)^{\otimes d}$
+
+** asymptotic lower bound
+[[./img/theory/asymptotic_result.png]]
+
+* Computationally Lightweight ML-based data compression
+** Data Compression with INRs
+#+REVEAL_HTML: <img src="./img/applications/coin.png" class="r-stretch">
+Image from Dupont et al. [4]
+
+#+REVEAL_HTML: <div class="tick-list">
+#+ATTR_REVEAL: :frag (appear)
+- computationally lightweight
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="cross-list">
+#+ATTR_REVEAL: :frag (appear)
+- short codelength
+#+REVEAL_HTML: </div>
+
+** COMBINER
+
+COMpression with Bayesian Implicit Neural Representations
+
+#+REVEAL_HTML: <img src="./img/applications/variational_bnn.png" class="r-stretch">
+Image from Blundell et al. [7]
+
+#+ATTR_REVEAL: :frag (appear)
+💡Gradient descent is the transform!
+
+** COMBINER
+#+REVEAL_HTML: <img src="./img/applications/recombiner_img.png" width="100%">
+
+** COMBINER
+#+REVEAL_HTML: <img src="./img/applications/recombiner.png" width="100%">
+
+* Take-home messages
+#+ATTR_REVEAL: :frag (appear)
+ - *Relative entropy coding* is a stochastic alternative to quantization for lossy source coding
+ - Analysed *selection sampling*-based REC algorithms
+ - *Greedy Poisson rejection sampling* is an optimal selection sampler
+ - *Implicit neural represenations* are an exciting, *compute-efficient* approach to data compression with huge potential
+
+* Open questions
+#+ATTR_REVEAL: :frag (appear)
+ - Fast multivariate REC?
+ - "Achievability" theorem for channel simulation divergence
+ - Practical implementation of common randomness
+
+* References I
+ - [1] Careil, M., Muckley, M. J., Verbeek, J., & Lathuilière, S. Towards image compression with perfect realism at ultra-low bitrates. ICLR 2024.
+ - [2] C. T. Li and A. El Gamal, “Strong functional representation lemma and applications to coding theorems,” IEEE Transactions on Information Theory, vol. 64, no. 11, pp. 6967–6978, 2018.
+
+* References II
+ - [4] E. Dupont, A. Golinski, M. Alizadeh, Y. W. Teh and Arnaud Doucet. "COIN: compression with implicit neural representations" arXiv preprint arXiv:2103.03123, 2021.
+ - [5] G. F., L. Wells, Some Notes on the Sample Complexity of Approximate Channel Simulation. To appear at Learning to Compress workshop @ ISIT 2024.
+ - [6] D. Goc, G. F. On Channel Simulation with Causal Rejection Samplers. To appear at ISIT 2024
+
+* References III
+ - [7] C. Blundell, J. Cornebise, K. Kavukcuoglu and D. Wierstra. Weight uncertainty in neural network. In ICML 2015.

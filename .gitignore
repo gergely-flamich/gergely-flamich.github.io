@@ -9,4 +9,5 @@ _site
 Gemfile.lock
 vendor
 assets/pdf/MLcvMinimal/*
+assets/pdf/MLcv2/*
 
