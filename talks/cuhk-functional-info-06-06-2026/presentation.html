@@ -21,19 +21,19 @@
 <div class="slides">
 <section id="sec-title-slide"><h2>Lossy data compression with stochastic codes and their characterisation via the functional information</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>06/07/2026</h4><h6><a href='https://arxiv.org/abs/2604.23076'>paper now available on Arxiv!</a></h6>
 </section>
-<section id="slide-org4eb361f">
-<h2 id="org4eb361f">In Collaboration With</h2>
+<section id="slide-orgbe62f0c">
+<h2 id="orgbe62f0c">In Collaboration With</h2>
 <img src="./img/collaborators/spencer_hill.png" width=23% >
 <img src="./img/collaborators/fady-2017.jpeg" width=23%>
 <img src="./img/collaborators/linder-tamas.jpeg" width=23%>
 </section>
-<section id="slide-org2a587e8">
-<h2 id="org2a587e8">what is a stochastic code?</h2>
-<div class="outline-text-2" id="text-org2a587e8">
+<section id="slide-org3a4930d">
+<h2 id="org3a4930d">what is a stochastic code?</h2>
+<div class="outline-text-2" id="text-org3a4930d">
 </div>
 </section>
-<section id="slide-org28fcaf5">
-<h3 id="org28fcaf5">lossless compression</h3>
+<section id="slide-org5562643">
+<h3 id="org5562643">lossless compression</h3>
 <ul>
 <li class="fragment appear">Source: \(X \sim P_X\)</li>
 <li class="fragment appear">Code: \(C(x) \in \{0, 1\}^*\)</li>
@@ -44,8 +44,8 @@
 
 </ul>
 </section>
-<section id="slide-org8c560e4">
-<h3 id="org8c560e4">stochastic codes</h3>
+<section id="slide-org33839e5">
+<h3 id="org33839e5">stochastic codes</h3>
 <ul>
 <li class="fragment appear">Source: \(X \sim P_X\)</li>
 <li class="fragment appear">Perturbation: \(P_{Y \mid X = x}\)</li>
@@ -55,18 +55,18 @@
 
 </ul>
 </section>
-<section id="slide-org7953e97">
-<h3 id="org7953e97">common randomness in practice</h3>
+<section id="slide-orgded4d18">
+<h3 id="orgded4d18">common randomness in practice</h3>
 
-<div id="org7f0490f" class="figure">
+<div id="orgb807f20" class="figure">
 <p><img src="./img/common_randomness_meme.jpg" alt="common_randomness_meme.jpg" class="fragment (appear)" />
 </p>
 </div>
 </section>
-<section id="slide-org5f23cbe">
-<h3 id="org5f23cbe">a general stochastic code: rejection sampling</h3>
+<section id="slide-org077d5be">
+<h3 id="org077d5be">a general stochastic code: rejection sampling</h3>
 
-<div id="orgb3b9f31" class="figure">
+<div id="orga318168" class="figure">
 <p><img src="./img/theory/gprs_motivation_illustration.png" alt="gprs_motivation_illustration.png" />
 </p>
 </div>
@@ -75,10 +75,10 @@
 Fact: \((x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P\)
 </p>
 </section>
-<section id="slide-orgec0bcbd">
-<h3 id="orgec0bcbd">a general stochastic code: rejection sampling</h3>
+<section id="slide-orgfc122ec">
+<h3 id="orgfc122ec">a general stochastic code: rejection sampling</h3>
 
-<div id="org0156229" class="figure">
+<div id="org1cb149b" class="figure">
 <p><img src="./img/stoch_code_sketch.png" alt="stoch_code_sketch.png" class="fragment (appear)" />
 </p>
 </div>
@@ -91,8 +91,8 @@ N(x) = \min\left\{n \in \mathbb{N} \mid U_n \cdot M(x) < \frac{dP_{Y \mid X=x}}{
 
 </div>
 </section>
-<section id="slide-org61341fe">
-<h3 id="org61341fe">the objective</h3>
+<section id="slide-org4597fae">
+<h3 id="org4597fae">the objective</h3>
 <div class="fragment (appear)">
 \begin{align*}
 R^* &= \inf_{(Z, C, D)} \mathbb{E}[|C(X, Z)|] \\
@@ -101,8 +101,8 @@ R^* &= \inf_{(Z, C, D)} \mathbb{E}[|C(X, Z)|] \\
 
 </div>
 </section>
-<section id="slide-org54f2c02">
-<h3 id="org54f2c02">bounds</h3>
+<section id="slide-orgd68c8be">
+<h3 id="orgd68c8be">bounds</h3>
 <p class="fragment (appear)">
 Li and El Gamal: letting \(I = I[X; Y]\),
 </p>
@@ -121,15 +121,15 @@ F(X \to Y) \leq R^* \leq F(X \to Y) + 2.45
 \]
 </p>
 </section>
-<section id="slide-org1932920">
-<h2 id="org1932920">why care?</h2>
-<div class="outline-text-2" id="text-org1932920">
+<section id="slide-org5965284">
+<h2 id="org5965284">why care?</h2>
+<div class="outline-text-2" id="text-org5965284">
 </div>
 </section>
-<section id="slide-orgd4089e5">
-<h3 id="orgd4089e5">learned transform coding</h3>
+<section id="slide-orge01eda1">
+<h3 id="orge01eda1">learned transform coding</h3>
 
-<div id="org05abb55" class="figure">
+<div id="org05d516a" class="figure">
 <p><img src="./img/transform_coding.png" alt="transform_coding.png" class="fragment (appear)" />
 </p>
 </div>
@@ -137,20 +137,20 @@ F(X \to Y) \leq R^* \leq F(X \to Y) + 2.45
 Pick \(f(x) + \epsilon\): reparameterisation trick!
 </p>
 </section>
-<section id="slide-orgfb5725f">
-<h3 id="orgfb5725f">compressing differentially privacy mechanisms</h3>
+<section id="slide-org4f68ac1">
+<h3 id="org4f68ac1">compressing differentially privacy mechanisms</h3>
 <p class="fragment (appear)">
 Privacy mechanism \(Y \mid X = x\)
 </p>
 <img class="fragment (appear)" src="./img/federated_learning_sketch.png" width=80% >
 </section>
-<section id="slide-org5910c04">
-<h2 id="org5910c04">the functional information</h2>
-<div class="outline-text-2" id="text-org5910c04">
+<section id="slide-org42eb066">
+<h2 id="org42eb066">the functional information</h2>
+<div class="outline-text-2" id="text-org42eb066">
 </div>
 </section>
-<section id="slide-orgb667bf5">
-<h3 id="orgb667bf5">The width function</h3>
+<section id="slide-orgebf617e">
+<h3 id="orgebf617e">The width function</h3>
 <p class="fragment (appear)">
 \(Q \ll P\) with \(r = dQ/dP\)
 </p>
@@ -158,13 +158,13 @@ Privacy mechanism \(Y \mid X = x\)
 \(w(h) = P(r \geq h)\)
 </p>
 
-<div id="org98dff9e" class="figure">
+<div id="org4ca9c28" class="figure">
 <p><img src="./img/theory/width_fn.png" alt="width_fn.png" class="fragment (appear)" />
 </p>
 </div>
 </section>
-<section id="slide-org8eef225">
-<h3 id="org8eef225">representing divergences</h3>
+<section id="slide-org2d58d82">
+<h3 id="org2d58d82">representing divergences</h3>
 <p class="fragment (appear)">
 \(w\) is a PDF! Hence, let \(H \sim w\).
 </p>
@@ -183,8 +183,8 @@ Privacy mechanism \(Y \mid X = x\)
 What about \(h[H]\)?
 </p>
 </section>
-<section id="slide-org85c3177">
-<h3 id="org85c3177">channel simulation divergence</h3>
+<section id="slide-org77a89ad">
+<h3 id="org77a89ad">channel simulation divergence</h3>
 <p class="fragment (appear)">
 \[
 D_{CS}[Q || P] \triangleq h[H]
@@ -201,8 +201,8 @@ D_{CS}[Q || P] \triangleq h[H]
 
 </ul>
 </section>
-<section id="slide-org593acd3">
-<h3 id="org593acd3">more csd properties</h3>
+<section id="slide-org13d803a">
+<h3 id="org13d803a">more csd properties</h3>
 <p class="fragment (appear)">
 \(\mathrm{KL} = D_{KL}[Q || P]\) and \(\mathrm{CS} = D_{CS}[Q || P]\):
 </p>
@@ -226,8 +226,8 @@ Furthermore:
 \(\Lambda(X) = \log |\mathcal{X}| - D_{CS}[P_X || \mathrm{Unif}(\mathcal{X})]\)
 </p>
 </section>
-<section id="slide-orge2c1b26">
-<h3 id="orge2c1b26">functional information</h3>
+<section id="slide-org1b30cd3">
+<h3 id="org1b30cd3">functional information</h3>
 <p class="fragment (appear)">
 Analogy with MI for \(P_{X, Y}\):
 </p>
@@ -249,8 +249,8 @@ F[X \to Y] \triangleq \mathbb{E}_Y [D_{CS}[P_{X \mid Y} || P_X]]
 \]
 </p>
 </section>
-<section id="slide-orgc478684">
-<h3 id="orgc478684">FI properties</h3>
+<section id="slide-org3b8ffc9">
+<h3 id="org3b8ffc9">FI properties</h3>
 <p>
 \(F[X \to Y] \triangleq \mathbb{E}_Y [D_{CS}[P_{X \mid Y} || P_X]]\)
 </p>
@@ -270,8 +270,8 @@ Then:
 \[F[X \to (Y, Z)] = F[X \to Y] + F[X \to Z \mid Y] + \Theta(1)\]
 </p>
 </section>
-<section id="slide-orgaed52b5">
-<h3 id="orgaed52b5">main result</h3>
+<section id="slide-orgf11710d">
+<h3 id="orgf11710d">main result</h3>
 <div class="fragment (appear)">
 \begin{align*}
 R^* &= \inf_{(Z, C, D)} \mathbb{E}[|C(X, Z)|] \\
@@ -291,15 +291,15 @@ F(X \to Y) \leq R^* \leq F(X \to Y) + 2.45
 
 <img class="fragment (appear)" src="./img/li_prop_1.png" width=80%>
 </section>
-<section id="slide-org1775aff">
-<h2 id="org1775aff">achievability via the ring toss code</h2>
-<div class="outline-text-2" id="text-org1775aff">
+<section id="slide-orgce98b09">
+<h2 id="orgce98b09">achievability via the ring toss code</h2>
+<div class="outline-text-2" id="text-orgce98b09">
 </div>
 </section>
-<section id="slide-orgf05a2bd">
-<h3 id="orgf05a2bd">a general stochastic code: rejection sampling</h3>
+<section id="slide-orgbe4fe1c">
+<h3 id="orgbe4fe1c">a general stochastic code: rejection sampling</h3>
 
-<div id="org341b5d8" class="figure">
+<div id="org9cca0e2" class="figure">
 <p><img src="./img/gprs_motivation_illustration.png" alt="gprs_motivation_illustration.png" />
 </p>
 </div>
@@ -308,10 +308,10 @@ F(X \to Y) \leq R^* \leq F(X \to Y) + 2.45
 Fact: \((x, y) \sim \mathrm{Unif}(A) \, \Rightarrow\, x \sim P\)
 </p>
 </section>
-<section id="slide-org60ad734">
-<h3 id="org60ad734">a general stochastic code: rejection sampling</h3>
+<section id="slide-orgfe49f3e">
+<h3 id="orgfe49f3e">a general stochastic code: rejection sampling</h3>
 
-<div id="orgd675feb" class="figure">
+<div id="orgf574245" class="figure">
 <p><img src="./img/stoch_code_sketch.png" alt="stoch_code_sketch.png" class="fragment (appear)" />
 </p>
 </div>
@@ -324,8 +324,8 @@ N(x) = \min\left\{n \in \mathbb{N} \mid U_n \cdot M < \frac{dP_{Y \mid X=x}}{dP_
 
 </div>
 </section>
-<section id="slide-org8cccadf">
-<h3 id="org8cccadf">encoding the index</h3>
+<section id="slide-org508d37c">
+<h3 id="org508d37c">encoding the index</h3>
 <p class="fragment (appear)">
 \(N(x) \sim \mathrm{Geom}(1/M)\)
 </p>
@@ -344,8 +344,8 @@ Q_{N \mid Z}(n \mid z) \triangleq w_{y_k}(M u_k) \prod_{i=1}^{n-1} (1 - w_{y_i}(
 \]
 </p>
 </section>
-<section id="slide-org46ef125">
-<h3 id="org46ef125">interpretation</h3>
+<section id="slide-org337f8a6">
+<h3 id="org337f8a6">interpretation</h3>
 <p class="fragment (appear)">
 \(\frac{dP_{X \mid Y}}{dP_X}(x \mid y) = \frac{dP_{Y \mid X}}{dP_Y}(y \mid x) \geq M u\)
 </p>
@@ -360,16 +360,16 @@ RS acceptance criterion!
 probability that \((y, u)\) acceptanced!
 </p>
 </section>
-<section id="slide-org8cb056a">
-<h3 id="org8cb056a">for singular channels</h3>
+<section id="slide-org5bda595">
+<h3 id="org5bda595">for singular channels</h3>
 <p>
 \(X \to Y\) singular: \(\frac{dP_{Y \mid X}}{dP_Y}(y \mid x) = g(y)\mathbb{1}[x \in A_y]\)
 </p>
 
 <img class="r-stretch" src="./img/ring_toss.png">
 </section>
-<section id="slide-org96a5d7f">
-<h3 id="org96a5d7f">corollaries</h3>
+<section id="slide-org34f103a">
+<h3 id="org34f103a">corollaries</h3>
 <p>
 \[
 F(X \to Y) \leq R^* \leq F(X \to Y) + 2.45
@@ -388,13 +388,13 @@ Recover asymptotic behaviour:
 \(\lim_{n \to \infty}\frac{F(X^n \to Y^n) - I[X^n; Y^n]}{\log n} = \begin{cases} 0 & \text{if } X \to Y \text{ singular}\\ 1/2 & \text{o.w.} \end{cases}\)
 </p>
 </section>
-<section id="slide-orgb414656">
-<h2 id="orgb414656">application: rate-distortion</h2>
-<div class="outline-text-2" id="text-orgb414656">
+<section id="slide-orgf34a4ff">
+<h2 id="orgf34a4ff">application: rate-distortion</h2>
+<div class="outline-text-2" id="text-orgf34a4ff">
 </div>
 </section>
-<section id="slide-org1f7a94f">
-<h3 id="org1f7a94f">the objective</h3>
+<section id="slide-org740d135">
+<h3 id="org740d135">the objective</h3>
 <p class="fragment (appear)">
 One-shot rate-distortion function:
 </p>
@@ -406,8 +406,8 @@ R_O(\delta) &= \inf_{(C, D)} \mathbb{E}[|C(X)|] \\
 
 </div>
 </section>
-<section id="slide-org8618492">
-<h3 id="org8618492">applying the FI</h3>
+<section id="slide-org30fd61b">
+<h3 id="org30fd61b">applying the FI</h3>
 <p class="fragment (appear)">
 Functional rate-distortion function
 </p>
@@ -426,12 +426,12 @@ Then:
 \(R_F(\delta) \leq R_O(\delta) \leq R_F(\delta) + 3.45\)
 </p>
 </section>
-<section id="slide-org871ac3f">
-<h3 id="org871ac3f">an example</h3>
+<section id="slide-org8e41754">
+<h3 id="org8e41754">an example</h3>
 <img class="r-stretch" src="./img/fi-vs-mi-rdf.png">
 </section>
-<section id="slide-org5b4bffd">
-<h2 id="org5b4bffd">Take-home messages</h2>
+<section id="slide-orgea8b4f5">
+<h2 id="orgea8b4f5">Take-home messages</h2>
 <ul>
 <li class="fragment appear">tight rate bound using functional information</li>
 <li class="fragment appear">recovered <b>all</b> currently known bounds</li>
@@ -439,8 +439,8 @@ Then:
 
 </ul>
 </section>
-<section id="slide-orga343ee1">
-<h2 id="orga343ee1">Open questions</h2>
+<section id="slide-org39eb39b">
+<h2 id="org39eb39b">Open questions</h2>
 <ul>
 <li class="fragment appear">Interpretation of <b>CSD</b> and <b>FI</b></li>
 <li class="fragment appear">Axiomatic derivation of FI?</li>
@@ -450,8 +450,8 @@ Then:
 
 </ul>
 </section>
-<section id="slide-orgdae7abb">
-<h2 id="orgdae7abb">check out the ring toss code paper on arXiv!</h2>
+<section id="slide-org767e1e8">
+<h2 id="org767e1e8">check out the ring toss code paper on arXiv!</h2>
 <img class="r-stretch" src="./img/rejection_qr.png">
 </section>
 </section>
