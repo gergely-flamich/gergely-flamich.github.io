@@ -1,5 +1,13 @@
 - year: 2026
   talks:
+
+    - title: "Data Compression with Diffusion Models"
+      month: Aug
+      day: 11
+      occasion: Invited talk at Hungarian Machine Learning Days
+      slides: hungarian-ml-days-11-aug-2026/presentation.html
+      recording:
+
     - title: "Lossy data compression with stochastic codes and their characterisation via the functional information"
       month: July
       day: 06
