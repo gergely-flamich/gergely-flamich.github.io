@@ -1,6 +1,6 @@
 #+TITLE: Data Compression with Diffusion Models
 #+author: Gergely Flamich
-#+date: 10/08/2026
+#+date: 11/08/2026
 
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 # This is needed to make the speaker notes work
@@ -16,8 +16,8 @@
 
 * In Collaboration With
 
-#+REVEAL_HTML: <img src="./img/collaborators/jiajun_he_2.jpg" width=23%>
 #+REVEAL_HTML: <img src="./img/collaborators/shanay.png" width=23%>
+#+REVEAL_HTML: <img src="./img/collaborators/jiajun_he_2.jpg" width=23%>
 #+REVEAL_HTML: <img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
 
 * lossy data compression
@@ -226,14 +226,11 @@ For compression:
 * compression speed
 #+REVEAL_HTML: <img src="./img/speed_all.png" width=80%>
 
-* rate vs compression speed
-#+REVEAL_HTML: <img src="./img/encode_law.png" width=90%>
-
 * take-home messages
 #+ATTR_REVEAL: :frag (appear)
-- Relative entropy coding: lossy compression using any probabilistic model
-- DiffC: combine REC with diffusion models
-- Implemented almost real-time video compression with REC
+- *Relative entropy coding:* lossy compression using any probabilistic model
+- *DiffC:* combine REC with diffusion models
+- Implemented *almost real-time video compression* with REC
 - Lots of potential: realism, differential privacy
 
 
@@ -252,4 +249,7 @@ For compression:
 
 * effect of grid resolution
 #+REVEAL_HTML: <img src="./img/step_count.png" width=70%>
+
+* rate vs compression speed
+#+REVEAL_HTML: <img src="./img/encode_law.png" width=90%>
 

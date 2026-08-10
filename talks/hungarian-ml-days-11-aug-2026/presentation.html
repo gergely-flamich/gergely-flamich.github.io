@@ -19,16 +19,16 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2>Data Compression with Diffusion Models</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>10/08/2026</h4>
+<section id="sec-title-slide"><h2>Data Compression with Diffusion Models</h2><h2></h2></br><h4>Gergely Flamich</h4><h4>11/08/2026</h4>
 </section>
-<section id="slide-orga755661">
-<h2 id="orga755661">In Collaboration With</h2>
-<img src="./img/collaborators/jiajun_he_2.jpg" width=23%>
+<section id="slide-org5a4d76c">
+<h2 id="org5a4d76c">In Collaboration With</h2>
 <img src="./img/collaborators/shanay.png" width=23%>
+<img src="./img/collaborators/jiajun_he_2.jpg" width=23%>
 <img src="./img/collaborators/miguel_hernandez_lobato.png" width=23%>
 </section>
-<section id="slide-org9212198">
-<h2 id="org9212198">lossy data compression</h2>
+<section id="slide-org5ef1825">
+<h2 id="org5ef1825">lossy data compression</h2>
 <p class="fragment (appear)">
 Have some data \(X\)
 </p>
@@ -52,22 +52,22 @@ Have some data \(X\)
 
 </ul>
 </section>
-<section id="slide-org29788da">
-<h2 id="org29788da">example: jpeg</h2>
+<section id="slide-orgd84c911">
+<h2 id="orgd84c911">example: jpeg</h2>
 
-<div id="orgfc1a523" class="figure">
+<div id="org112873a" class="figure">
 <p><img src="./img/jpeg_example/transform_encoding.png" alt="transform_encoding.png" class="fragment (appear)" />
 </p>
 </div>
 
 
-<div id="orgd0c60ce" class="figure">
+<div id="org48f4f69" class="figure">
 <p><img src="./img/jpeg_example/transform_decoding.png" alt="transform_decoding.png" class="fragment (appear)" />
 </p>
 </div>
 </section>
-<section id="slide-org9736cea">
-<h2 id="org9736cea">performance measures</h2>
+<section id="slide-org1580fc8">
+<h2 id="org1580fc8">performance measures</h2>
 <ul>
 <li class="fragment appear"><b>Rate:</b> number of bits \(\mathbb{E}[|C(Z)|]\)</li>
 <li class="fragment appear"><b>Distortion:</b> \(\mathbb{E}[\Delta(X, \hat{X})]\)
@@ -80,8 +80,8 @@ Have some data \(X\)
 
 </ul>
 </section>
-<section id="slide-org25a8800">
-<h2 id="org25a8800">learned compression</h2>
+<section id="slide-org4f0b036">
+<h2 id="org4f0b036">learned compression</h2>
 <ul>
 <li class="fragment appear">Transform: \(\hat{x} = g(\lfloor f(x) \rceil)\)</li>
 <li class="fragment appear">Entropy model: \(p(z)\)</li>
@@ -102,8 +102,8 @@ Have some data \(X\)
 🤔 How to encode \(f(x) + \epsilon\)?
 </p>
 </section>
-<section id="slide-org10f7b67">
-<h2 id="org10f7b67">relative entropy coding</h2>
+<section id="slide-orgb9b0151">
+<h2 id="orgb9b0151">relative entropy coding</h2>
 <p class="fragment (appear)">
 <b>Goal:</b> given \(q\), encode a sample \(Z \sim q\)
 </p>
@@ -124,16 +124,16 @@ Have some data \(X\)
 
 </ul>
 </section>
-<section id="slide-org95c3cc4">
-<h2 id="org95c3cc4">minimal random coding</h2>
+<section id="slide-org4ca705e">
+<h2 id="org4ca705e">minimal random coding</h2>
 
-<div id="org1ce86da" class="figure">
+<div id="org9c69ef7" class="figure">
 <p><img src="./img/rec_illustration.png" alt="rec_illustration.png" />
 </p>
 </div>
 </section>
-<section id="slide-org707e052">
-<h2 id="org707e052">a* coding</h2>
+<section id="slide-org9c0f4db">
+<h2 id="org9c0f4db">a* coding</h2>
 <p class="fragment (appear)">
 \(E_1, \dotsc, E_N \sim \mathrm{Exp}(1)\)
 </p>
@@ -152,8 +152,8 @@ I_{A^*} = \mathrm{argmin}_{i \in [1:N]} \left\{\frac{p(Z_i)}{q(Z_i)} \cdot \sum_
 \(\mathbb{H}[I_{A^*}] \leq  \mathrm{KL}[q || p] + O(\log_2 \mathrm{KL}[q || p])\)
 </p>
 </section>
-<section id="slide-org33f29c7">
-<h2 id="org33f29c7">Putting things together</h2>
+<section id="slide-org6c8d5d5">
+<h2 id="org6c8d5d5">Putting things together</h2>
 <p class="fragment (appear)">
 <b>Training</b>
 </p>
@@ -172,18 +172,18 @@ I_{A^*} = \mathrm{argmin}_{i \in [1:N]} \left\{\frac{p(Z_i)}{q(Z_i)} \cdot \sum_
 
 </ul>
 </section>
-<section id="slide-orge1323e8">
-<h2 id="orge1323e8">diffusion models</h2>
+<section id="slide-orgc692803">
+<h2 id="orgc692803">diffusion models</h2>
 
-<div id="orge0261b4" class="figure">
+<div id="org3c6921f" class="figure">
 <p><img src="./img/diffusion_model.png" alt="diffusion_model.png" class="fragment (appear)" />
 </p>
 </div>
 
 <small class="fragment (appear)">Song, Yang, et al. "Score-based generative modeling through stochastic differential equations."</small>
 </section>
-<section id="slide-org1b73c3c">
-<h2 id="org1b73c3c">the key identity</h2>
+<section id="slide-org36be42b">
+<h2 id="org36be42b">the key identity</h2>
 <p class="fragment (appear)">
 When denoiser is perfect:
 </p>
@@ -203,23 +203,23 @@ For compression:
 
 </div>
 </section>
-<section id="slide-org9668c96">
-<h2 id="org9668c96">diffC</h2>
+<section id="slide-org7f179f8">
+<h2 id="org7f179f8">diffC</h2>
 
-<div id="org7665abe" class="figure">
+<div id="org223744d" class="figure">
 <p><img src="./img/diffc_schematic.png" alt="diffc_schematic.png" class="fragment (appear)" />
 </p>
 </div>
 
 <small class="fragment (appear)">Theis, Lucas, et al. "Lossy compression with Gaussian diffusion."</small>
 </section>
-<section id="slide-orga2060ce">
-<h2 id="orga2060ce">diffc for video compression</h2>
+<section id="slide-orgeef0d6b">
+<h2 id="orgeef0d6b">diffc for video compression</h2>
 <video data-autoplay loop muted src="./img/vids/v4_ours_b0p008.mp4" width=30%></video>
 <video data-autoplay loop muted src="./img/vids/v4_hevc_848p_crf40.mp4" width=30%></video>
 </section>
-<section id="slide-orgfaef29f">
-<h2 id="orgfaef29f">towards practicality</h2>
+<section id="slide-orgda69f7b">
+<h2 id="orgda69f7b">towards practicality</h2>
 <p class="fragment (appear)">
 <b>Goal:</b> turn off-the-shelf model into video compressor
 </p>
@@ -233,8 +233,8 @@ For compression:
 
 </ol>
 </section>
-<section id="slide-orgb20cd9d">
-<h2 id="orgb20cd9d">the model</h2>
+<section id="slide-org29b9f95">
+<h2 id="org29b9f95">the model</h2>
 <img src="./img/wan_architecture.png" width=70% class="fragment (appear)"></img>
 
 <ul>
@@ -243,20 +243,20 @@ For compression:
 
 </ul>
 </section>
-<section id="slide-orgf5d3f2d">
-<h2 id="orgf5d3f2d">possible choices for probabilistic model</h2>
+<section id="slide-org0d08db1">
+<h2 id="org0d08db1">possible choices for probabilistic model</h2>
 <img src="./img/block_chain_bridge.png" width=80% class="fragment (appear)"></img>
 </section>
-<section id="slide-org6e90e9c">
-<h2 id="org6e90e9c">empirical findings</h2>
+<section id="slide-orgcb4b9ec">
+<h2 id="orgcb4b9ec">empirical findings</h2>
 <img src="./img/design_space.png" width=80% class="fragment (appear)"></img>
 </section>
-<section id="slide-org9d5f8af">
-<h2 id="org9d5f8af">the challenge to tackle</h2>
+<section id="slide-orge4901bc">
+<h2 id="orge4901bc">the challenge to tackle</h2>
 <img src="./img/step_anatomy.png" width=80% class="fragment (appear)"></img>
 </section>
-<section id="slide-org18650c3">
-<h2 id="org18650c3">single step techniques</h2>
+<section id="slide-org2554d67">
+<h2 id="org2554d67">single step techniques</h2>
 <ul>
 <li class="fragment appear">\(\mathrm{KL}[q(Z_s \mid Z_t, x) || p(Z_s \mid Z_t)]\) too high</li>
 <li class="fragment appear">Shuffle dimensions</li>
@@ -266,13 +266,13 @@ For compression:
 
 </ul>
 </section>
-<section id="slide-orgbf86310">
-<h2 id="orgbf86310">streamlined implementation</h2>
+<section id="slide-org155535f">
+<h2 id="org155535f">streamlined implementation</h2>
 <figure class="fragment (appear)"><img src="./img/engineering_gains.png" width=100% ></img>
 <figcaption><small>Table: sec/81-frame block. Bitrate within 0.15%, LPIPS within 0.0008</small></figcaption></figure>
 </section>
-<section id="slide-org1c47e6e">
-<h2 id="org1c47e6e">across diffusion steps</h2>
+<section id="slide-org20c6b37">
+<h2 id="org20c6b37">across diffusion steps</h2>
 <ul>
 <li class="fragment appear">Reduce number of diffusion steps</li>
 <li class="fragment appear">\(\mathrm{KL} = \frac{1}{2}\Delta \mathrm{SNR}_t \cdot \Vert x_0 - \hat{x}_0(x_t) \Vert^2\)</li>
@@ -282,52 +282,52 @@ For compression:
 
 </ul>
 </section>
-<section id="slide-org929e2ad">
-<h2 id="org929e2ad">state-of-the-art video compression with REC</h2>
+<section id="slide-org9c991e8">
+<h2 id="org9c991e8">state-of-the-art video compression with REC</h2>
 <img src="./img/suite_rd.png" width=70%>
 </section>
-<section id="slide-org0269380">
-<h2 id="org0269380">effect of widening</h2>
+<section id="slide-orgc01b90a">
+<h2 id="orgc01b90a">effect of widening</h2>
 <img src="./img/variance_lever.png" width=70%>
 </section>
-<section id="slide-org640488c">
-<h2 id="org640488c">compression speed</h2>
+<section id="slide-org8c1ab09">
+<h2 id="org8c1ab09">compression speed</h2>
 <img src="./img/speed_all.png" width=80%>
 </section>
-<section id="slide-orgf82255f">
-<h2 id="orgf82255f">rate vs compression speed</h2>
-<img src="./img/encode_law.png" width=90%>
-</section>
-<section id="slide-org9b23f52">
-<h2 id="org9b23f52">take-home messages</h2>
+<section id="slide-org8f2ac08">
+<h2 id="org8f2ac08">take-home messages</h2>
 <ul>
-<li class="fragment appear">Relative entropy coding: lossy compression using any probabilistic model</li>
-<li class="fragment appear">DiffC: combine REC with diffusion models</li>
-<li class="fragment appear">Implemented almost real-time video compression with REC</li>
+<li class="fragment appear"><b>Relative entropy coding:</b> lossy compression using any probabilistic model</li>
+<li class="fragment appear"><b>DiffC:</b> combine REC with diffusion models</li>
+<li class="fragment appear">Implemented <b>almost real-time video compression</b> with REC</li>
 <li class="fragment appear">Lots of potential: realism, differential privacy</li>
 
 </ul>
 </section>
-<section id="slide-org7055a0d">
-<h2 id="org7055a0d">another video comparison</h2>
+<section id="slide-orgacd4d6e">
+<h2 id="orgacd4d6e">another video comparison</h2>
 <video data-autoplay loop muted src="./img/vids/v4p_ours30_0p0080.mp4" width=50%></video>
 <video data-autoplay loop muted src="./img/vids/v4p_hevc_0p0108.mp4" width=50%></video>
 </section>
-<section id="slide-orgd37d1b8">
-<h2 id="orgd37d1b8">bd-rates</h2>
+<section id="slide-org8aa9c80">
+<h2 id="org8aa9c80">bd-rates</h2>
 <img src="./img/bd_rate.png" width=90%>
 </section>
-<section id="slide-org77ddfa3">
-<h2 id="org77ddfa3">different grids</h2>
+<section id="slide-org973fdc6">
+<h2 id="org973fdc6">different grids</h2>
 <img src="./img/schedule_placement.png" width=90%>
 </section>
-<section id="slide-orgcf29656">
-<h2 id="orgcf29656">different grid results</h2>
+<section id="slide-orgddd6e33">
+<h2 id="orgddd6e33">different grid results</h2>
 <img src="./img/schedule_rd.png" width=75%>
 </section>
-<section id="slide-orgefdbd1c">
-<h2 id="orgefdbd1c">effect of grid resolution</h2>
+<section id="slide-orge24cd3c">
+<h2 id="orge24cd3c">effect of grid resolution</h2>
 <img src="./img/step_count.png" width=70%>
+</section>
+<section id="slide-org4088da0">
+<h2 id="org4088da0">rate vs compression speed</h2>
+<img src="./img/encode_law.png" width=90%>
 </section>
 </section>
 </div>
