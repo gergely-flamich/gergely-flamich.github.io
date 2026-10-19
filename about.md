@@ -3,18 +3,16 @@ layout: about
 title: about
 permalink: /
 subtitle: >
-  <a href='https://profiles.imperial.ac.uk/g.flamich'>Imperial College Research Fellow</a>, Imperial College London.
-cv_pdf: 'MLcvMinimal/CV_Gergely_Flamich.pdf'
+  Research Scientist, Isomorphic Labs.
+cv_pdf: 'MLcv2/CV_Gergely_Flamich.pdf'
 
 profile:
   align: right
   image: profile_pic_3_cropped.jpeg
   image_circular: false # crops the image to make it circular
   address: >
-    <p>Information Processing and Communications Lab,</p>
-    <p>Department of Electrical and Electronic Engineering,</p>
-    <p>Imperial College London,</p>
-    <p>South Kensington Campus, London, UK</p>
+    <p>Isomorphic Labs</p>
+    <p>London, UK</p>
 
 news: false  # includes a list of news items
 latest_posts: false  # includes a list of the newest posts
@@ -22,9 +20,12 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hello there! I'm Gergely Flamich (pronounced <span style="font-style:italic;font-variant:small-caps; font-weight:400">gher - gey flah - mih</span> but in English, I usually go by Greg), and I'm originally from Vác, Hungary. 
+Hello there! I'm Gergely Flamich (pronounced <span style="font-style:italic;font-variant:small-caps; font-weight:400">gher - gey flah - mih</span>, but in English I usually go by Greg), and I'm originally from Vác, Hungary. 
 
-From 1 August 2025, I am an [Imperial College Research Fellow](https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/icrf/), sponsored by [Deniz Gündüz](https://profiles.imperial.ac.uk/d.gunduz) and hosted at the [Information Processing and Communications Lab](https://www.imperial.ac.uk/information-processing-and-communications-lab/) at Imperial College London.
+From October 2026, I am a Research Scientist at [Isomorphic Labs](https://www.isomorphiclabs.com/). 
+More details to follow soon! 🧬
+
+Between August 2025 and October 2026, I was an [Imperial College Research Fellow](https://www.imperial.ac.uk/research-and-innovation/research-office/funder-information/research-fellowships/icrf/), sponsored by [Deniz Gündüz](https://profiles.imperial.ac.uk/d.gunduz) and hosted at the [Information Processing and Communications Lab](https://www.imperial.ac.uk/information-processing-and-communications-lab/) at Imperial College London.
 Before that, I spent five months as a postdoctoral research associate in the same lab.
 
 I completed my PhD degree between October 2020 and December 2024 in Advanced Machine Learning at the [Computational and Biological Learning Lab](https://www.cbl-cambridge.org/), supervised by [José Miguel Hernández Lobato](https://jmhl.org/). 
