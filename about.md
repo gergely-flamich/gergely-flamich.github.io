@@ -20,7 +20,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hello there! I'm Gergely Flamich (pronounced <span style="font-style:italic;font-variant:small-caps; font-weight:400">gher - gey flah - mih</span>, but in English I usually go by Greg), and I'm originally from Vác, Hungary. 
+Hello there! I'm Gergely Flamich (pronounced <span style="font-style:italic;font-variant:small-caps; font-weight:400">gher - gey flah - mih</span>), but in English I usually go by Greg and my chosen Chinese name is 炎省身. I'm originally from Vác, Hungary. 
 
 From October 2026, I am a Research Scientist at [Isomorphic Labs](https://www.isomorphiclabs.com/). 
 More details to follow soon! 🧬
